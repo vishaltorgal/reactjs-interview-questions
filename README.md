@@ -4,6 +4,7 @@ State is a built-in React object used to manage dynamic data within a component.
 
 ### Key Points
 - State is **mutable** and can be updated using `setState` in class components or the `useState` hook in functional components.
+  
 - When state is updated, React re-renders the component to reflect the new state.
 
 
@@ -59,12 +60,16 @@ export default Counter;
 
 ### **State**
 - State is a mutable data structure that holds information about the component itself.
+  
 - It can be updated using the `setState` method in class components or the `useState` hook in functional components.
+  
 - It is managed within the component and not accessible to other components unless explicitly passed.
 
 ### **Props**
 - Props are read-only and are passed to the component by its parent.
+  
 - They are used to pass data and methods from parent to child components.
+  
 - They cannot be modified by the child component receiving them.
 
 <br>
@@ -75,7 +80,9 @@ A Higher-Order Component (HOC) is a pattern in React that allows you to reuse co
 
 ### Key Points
 - HOC is a function: It takes a component and returns a new component.
+  
 - It doesn’t modify the original component: Instead, it enhances or adds features to it.
+  
 - Used for code reuse: HOCs allow for reusable functionality across multiple components (e.g., adding authentication checks, fetching data).
 
 ### ***Create the HOC***
@@ -127,7 +134,9 @@ A Pure Component in React is a type of component that only re-renders if its pro
 
 ### Key Points
 - It will always re-render whenever the parent re-renders, regardless of whether the props or state have changed.
+  
 - React will perform a shallow comparison of props and state before re-rendering the component.
+  
 - If the props or state have not changed, React will skip the render, improving performance.
 
 ### ***Pure Component***
@@ -153,9 +162,11 @@ export default PureComponentExample;
 Synthetic Events are React's cross-browser wrapper around the browser's native events. They combine the behavior of different browsers into a single API to ensure consistent event handling.
 
 ### Key Points
-- Cross-Browser Compatibility: Synthetic events normalize behavior across browsers.
-- Performance Optimization: Synthetic events are pooled for efficiency, which means the same event object is reused for multiple events.
-- Consistent API: React provides the same interface regardless of the browser.
+- `Cross-Browser Compatibility`: Synthetic events normalize behavior across browsers.
+  
+- `Performance Optimization`: Synthetic events are pooled for efficiency, which means the same event object is reused for multiple events.
+  
+- `Consistent API`: React provides the same interface regardless of the browser.
 
 ```jsx
 import React from 'react';
@@ -195,12 +206,16 @@ The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 
 ### Key Points
 - `Performance`: Updates to the real DOM are expensive. The Virtual DOM minimizes these updates by batching changes and updating the real DOM only when necessary.
+  
 - `Simplicity`: Developers can write declarative code without worrying about how to efficiently update the DOM.
+  
 - `Consistency`: The Virtual DOM helps ensure the UI is always in sync with the state.
 
 ### How the Virtual DOM Works
 - `Initial Render` : When the component is first rendered, the Virtual DOM creates a virtual representation of the DOM elements.
+  
 - `Diffing Algorithm` : React uses a diffing algorithm to compare the new virtual DOM tree with the previous one.
+  
 - `Efficient Updates` : React updates only the parts of the real DOM that have changed, minimizing direct DOM manipulations.
 
 <br>
@@ -229,6 +244,7 @@ export default ControlledInput;
 
 ### Key Points
 - The value of the input is tied to the text state.
+  
 - The onChange handler updates the state when the user types, keeping the input value in sync with the state.
 
 <br>
@@ -259,7 +275,9 @@ export default UncontrolledInput;
 ```
 ### Key Points
 - `Refs`: Use useRef to access the input's current value.
+  
 - `DOM Control`: The input value is managed by the DOM, not React state.
+  
 - `Use Case`: Useful when you need direct access to the DOM or for simple use cases where state management is not necessary.
 
 <br>
@@ -285,12 +303,47 @@ export default FragmentExample;
 
 ### Key Points
 - `Syntax`: Use empty tags <>...</> or <React.Fragment>...</React.Fragment>.
+  
 - `No Extra Nodes`: Fragments don’t add extra elements to the DOM.
+  
 - `Clean DOM`: Helps in keeping the DOM structure minimal and clean.
+  
 
 ### list of reasons to prefer fragments over container DOM elements
 - `Avoid Unnecessary DOM Nodes`: Fragments are a bit faster and use less memory by not creating an extra DOM node.
+  
 - `CSS Styling Simplicity`: When using fragments, you avoid having extra elements that require specific styles. With unnecessary wrapping elements, it might complicate applying styles or break layout constraints.
+  
 - `No Impact on Layout`: Unlike container elements like <div> or <span>, which could affect the layout (depending on their styles), fragments leave no trace in the layout rendering, thus maintaining the layout's intended structure.
   
 <br>
+
+## 10. **What are stateful components?**
+
+A component is considered stateful if its behavior depends on its internal state. These stateful components can either be functional components with hooks or class components.
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);  // Declaring state
+
+  const increment = () => {
+    setCount(count + 1);  // Updating state
+  };
+
+  return (
+    <div>
+      <p>{count}</p>  {/* Displaying state */}
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+```
+
+### Comparison with Stateless (Functional) Components
+- `Stateful components` can modify and track their state over time.
+  
+- `Stateless components` (also called "dumb" components) do not manage their own state; they simply receive props from their parent component and render UI based on those props.
+
+  <br>
