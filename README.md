@@ -441,3 +441,141 @@ class Example extends Component {
 export default Example;
 ```
 <br>
+
+## 15. **What is React Fiber?**
+
+Fiber is the new reconciliation engine or reimplementation of core algorithm in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, ability to pause, abort, or reuse work and assign priority to different types of updates; and new concurrency primitive
+
+<br>
+
+## 16. **Callback Function**
+
+A `callback function` is a function passed as an argument to another function, to be called (invoked) later, usually after a task is completed.
+
+### ***Class Component Example***
+```jsx
+function greetUser(name, callback) {
+  console.log("Hello, " + name + "!");
+  callback();
+}
+
+function sayGoodbye() {
+  console.log("Goodbye!");
+}
+
+greetUser("Alice", sayGoodbye);
+
+// Output
+Hello, Alice!
+Goodbye!
+
+```
+### In this example
+- sayGoodbye is passed as a callback to greetUser.
+
+- After greeting the user, it calls the callback() function.
+
+<br>
+
+## 17. **Difference Callback vs. Higher-Order Component (HOC)**
+
+ ###  Definition:
+A callback is a function passed as an argument to another function to be executed later, often after some operation is complete.
+
+### Commonly Used For:
+- Handling asynchronous behavior (e.g., API calls, event handling).
+
+- Executing code after a function finishes.
+
+
+### ***Callback Component Example***
+```jsx
+  function doSomething(callback) {
+  console.log("Doing something...");
+  callback();  // call the callback function
+}
+
+function afterDone() {
+  console.log("Done!");
+}
+
+doSomething(afterDone);
+```
+
+ ###  Definition:
+A Higher-Order Component is a function that takes a component and returns a new component. It's used to add additional behavior or logic to an existing React component.
+
+### Commonly Used For:
+- Code reuse in React apps.
+
+- Adding cross-cutting concerns (e.g., authentication, logging, theming, etc.).
+
+
+### ***Callback Component Example***
+```jsx
+  function withLogger(WrappedComponent) {
+  return function EnhancedComponent(props) {
+    console.log("Rendering:", WrappedComponent.name);
+    return <WrappedComponent {...props} />;
+  };
+}
+
+function Hello() {
+  return <h1>Hello World</h1>;
+}
+
+const HelloWithLogger = withLogger(Hello);
+
+```
+<br>
+
+## 18. **What is the Event Loop**
+
+The JavaScript Event Loop is a mechanism that allows JavaScript (which is single-threaded) to perform non-blocking asynchronous operations, such as timers, network requests, and DOM events.
+
+It continuously monitors the call stack and the message queues, executing tasks in the proper order — ensuring that asynchronous code runs only when the call stack is empty.
+
+The Event Loop is what allows JavaScript to non-blockingly handle asynchronous events using:
+
+- `Call Stack`: Where functions are executed.
+
+- `Web APIs`: Where async tasks like setTimeout, fetch, etc., run.
+
+- `Callback Queue (Task Queue)`: Where async callbacks wait to be executed.
+
+- `Event Loop`: Keeps checking if the call stack is empty and then pushes the next task from the queue.
+
+
+### ***Event Example***
+```jsx
+console.log("1. Start");
+
+setTimeout(() => {
+  console.log("2. Inside setTimeout");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("3. Inside Promise.then");
+});
+```
+
+### ***Output***
+```jsx
+1. Start
+4. End
+3. Inside Promise.then
+2. Inside setTimeout
+
+```
+
+- console.log("1. Start") and console.log("4. End") run immediately (synchronous).
+
+- setTimeout(..., 0) is handled by the browser's Web API, and its callback is added to the task queue after at least 0ms.
+
+- Promise.then() is added to the microtask queue, which runs before the task queue.
+
+- So, Promise.then() logs before setTimeout.
+  
+- console.log("4. End");
+
+<br>
