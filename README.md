@@ -579,3 +579,129 @@ Promise.resolve().then(() => {
 - console.log("4. End");
 
 <br>
+
+## 19. **Context API **
+The Context API is a built-in React feature used to create global state or shared values that can be accessed by any component in the tree, no matter how deep.
+It solves "prop drilling" — the problem of passing props through multiple layers of components just to reach a deeply nested child.
+
+### ***UserContext.js***
+```jsx
+import React, { createContext } from 'react';
+
+export const UserContext = createContext();
+
+export const UserProvider = ({ children }) => {
+  const user = "Alice";
+
+  return (
+    <UserContext.Provider value={user}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+```
+
+### ***DisplayUser.js***
+```jsx
+import React, { useContext } from 'react';
+import { UserContext } from './UserContext';
+
+const DisplayUser = () => {
+  const user = useContext(UserContext);
+  return <h2>Hello, {user}!</h2>;
+};
+
+export default DisplayUser;
+
+
+```
+
+### ***UWrap Your App with the Provider***
+```jsx
+// App.js
+import React from 'react';
+import { UserProvider } from './UserContext';
+import DisplayUser from './DisplayUser';
+
+const App = () => {
+  return (
+    <UserProvider>
+      <DisplayUser />
+    </UserProvider>
+  );
+};
+
+export default App;
+
+```
+
+### ***Output***
+```jsx
+Hello, Alice!
+```
+<br>
+
+## 20. **custom hook**
+
+### ***useCounter.js**
+```jsx
+import { useState } from 'react';
+
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => setCount(c => c + 1);
+  const decrement = () => setCount(c => c - 1);
+  const reset = () => setCount(initialValue);
+
+  return { count, increment, decrement, reset };
+}
+
+export default useCounter;
+
+```
+
+### ***Use the Hook in a Component***
+```jsx
+// CounterComponent.js
+import React from 'react';
+import useCounter from './useCounter';
+
+function CounterComponent() {
+  const { count, increment, decrement, reset } = useCounter(0);
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={increment}>➕</button>
+      <button onClick={decrement}>➖</button>
+      <button onClick={reset}>🔁</button>
+    </div>
+  );
+}
+
+export default CounterComponent;
+
+```
+
+### Key Points
+- Must start with use
+- Only call hooks at the top level
+- Only call hooks from:
+    1. React function components, or
+    2. Other custom hooks
+
+ ### Benefit
+ 
+|       Name                 | Description                                                   |
+| ------------------------- | ------------------------------------------------------------- |
+| ♻ **Reusability**         | Write once, reuse logic across multiple components.           |
+| ✨ **Cleaner Code**        | Keeps components simple by separating logic.                  |
+| 🧪 **Testability**        | Easier to test logic in isolation (without UI).               |
+| 📦 **Abstraction**        | Hides complex logic behind a simple API.                      |
+| 📁 **Organized Codebase** | Logic and UI are better separated, improving maintainability. |
+
+<br>
+
+
