@@ -1,3 +1,29 @@
+# React JS Interview Questions (2025–2026)
+
+### Table of Contents
+
+1. [State in React](#1-state-in-react)
+2. [Difference Between State and Props](#2-difference-between-state-and-props)
+3. [Higher Order Components (HOC)](#3-what-are-higher-order-components-hoc)
+4. [Pure Components](#4-what-are-pure-components-in-react)
+5. [Synthetic Events](#5-what-are-synthetic-events-in-react)
+6. [Key Prop in Lists](#6-what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
+7. [Virtual DOM](#6-what-is-virtual-dom)
+8. [Controlled Components](#7-what-are-controlled-components)
+9. [Uncontrolled Components](#8-what-are-uncontrolled-components)
+10. [Fragments](#9-what-are-fragments)
+11. [Stateful Components](#10-what-are-stateful-components)
+12. [Function Components vs Class Components](#11-function-components-vs-class-components)
+13. [Ways to Optimize React Application](#12-ways-to-optimize-react-application)
+14. [useRef Hook](#13-useref)
+15. [createRef](#14-createref)
+16. [React Fiber](#15-what-is-react-fiber)
+17. [Callback Function](#16-callback-function)
+18. [Callback vs Higher Order Component (HOC)](#17-difference-callback-vs-higher-order-component-hoc)
+19. [JavaScript Event Loop](#18-what-is-the-event-loop)
+20. [Context API](#19-context-api)
+21. [Custom Hooks](#20-custom-hook)
+
 ## 1. **State in React**
 
 State is a built-in React object used to manage dynamic data within a component. It allows components to create and manage their own data, which can change over time based on user interactions or other factors.
@@ -702,6 +728,6 @@ export default CounterComponent;
 | 📦 **Abstraction**        | Hides complex logic behind a simple API.                      |
 | 📁 **Organized Codebase** | Logic and UI are better separated, improving maintainability. |
 
-<br>
+
 
 
