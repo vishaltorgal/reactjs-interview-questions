@@ -215,7 +215,7 @@ const todoItems = todos.map((todo, index) => (
 ```
 <br>
 
-## 6. **What is Virtual DOM?**
+## 7. **What is Virtual DOM?**
 
 The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The representation of a UI is kept in memory and synced with the "real" DOM. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called reconciliation.
 
@@ -231,7 +231,7 @@ The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 
 <br>
 
-## 7. **What are controlled components?**
+## 8. **What are controlled components?**
 
 Controlled components in React are form elements like `<input>`, `<textarea>`, and `<select>` where the value is controlled by React's state. The form element's value is set by the state, and any changes to the input are handled through event handlers that update the state.
 
@@ -259,7 +259,7 @@ export default ControlledInput;
 
 <br>
 
-## 8. **What are Uncontrolled components?**
+## 9. **What are Uncontrolled components?**
 
 Uncontrolled components in React are form elements where the form data is handled by the DOM itself, rather than by React's state. In these components, you access the form values using refs, not state.
 
@@ -290,7 +290,7 @@ export default UncontrolledInput;
 
 <br>
 
-## 9. **What are fragments?**
+## 10. **What are fragments?**
 
 Fragments allow you to group multiple elements without adding extra nodes to the DOM. They help keep the DOM clean and avoid unnecessary wrapping elements like `<div>`.
 
@@ -322,7 +322,7 @@ export default FragmentExample;
   
 <br>
 
-## 10. **What are stateful components?**
+## 11. **What are stateful components?**
 
 A component is considered stateful if its behavior depends on its internal state. These stateful components can either be functional components with hooks or class components.
 
@@ -351,7 +351,7 @@ const Counter = () => {
 
   <br>
 
-## 11. **Function Components vs Class Components**
+## 12. **Function Components vs Class Components**
 
 ### When to Use Class Components:
 
@@ -372,7 +372,7 @@ const Counter = () => {
 
 <br>
 
-## 12. **Ways to optimize react application**
+## 13. **Ways to optimize react application**
 
 ### Use PureComponent for Class Components
 - `What it does`: Prevents re-renders if props and state are shallowly equal to the previous ones.
@@ -400,7 +400,7 @@ const Counter = () => {
 
 <br>
 
-## 13. **useRef**
+## 14. **useRef**
 
 `useRef` is a React hook that allows you to persist values across renders without causing a re-render.
 
@@ -431,7 +431,7 @@ const Example = () => {
 
 <br>
 
-## 14. **createRef**
+## 15. **createRef**
 
 `createRef` is a way to create a reference to a DOM element or a class component instance in React class components. It allows direct manipulation of the DOM or calling methods on class components without relying on state or props.
 
@@ -468,13 +468,13 @@ export default Example;
 ```
 <br>
 
-## 15. **What is React Fiber?**
+## 16. **What is React Fiber?**
 
 Fiber is the new reconciliation engine or reimplementation of core algorithm in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, ability to pause, abort, or reuse work and assign priority to different types of updates; and new concurrency primitive
 
 <br>
 
-## 16. **Callback Function**
+## 17. **Callback Function**
 
 A `callback function` is a function passed as an argument to another function, to be called (invoked) later, usually after a task is completed.
 
@@ -503,7 +503,7 @@ Goodbye!
 
 <br>
 
-## 17. **Difference Callback vs. Higher-Order Component (HOC)**
+## 18. **Difference Callback vs. Higher-Order Component (HOC)**
 
  ###  Definition:
 A callback is a function passed as an argument to another function to be executed later, often after some operation is complete.
@@ -555,7 +555,7 @@ const HelloWithLogger = withLogger(Hello);
 ```
 <br>
 
-## 18. **What is the Event Loop**
+## 19. **What is the Event Loop**
 
 The JavaScript Event Loop is a mechanism that allows JavaScript (which is single-threaded) to perform non-blocking asynchronous operations, such as timers, network requests, and DOM events.
 
@@ -606,7 +606,7 @@ Promise.resolve().then(() => {
 
 <br>
 
-## 19. **Context API **
+## 20. **Context API **
 The Context API is a built-in React feature used to create global state or shared values that can be accessed by any component in the tree, no matter how deep.
 It solves "prop drilling" — the problem of passing props through multiple layers of components just to reach a deeply nested child.
 
@@ -668,7 +668,7 @@ Hello, Alice!
 ```
 <br>
 
-## 20. **custom hook**
+## 21. **custom hook**
 
 ### ***useCounter.js**
 ```jsx
