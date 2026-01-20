@@ -23,7 +23,13 @@
 19. [JavaScript Event Loop](#19-what-is-the-event-loop)
 20. [Context API](#20-context-api)
 21. [Custom Hooks](#21-custom-hook)
+22. [Difference between useState and useReducer](#22-difference-between-usestate-and-usereducer)
+23. [Difference between useEffect and useLayoutEffect](#23-difference-between-useeffect-and-uselayouteffect)
+24. [Difference between useMemo and useCallback](#24-difference-between-usememo-and-usecallback)
+25. [Difference between useRef and useState](#25-difference-between-useref-and-usestate)
+26. [Difference between CSR and SSR](#26-difference-between-csr-and-ssr)
 
+    
 ## 1. **State in React**
 
 State is a built-in React object used to manage dynamic data within a component. It allows components to create and manage their own data, which can change over time based on user interactions or other factors.
@@ -290,6 +296,8 @@ export default UncontrolledInput;
 
 <br>
 
+
+
 ## 10. **What are fragments?**
 
 Fragments allow you to group multiple elements without adding extra nodes to the DOM. They help keep the DOM clean and avoid unnecessary wrapping elements like `<div>`.
@@ -353,22 +361,14 @@ const Counter = () => {
 
 ## 12. **Function Components vs Class Components**
 
-### When to Use Class Components:
+| Feature       | Functional Component | Class Component          |
+| ------------- | -------------------- | ------------------------ |
+| Syntax        | JavaScript function  | ES6 class                |
+| State         | Managed using hooks  | Managed using this.state |
+| Lifecycle     | useEffect hook       | Lifecycle methods        |
+| Performance   | Lightweight          | Slightly heavier         |
+| Current usage | Preferred            | Less used                |
 
-- `Legacy Code`: If you're working with an existing codebase that already uses class components, it may be more efficient to continue using them to maintain consistency and avoid refactoring.
-- `Familiarity`: If you're more familiar with class-based syntax or working with developers who prefer it, you might choose class components for a smoother transition.
-- `Older React Features`: If you're working with older versions of React (pre-16.8) that don't support hooks, class components are required to manage state and lifecycle methods.
-
-### When to Use Functional Components:
-
-- `New Projects`: For new projects or codebases, prefer functional components as they align with modern React practices and offer cleaner, more maintainable code.
-- `Hooks`: When you need state management, lifecycle methods, and side effects, use hooks in functional components, as they provide a more concise and flexible approach.
-- `Performance`: Functional components with hooks tend to offer better optimization potential with React's latest features (like Concurrent Mode and Suspense).
-- `Simplicity`: Functional components are typically more lightweight and easier to understand compared to class components, especially for small or medium-sized components.
-
-### Summary
-- Use class components when working with legacy code or when you have a specific reason based on your team's expertise.
-- Use functional components for modern, efficient, and maintainable code, especially with hooks for state management and lifecycle features.
 
 <br>
 
@@ -729,5 +729,44 @@ export default CounterComponent;
 | 📁 **Organized Codebase** | Logic and UI are better separated, improving maintainability. |
 
 
+## 22. Difference between useState and useReducer
 
+| Feature      | useState             | useReducer             |
+| ------------ | -------------------- | ---------------------- |
+| Complexity   | Simple state         | Complex state logic    |
+| Update style | Direct update        | Action based update    |
+| Readability  | Less for large state | Better for large state |
+| Use case     | Counters, toggles    | Forms, complex flows   |
 
+## 23. Difference between useEffect and useLayoutEffect
+
+| Feature        | useEffect    | useLayoutEffect      |
+| -------------- | ------------ | -------------------- |
+| Execution time | After paint  | Before paint         |
+| UI blocking    | Non blocking | Blocking             |
+| Performance    | Better       | Can hurt performance |
+| Use case       | API calls    | DOM measurements     |
+
+## 24. Difference between useMemo and useCallback
+
+| Feature      | useMemo                | useCallback                      |
+| ------------ | ---------------------- | -------------------------------- |
+| Purpose      | Memoizes value         | Memoizes function                |
+| Return value | Cached value           | Cached function                  |
+| Usage        | Expensive calculations | Prevent re creation of functions |
+
+## 25. Difference between useRef and useState
+
+| Feature    | useRef             | useState             |
+| ---------- | ------------------ | -------------------- |
+| Re render  | Does not re render | Re renders component |
+| Mutability | Mutable            | Immutable            |
+| Use case   | DOM access         | UI updates           |
+
+## 26. Difference between CSR and SSR
+
+| Feature      | CSR     | SSR    |
+| ------------ | ------- | ------ |
+| Rendering    | Browser | Server |
+| SEO          | Poor    | Good   |
+| Initial load | Slow    | Fast   |
