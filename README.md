@@ -79,21 +79,21 @@ function Counter() {
 export default Counter;
 ```
 
-<br>
+
 
 ## 2. **Difference Between State and Props**
 
-### **State**
-- State is a mutable data structure that holds information about the component itself.
-- It can be updated using the `setState` method in class components or the `useState` hook in functional components.
-- It is managed within the component and not accessible to other components unless explicitly passed.
+| Feature    | Props (Properties)               | State                                      |
+| ---------- | -------------------------------- | ------------------------------------------ |
+| Definition | Data passed from parent to child | Data managed internally within a component |
+| Mutability | Immutable for child              | Mutable                                    |
+| Source     | External                         | Internal                                   |
+| Update     | Cannot be updated by child       | Updated using setState or hooks            |
+| Usage      | Component communication          | Dynamic behavior                           |
+| Re render  | Changes trigger re render        | Changes trigger re render                  |
 
-### **Props**
-- Props are read-only and are passed to the component by its parent.
-- They are used to pass data and methods from parent to child components.
-- They cannot be modified by the child component receiving them.
 
-<br>
+
 
 ## 3. **What are Higher-Order Components (HOC)?**
 
