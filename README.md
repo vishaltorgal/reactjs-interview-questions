@@ -28,8 +28,13 @@
 24. [Difference between useMemo and useCallback](#24-difference-between-usememo-and-usecallback)
 25. [Difference between useRef and useState](#25-difference-between-useref-and-usestate)
 26. [Difference between CSR and SSR](#26-difference-between-csr-and-ssr)
-
-    
+27. [Lifecycle Phases in React](#27-lifecycle-phases-in-react)
+28. [What are Error Boundaries in React?](#28-what-are-error-boundaries-in-react)
+29. [What is Reconciliation in React?](#29-what-is-reconciliation-in-react)
+30. [What is Lazy Loading?](#30-what-is-lazy-loading)
+31. [What is Suspense in React?](#31-what-is-suspense-in-react)
+32. [What is code splitting in React?](#32-what-is-code-splitting-in-react)
+33. 
 ## 1. **State in React**
 
 State is a built-in React object used to manage dynamic data within a component. It allows components to create and manage their own data, which can change over time based on user interactions or other factors.
@@ -770,3 +775,157 @@ export default CounterComponent;
 | Rendering    | Browser | Server |
 | SEO          | Poor    | Good   |
 | Initial load | Slow    | Fast   |
+
+## 27. Lifecycle Phases in React
+
+React lifecycle has ***three*** main phases:
+
+`Mounting` – component is created and added to DOM
+`Updating` – component re-renders due to changes
+`Unmounting` – component is removed from DOM
+
+***Example (Class Component)***
+
+```jsx
+class Demo extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  componentDidMount() {
+    console.log("Mounted");
+  }
+
+  componentDidUpdate() {
+    console.log("Updated");
+  }
+
+  componentWillUnmount() {
+    console.log("Unmounted");
+  }
+
+  render() {
+    return <h1>{this.state.count}</h1>;
+  }
+}
+
+```
+
+***Lifecycle Methods vs Hooks***
+
+| Class Lifecycle      | Hook Equivalent                     |
+| -------------------- | ----------------------------------- |
+| componentDidMount    | useEffect(() => {}, [])             |
+| componentDidUpdate   | useEffect(() => {}, [deps])         |
+| componentWillUnmount | useEffect(() => { return cleanup }) |
+
+
+## 28. What are Error Boundaries in React?
+
+Error Boundaries are React components that catch JavaScript errors in:
+
+- Child component rendering
+- Lifecycle methods
+- Constructors of child components
+
+They prevent the entire app from crashing and display a fallback UI instead.
+
+```jsx
+function App() {
+  const [count, setCount] = React.useState(0);
+
+  return (
+    <ErrorBoundary>
+      <BuggyComponent count={count} />
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </ErrorBoundary>
+  );
+}
+
+```
+
+- Error boundaries do not catch event handler errors
+- Only class components can be error boundaries
+- You can wrap specific components, not the entire app always
+
+## 29. What is Reconciliation in React?
+
+***Reconciliation*** is the process React uses to update the UI efficiently when state or props change.
+
+Instead of updating the entire DOM, React:
+
+- Creates a new Virtual DOM
+- Compares it with the previous Virtual DOM
+- Updates only the changed parts in the real DOM
+
+## 30. What is Lazy Loading?
+
+ Lazy loading in React is a performance optimization technique where components are loaded only when they are needed, instead of loading all components at the initial application load.
+
+This reduces:
+
+- Initial bundle size
+- Page load time
+- Memory usage
+
+and improves application performance.
+
+***React uses:***
+
+- `React.lazy()` to load components dynamically
+- `Suspense` to show a fallback UI while loading
+
+***Why use it?***
+
+Without lazy loading, a user visiting your "Home" page has to wait for the browser to download the code for the "Settings," "Admin," and "Profile" pages too. This leads to:
+
+- Large Bundle Sizes: Slower initial page loads.
+- Wasted Bandwidth: Users download code they might never use.
+- Higher Bounce Rates: Especially on mobile devices or slow networks.
+
+```jsx
+import React, { Suspense, lazy } from "react";
+
+const Profile = lazy(() => import("./Profile"));
+
+function App() {
+  return (
+    <Suspense fallback={<h3>Loading...</h3>}>
+      <Profile />
+    </Suspense>
+  );
+}
+
+export default App;
+
+```
+## 31. What is Suspense in React?
+
+Suspense is a React component that lets you pause rendering of part of the UI and show a fallback UI while waiting for something to load, most commonly lazy loaded components.
+
+Suspense does not make code load faster, but it:
+
+- Prevents blocking the UI
+- Shows meaningful loading states
+- Allows splitting large bundles
+- Improves first paint and user perception
+- You can wrap specific components, not entire app
+
+## 32. What is code splitting in React?
+
+Code splitting in React is a performance optimization technique where a large JavaScript bundle is split into smaller chunks, and only the required code is loaded when needed.
+
+This helps:
+
+- Reduce initial bundle size
+- Improve first page load time
+- Improve application performance
+
+***Types of Code Splitting***
+| Type             | Description            |
+| ---------------- | ---------------------- |
+| Route based      | Split code per route   |
+| Component based  | Split heavy components |
+| Vendor splitting | Separate libraries     |
+
