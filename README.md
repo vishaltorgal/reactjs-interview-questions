@@ -35,6 +35,7 @@
 31. [What is Suspense in React?](#31-what-is-suspense-in-react)
 32. [What is code splitting in React?](#32-what-is-code-splitting-in-react)
 33. [What is Prop Drilling in React?](#33-what-is-prop-drilling-in-react)
+34. [Keys and Re-rendering in React?](#34-keys-and-re-rendering-in-React)
 
     
 ## 1. **State in React**
@@ -947,3 +948,23 @@ Prop drilling is a situation in React where data is passed from a parent compone
 - Use Context API
 - Use state management libraries like Redux
 - Tightly coupled components
+
+## 34. Keys and Re-rendering in React?
+
+Keys are special attributes in React used to uniquely identify elements in a list.
+
+***Why Keys Are Important for Performance***
+When a list changes, React:
+
+- Compares previous Virtual DOM with new Virtual DOM
+- Uses keys to identify which items changed, moved, or stayed the same
+- Updates only the required DOM nodes
+
+  Without proper keys, React may re-render more elements than necessary.
+
+***Key Rules***
+
+- Keys must be unique
+- Keys must be stable
+- Avoid using array index
+- Use database IDs when possible
