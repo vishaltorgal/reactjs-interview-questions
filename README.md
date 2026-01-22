@@ -36,6 +36,7 @@
 32. [What is code splitting in React?](#32-what-is-code-splitting-in-react)
 33. [What is Prop Drilling in React?](#33-what-is-prop-drilling-in-react)
 34. [Keys and Re-rendering in React?](#34-keys-and-re-rendering-in-React)
+35. [Types of Hooks in React?](#35-types-of-hooks-in-react)
 
     
 ## 1. **State in React**
@@ -968,3 +969,38 @@ When a list changes, React:
 - Keys must be stable
 - Avoid using array index
 - Use database IDs when possible
+
+## 35. Types of Hooks in React?
+
+***Basic Hooks***
+| Hook       | Purpose             | Use Case                 | Example                                 |
+| ---------- | ------------------- | ------------------------ | --------------------------------------- |
+| useState   | Manage local state  | Form inputs, counters    | `const [count, setCount] = useState(0)` |
+| useEffect  | Handle side effects | API calls, subscriptions | `useEffect(() => fetchData(), [])`      |
+| useContext | Consume context     | Theme, auth, language    | `const theme = useContext(ThemeCtx)`    |
+
+***Additional Hooks***
+| Hook        | Purpose                         | Use Case                 | Example                                               |
+| ----------- | ------------------------------- | ------------------------ | ----------------------------------------------------- |
+| useRef      | Persist value without re-render | Focus input, timers      | `const inputRef = useRef(null)`                       |
+| useReducer  | Complex state logic             | Forms, state machines    | `const [state, dispatch] = useReducer(reducer, init)` |
+| useCallback | Memoize function                | Prevent child re-renders | `useCallback(fn, [])`                                 |
+| useMemo     | Memoize value                   | Expensive calculations   | `useMemo(calc, [deps])`                               |
+
+***Layout & Effect Hooks***
+| Hook               | Purpose                     | Use Case            | Example                            |
+| ------------------ | --------------------------- | ------------------- | ---------------------------------- |
+| useLayoutEffect    | DOM-read/write before paint | Measure layout      | `useLayoutEffect(() => {}, [])`    |
+| useInsertionEffect | Inject styles before paint  | CSS-in-JS libraries | `useInsertionEffect(() => {}, [])` |
+
+***Use Case Mapping***
+| Scenario            | Best Hook             |
+| ------------------- | --------------------- |
+| Input handling      | useState              |
+| API call            | useEffect             |
+| Avoid re-render     | useMemo / useCallback |
+| Share data globally | useContext            |
+| Heavy UI update     | useTransition         |
+| Access DOM          | useRef                |
+| Complex logic       | useReducer            |
+
