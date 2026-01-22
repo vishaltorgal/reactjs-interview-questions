@@ -34,7 +34,9 @@
 30. [What is Lazy Loading?](#30-what-is-lazy-loading)
 31. [What is Suspense in React?](#31-what-is-suspense-in-react)
 32. [What is code splitting in React?](#32-what-is-code-splitting-in-react)
-33. 
+33. [What is Prop Drilling in React?](#33-what-is-prop-drilling-in-react)
+
+    
 ## 1. **State in React**
 
 State is a built-in React object used to manage dynamic data within a component. It allows components to create and manage their own data, which can change over time based on user interactions or other factors.
@@ -929,3 +931,19 @@ This helps:
 | Component based  | Split heavy components |
 | Vendor splitting | Separate libraries     |
 
+
+## 33. What is Prop Drilling in React?
+
+Prop drilling is a situation in React where data is passed from a parent component to deeply nested child components through multiple intermediate components, even though those intermediate components do not need the data.
+
+***Problems Caused by Prop Drilling***
+
+- Unnecessary props in components
+- Hard to maintain code
+- Difficult to refactor
+
+***How to Avoid Prop Drilling***
+
+- Use Context API
+- Use state management libraries like Redux
+- Tightly coupled components
