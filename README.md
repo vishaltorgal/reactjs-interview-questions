@@ -41,11 +41,13 @@
     
 ## 1. **State in React**
 
-State is a built-in React object used to manage dynamic data within a component. It allows components to create and manage their own data, which can change over time based on user interactions or other factors.
+***State*** is a built in React object used to store dynamic data and re render the component when the data changes.
 
 ### Key Points
-- State is **mutable** and can be updated using `setState` in class components or the `useState` hook in functional components.
-- When state is updated, React re-renders the component to reflect the new state.
+- State is mutable using setState or useState
+- State changes trigger re rendering
+- State is local to the component
+- State should not be modified directly
 
 
 ### ***Class Component Example***
