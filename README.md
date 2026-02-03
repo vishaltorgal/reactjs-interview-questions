@@ -35,7 +35,7 @@
 31. [What is Suspense in React?](#31-what-is-suspense-in-react)
 32. [What is code splitting in React?](#32-what-is-code-splitting-in-react)
 33. [What is Prop Drilling in React?](#33-what-is-prop-drilling-in-react)
-34. [Keys and Re-rendering in React?](#34-keys-and-re-rendering-in-React)
+34. [Keys and Re-rendering in React?](#34-keys-and-re-rendering-in-react)
 35. [Types of Hooks in React?](#35-types-of-hooks-in-react)
 
     
@@ -617,7 +617,7 @@ Promise.resolve().then(() => {
 
 <br>
 
-## 20. **Context API **
+## 20. **Context API**
 The Context API is a built-in React feature used to create global state or shared values that can be accessed by any component in the tree, no matter how deep.
 It solves "prop drilling" — the problem of passing props through multiple layers of components just to reach a deeply nested child.
 
