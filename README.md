@@ -188,7 +188,7 @@ class MyComponent extends PureComponent {
 }
 
 ```
-***Functional equivalent***
+### ***Functional equivalent***
 In modern React, we create pure components by wrapping a functional component in ***React.memo***
 
 ```jsx
@@ -201,7 +201,7 @@ const MyComponent = React.memo(() => {
 
 ## 5. **What are synthetic events in React?**
 
-Synthetic Events are React's cross-browser wrapper around the browser's native events. They combine the behavior of different browsers into a single API to ensure consistent event handling.
+A synthetic event is a cross browser wrapper around the browser’s native event.
 
 ### Key Points
 - `Cross-Browser Compatibility`: Synthetic events normalize behavior across browsers.
@@ -209,34 +209,35 @@ Synthetic Events are React's cross-browser wrapper around the browser's native e
 - `Consistent API`: React provides the same interface regardless of the browser.
 
 ```jsx
-import React from 'react';
+function Button() {
+  function handleClick(e) {
+    console.log(e);           // SyntheticEvent
+    console.log(e.target);    // Works like native event
+  }
 
-function SyntheticEventExample() {
-  const handleClick = (event) => {
-    console.log('Synthetic Event:', event); // React Synthetic Event
-    console.log('Native Event:', event.nativeEvent); // Native DOM Event
-  };
-
-  return (
-    <div>
-      <button onClick={handleClick}>Click Me</button>
-    </div>
-  );
+  return <button onClick={handleClick}>Click me</button>;
 }
-
-export default SyntheticEventExample;
-
 ```
 <br>
 
 ## 6. **What is "key" prop and what is the benefit of using it in arrays of elements?**
 
-A key is a special attribute you should include when mapping over arrays to render data. Key prop helps React identify which items have changed, are added, or are removed.
+The ***key prop*** helps React track which list items have changed, been added, or removed.
+
+### ***Why key is important***
+Without key, React may:
+- Re render unnecessary items
+- Update the wrong components
+- Cause UI bugs
 
 ```jsx
-const todoItems = todos.map((todo, index) => (
-  <li key={index}>{todo.text}</li>
-));
+const users = ["Vishal", "Amit", "Rahul"];
+
+<ul>
+  {users.map((name, index) => (
+    <li key={name}>{name}</li>
+  ))}
+</ul>
 ```
 <br>
 
