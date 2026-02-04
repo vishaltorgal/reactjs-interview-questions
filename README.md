@@ -40,6 +40,8 @@
 36. [useMemo](#36-usememo)
 37. [useCallback](#37-usecallback)
 38. [Redux](#38-redux)
+39. [Difference between custom hook and components](#39-difference-between-custom-hook-and-components)
+40. [What background process on npm start](#40-what-background-process-on-npm-start)
 
     
 ## 1. **State in React**
@@ -1122,3 +1124,29 @@ function Counter() {
   );
 }
 ```
+
+<br>
+
+## 39. Difference between custom hook and components
+
+| Aspect          | Component                  | Custom Hook             |
+| --------------- | -------------------------- | ----------------------- |
+| Purpose         | Builds and renders UI      | Reuses stateful logic   |
+| Return value    | JSX                        | Data, state, functions  |
+| Naming          | Starts with Capital letter | Must start with `use`   |
+| Can use hooks   | Yes                        | Yes                     |
+| Can return JSX  | Yes                        | No                      |
+| Reusability     | Reused by rendering        | Reused by calling       |
+| Concern         | UI + behavior              | Behavior only           |
+| Example usage   | `<UserProfile />`          | `useUser()`             |
+| Best used when  | You need to show something | You need to share logic |
+| React treats as | Renderable element         | Logic abstraction       |
+
+<br>
+
+## 40. What background process on npm start
+
+- ***npm/yarn***	The package manager that triggers the script.
+- ***Webpack***	The "Bundler" that gathers and organizes all your files.
+- ***Babel***	The "Transpiler" that turns JSX/ES6 into browser-ready JS.
+- ***ESLint***	The "Linter" that checks your code for errors during the build.
