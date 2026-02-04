@@ -1011,7 +1011,7 @@ When a list changes, React:
 
 <br>
 
-## 35. useMemo
+## 36. useMemo
 
 ***useMemo*** returns a cached value and recomputes it only when its dependencies change.
 
@@ -1041,7 +1041,7 @@ function App() {
 - Prevent unnecessary re computations
 - Optimize performance
 
-## 36. useCallback
+## 37. useCallback
 
 ***useCallback*** remembers a function, so it is not recreated on every render.
 
