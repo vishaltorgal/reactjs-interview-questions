@@ -39,6 +39,7 @@
 35. [Types of Hooks in React?](#35-types-of-hooks-in-react)
 36. [useMemo](#36-usememo)
 37. [useCallback](#37-usecallback)
+38. [Redux](#38-redux)
 
     
 ## 1. **State in React**
@@ -1069,3 +1070,55 @@ export default App;
 - useCallback remembers a function so it is not recreated on every re render.
 - React normally creates functions again and again.
 - useCallback stops that and keeps the same function.
+
+<b>
+
+## 38. Redux
+
+***Redux*** is a state management library used to manage global application state in a predictable way.
+- Redux stores the entire app state in one central store and updates it using actions and reducers.
+
+***Core concepts***
+- Store → where state lives
+- Action → what happened
+- Reducer → how state changes
+
+***Store***
+```jsx
+import { createStore } from "redux";
+const store = createStore(counterReducer);
+```
+***Action***
+```jsx
+const increment = { type: "INCREMENT" };
+```
+***Reducer***
+```jsx
+function counterReducer(state = 0, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    default:
+      return state;
+  }
+}
+```
+
+***Using Redux in React***
+```jsx
+import { Provider, useSelector, useDispatch } from "react-redux";
+
+function Counter() {
+  const count = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      <p>{count}</p>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>
+        Increase
+      </button>
+    </>
+  );
+}
+```
