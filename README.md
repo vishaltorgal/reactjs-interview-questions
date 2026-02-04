@@ -490,7 +490,15 @@ export default Example;
 
 ## 16. **What is React Fiber?**
 
-Fiber is the new reconciliation engine or reimplementation of core algorithm in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, ability to pause, abort, or reuse work and assign priority to different types of updates; and new concurrency primitive
+React Fiber is the internal architecture React uses to break rendering work into units and prioritize updates.
+
+***Before Fiber:***
+- Rendering was synchronous
+- Large updates could block the UI
+
+***With Fiber:***
+- Work can be paused, resumed, or cancelled
+- High priority updates run first
 
 <br>
 
