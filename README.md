@@ -37,6 +37,8 @@
 33. [What is Prop Drilling in React?](#33-what-is-prop-drilling-in-react)
 34. [Keys and Re-rendering in React?](#34-keys-and-re-rendering-in-react)
 35. [Types of Hooks in React?](#35-types-of-hooks-in-react)
+36. [useMemo](#36-usememo)
+37. [useCallback](#37-usecallback)
 
     
 ## 1. **State in React**
@@ -1007,3 +1009,63 @@ When a list changes, React:
 | Access DOM          | useRef                |
 | Complex logic       | useReducer            |
 
+<br>
+
+## 35. useMemo
+
+***useMemo*** returns a cached value and recomputes it only when its dependencies change.
+
+```jsx
+import { useMemo, useState } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+  const [number, setNumber] = useState(5);
+
+  const squared = useMemo(() => {
+    console.log("Calculating...");
+    return number * number;
+  }, [number]);
+
+  return (
+    <>
+      <p>Square: {squared}</p>
+      <button onClick={() => setCount(count + 1)}>Re render</button>
+    </>
+  );
+}
+```
+
+***When to use useMemo***
+- Heavy calculations
+- Prevent unnecessary re computations
+- Optimize performance
+
+## 36. useCallback
+
+***useCallback*** remembers a function, so it is not recreated on every render.
+
+```jsx
+import React, { useState, useCallback } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const sayHello = useCallback(() => {
+    console.log("Hello");
+  }, []);
+
+  return (
+    <>
+      <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <button onClick={sayHello}>Say Hello</button>
+    </>
+  );
+}
+
+export default App;
+```
+- useCallback remembers a function so it is not recreated on every re render.
+- React normally creates functions again and again.
+- useCallback stops that and keeps the same function.
