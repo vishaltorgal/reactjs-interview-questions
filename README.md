@@ -20,7 +20,7 @@
 16. [React Fiber](#16-what-is-react-fiber)
 17. [Callback Function](#17-callback-function)
 18. [Callback vs Higher Order Component (HOC)](#18-difference-callback-vs-higher-order-component-hoc)
-19. [JavaScript Event Loop](#19-what-is-the-event-loop)
+19. [useReducer](#19-usereducer)
 20. [Context API](#20-context-api)
 21. [Custom Hooks](#21-custom-hook)
 22. [Difference between useState and useReducer](#22-difference-between-usestate-and-usereducer)
@@ -583,60 +583,55 @@ const HelloWithLogger = withLogger(Hello);
 ```
 <br>
 
-## 19. **What is the Event Loop**
+## 19. **useReducer**
 
-The JavaScript Event Loop is a mechanism that allows JavaScript (which is single-threaded) to perform non-blocking asynchronous operations, such as timers, network requests, and DOM events.
+***useReducer*** is a React Hook used for state management when state logic is complex or depends on previous state.
 
-It continuously monitors the call stack and the message queues, executing tasks in the proper order — ensuring that asynchronous code runs only when the call stack is empty.
-
-The Event Loop is what allows JavaScript to non-blockingly handle asynchronous events using:
-
-- `Call Stack`: Where functions are executed.
-
-- `Web APIs`: Where async tasks like setTimeout, fetch, etc., run.
-
-- `Callback Queue (Task Queue)`: Where async callbacks wait to be executed.
-
-- `Event Loop`: Keeps checking if the call stack is empty and then pushes the next task from the queue.
-
-
-### ***Event Example***
+***Syntax***
 ```jsx
-console.log("1. Start");
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+***Example***
+```jsx
+import { useReducer } from "react";
 
-setTimeout(() => {
-  console.log("2. Inside setTimeout");
-}, 0);
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return state + 1;
+    case "decrement":
+      return state - 1;
+    default:
+      return state;
+  }
+}
 
-Promise.resolve().then(() => {
-  console.log("3. Inside Promise.then");
-});
+function Counter() {
+  const [count, dispatch] = useReducer(reducer, 0);
+
+  return (
+    <>
+      <p>{count}</p>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+    </>
+  );
+}
+
 ```
 
-### ***Output***
-```jsx
-1. Start
-4. End
-3. Inside Promise.then
-2. Inside setTimeout
+| useState         | useReducer           |
+| ---------------- | -------------------- |
+| Simple state     | Complex state        |
+| Direct updates   | Action based updates |
+| Less boilerplate | More predictable     |
 
-```
-
-- console.log("1. Start") and console.log("4. End") run immediately (synchronous).
-
-- setTimeout(..., 0) is handled by the browser's Web API, and its callback is added to the task queue after at least 0ms.
-
-- Promise.then() is added to the microtask queue, which runs before the task queue.
-
-- So, Promise.then() logs before setTimeout.
-  
-- console.log("4. End");
 
 <br>
 
 ## 20. **Context API**
-The Context API is a built-in React feature used to create global state or shared values that can be accessed by any component in the tree, no matter how deep.
-It solves "prop drilling" — the problem of passing props through multiple layers of components just to reach a deeply nested child.
+
+The ***Context API*** in React is used to share data globally across components without passing props manually at every level.
 
 ### ***UserContext.js***
 ```jsx
@@ -656,87 +651,73 @@ export const UserProvider = ({ children }) => {
 
 ```
 
-### ***DisplayUser.js***
+### ***Create Context***
 ```jsx
-import React, { useContext } from 'react';
-import { UserContext } from './UserContext';
+import { createContext } from "react";
 
-const DisplayUser = () => {
-  const user = useContext(UserContext);
-  return <h2>Hello, {user}!</h2>;
-};
-
-export default DisplayUser;
-
-
+const ThemeContext = createContext();
 ```
-
-### ***UWrap Your App with the Provider***
+### ***Provide Context***
 ```jsx
-// App.js
-import React from 'react';
-import { UserProvider } from './UserContext';
-import DisplayUser from './DisplayUser';
-
-const App = () => {
+function App() {
   return (
-    <UserProvider>
-      <DisplayUser />
-    </UserProvider>
+    <ThemeContext.Provider value="dark">
+      <Dashboard />
+    </ThemeContext.Provider>
   );
-};
-
-export default App;
-
+}
 ```
-
-### ***Output***
+### ***Consume Context***
 ```jsx
-Hello, Alice!
+import { useContext } from "react";
+
+function Dashboard() {
+  const theme = useContext(ThemeContext);
+  return <p>{theme}</p>;  //<p>dark</p>
+}
+
 ```
+### ***Key points***
+
+- Avoids prop drilling
+- Useful for global data
+- Triggers re render when value changes
+
 <br>
 
 ## 21. **custom hook**
 
-### ***useCounter.js**
+- A custom hook is a reusable JavaScript function that uses React hooks and starts with the word ***use***.
+- It helps you share logic between components without repeating code.
+  
+### ***Custom Hook**
 ```jsx
-import { useState } from 'react';
+import { useState } from "react";
 
-function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue);
+function useCounter() {
+  const [count, setCount] = useState(0);
 
-  const increment = () => setCount(c => c + 1);
-  const decrement = () => setCount(c => c - 1);
-  const reset = () => setCount(initialValue);
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
 
-  return { count, increment, decrement, reset };
+  return { count, increment, decrement };
 }
-
-export default useCounter;
 
 ```
 
 ### ***Use the Hook in a Component***
 ```jsx
-// CounterComponent.js
-import React from 'react';
-import useCounter from './useCounter';
-
-function CounterComponent() {
-  const { count, increment, decrement, reset } = useCounter(0);
+function Counter() {
+  const { count, increment, decrement } = useCounter();
 
   return (
-    <div>
-      <h2>Count: {count}</h2>
-      <button onClick={increment}>➕</button>
-      <button onClick={decrement}>➖</button>
-      <button onClick={reset}>🔁</button>
-    </div>
+    <>
+      <p>{count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </>
   );
 }
-
-export default CounterComponent;
-
 ```
 
 ### Key Points
@@ -756,6 +737,7 @@ export default CounterComponent;
 | 📦 **Abstraction**        | Hides complex logic behind a simple API.                      |
 | 📁 **Organized Codebase** | Logic and UI are better separated, improving maintainability. |
 
+<br>
 
 ## 22. Difference between useState and useReducer
 
@@ -765,6 +747,8 @@ export default CounterComponent;
 | Update style | Direct update        | Action based update    |
 | Readability  | Less for large state | Better for large state |
 | Use case     | Counters, toggles    | Forms, complex flows   |
+
+<br>
 
 ## 23. Difference between useEffect and useLayoutEffect
 
