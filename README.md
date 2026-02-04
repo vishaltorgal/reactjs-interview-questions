@@ -1071,7 +1071,7 @@ export default App;
 - React normally creates functions again and again.
 - useCallback stops that and keeps the same function.
 
-<b>
+<br>
 
 ## 38. Redux
 
