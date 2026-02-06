@@ -1146,7 +1146,21 @@ function Counter() {
 
 ## 40. What background process on npm start
 
-- ***npm/yarn***	The package manager that triggers the script.
-- ***Webpack***	The "Bundler" that gathers and organizes all your files.
-- ***Babel***	The "Transpiler" that turns JSX/ES6 into browser-ready JS.
-- ***ESLint***	The "Linter" that checks your code for errors during the build.
+***When you run:***
+- npm looks into package.json
+- Finds this line: "start": "react-scripts start"
+- So npm runs react-scripts
+- react-scripts then starts all the background processes
+
+***Those background processes are started by react-scripts 👇***
+- Webpack dev server starts
+- Babel transpiles JSX and modern JS
+- File watcher listens for code changes
+- Hot reload refreshes the browser
+- ESLint runs checks in the background
+- Environment variables are loaded
+
+***Key difference in one line***
+
+- ***npm start*** → just a trigger (command runner)
+- ***react-scripts*** → does the actual work in background
