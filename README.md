@@ -42,6 +42,7 @@
 38. [Redux](#38-redux)
 39. [Difference between custom hook and components](#39-difference-between-custom-hook-and-components)
 40. [What background process on npm start](#40-what-background-process-on-npm-start)
+41. [React design system libraries](#41-react-design-system-libraries)
 
     
 ## 1. **State in React**
@@ -1164,3 +1165,42 @@ function Counter() {
 
 - ***npm start*** → just a trigger (command runner)
 - ***react-scripts*** → does the actual work in background
+
+## 41. React design system libraries
+
+***React design system libraries*** are pre-built, reusable UI components that follow a consistent design language across an application or across multiple apps.
+
+They solve one big problem:
+👉 UI consistency + speed + accessibility
+
+***What’s inside a design system library***
+- Buttons
+- Inputs
+- Modals
+- Tables
+- Cards
+- Typography
+- Colors and spacing tokens
+- Icons
+- Accessibility rules
+- Theming support
+
+***Example in React***
+Instead of writing buttons everywhere:
+
+```jsx
+<Button variant="primary" size="md">
+  Save
+</Button>
+```
+
+***Popular React design system libraries***
+- Material UI (MUI) – Google Material Design
+- Ant Design – Enterprise dashboards
+- Chakra UI – Simple and accessible
+- Radix UI – Headless components
+
+***How it fits with microfrontends***
+- Different teams
+- Different repos
+- Same look and feel
