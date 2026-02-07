@@ -43,7 +43,7 @@
 39. [Difference between custom hook and components](#39-difference-between-custom-hook-and-components)
 40. [What background process on npm start](#40-what-background-process-on-npm-start)
 41. [React design system libraries](#41-react-design-system-libraries)
-42. [React vs Angular](#42-rect-vs-angular)
+42. [React vs Angular](#42-react-vs-angular)
 
     
 ## 1. **State in React**
