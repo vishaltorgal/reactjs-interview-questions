@@ -43,6 +43,7 @@
 39. [Difference between custom hook and components](#39-difference-between-custom-hook-and-components)
 40. [What background process on npm start](#40-what-background-process-on-npm-start)
 41. [React design system libraries](#41-react-design-system-libraries)
+42. [React vs Angular](#42-rect-vs-angular)
 
     
 ## 1. **State in React**
@@ -1204,3 +1205,53 @@ Instead of writing buttons everywhere:
 - Different teams
 - Different repos
 - Same look and feel
+
+<br>
+
+## 42. React vs Angular
+
+| Aspect           | React                               | Angular                         | Which is better & why                   |
+| ---------------- | ----------------------------------- | ------------------------------- | --------------------------------------- |
+| Type             | UI library                          | Full-fledged framework          | Angular if you want everything built-in |
+| Learning curve   | Easier, flexible                    | Steep, opinionated              | React is better for quick learning      |
+| Language         | JavaScript / TypeScript             | TypeScript only                 | React is more flexible                  |
+| Architecture     | Unopinionated                       | Opinionated (MVC-like)          | Angular suits large teams               |
+| State management | External libraries (Redux, Zustand) | Built-in (RxJS, services)       | Angular for structured state            |
+| Performance      | Very fast with Virtual DOM          | Very fast with change detection | React slightly better for dynamic UI    |
+| Boilerplate      | Minimal                             | Heavy                           | React is better for simplicity          |
+| Tooling          | Choose what you want                | CLI, routing, forms built-in    | Angular for consistency                 |
+| Two-way binding  | No                                  | Yes                             | Angular easier for form-heavy apps      |
+| Mobile support   | React Native                        | Ionic / NativeScript            | React has stronger ecosystem            |
+| Community        | Massive                             | Large but smaller than React    | React wins                              |
+| Use cases        | SPAs, dashboards, startups          | Enterprise-scale apps           | Depends on project size                 |
+
+
+## React
+
+***Use React when:***
+- You want flexibility in architecture
+- Project is small to medium
+- Team size is small
+- You want faster development
+- You are building highly interactive UI
+- You plan to use microfrontends
+- You want a huge ecosystem and hiring pool
+- You prefer choosing your own tools (router, state, etc.)
+- Dashboards
+- Admin panels
+- Startups
+- Consumer apps
+
+## Angular
+
+***Use Angular when:***
+- Project is large and complex
+- Multiple teams are working together
+- You need strict structure and consistency
+- App is form-heavy
+- Enterprise-level standards are required
+- You want everything built-in
+- Long-term maintainability is critical
+- Banking apps
+- Government portals
+- Enterprise dashboards
