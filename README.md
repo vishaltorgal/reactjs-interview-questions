@@ -1065,8 +1065,7 @@ function App() {
 - ❌ For small simple calculations
 - ❌ Just to “optimize everything”
 - ❌ Without performance issue
-
-Because useMemo itself has some overhead.
+- Because useMemo itself has some overhead.
 
 🏋️ ***Real Life Example***
 
@@ -1118,6 +1117,20 @@ export default App;
 - React normally creates functions again and again.
 - useCallback stops that and keeps the same function.
 
+
+🔥 When To Use useCallback
+- ✔ Passing functions to child components
+- ✔ Child component is wrapped with React.memo
+- ✔ Function is inside dependency array of useEffect
+- ✔ Performance optimization is needed
+
+
+🚫 When NOT To Use It
+- ❌ If function is not passed to children
+- ❌ If app is small
+- ❌ If there is no performance issue
+- ❌ For every function blindly
+  
 <br>
 
 ## 38. Redux
