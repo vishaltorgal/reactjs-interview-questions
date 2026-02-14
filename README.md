@@ -745,6 +745,15 @@ function Counter() {
 | 📦 **Abstraction**        | Hides complex logic behind a simple API.                      |
 | 📁 **Organized Codebase** | Logic and UI are better separated, improving maintainability. |
 
+***Difference from Component***
+
+| Custom Hook            | Component            |
+| ---------------------- | -------------------- |
+| Reuses logic           | Renders UI           |
+| No JSX return          | Returns JSX          |
+| Used inside components | Used in UI tree      |
+| Starts with `use`      | Normal function name |
+
 <br>
 
 ## 22. Difference between useState and useReducer
@@ -834,6 +843,8 @@ class Demo extends React.Component {
 | componentDidMount    | useEffect(() => {}, [])             |
 | componentDidUpdate   | useEffect(() => {}, [deps])         |
 | componentWillUnmount | useEffect(() => { return cleanup }) |
+
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/0f855e39-12e3-4274-812c-532e183e09b1" />
 
 
 ## 28. What are Error Boundaries in React?
