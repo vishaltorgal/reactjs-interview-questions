@@ -1053,11 +1053,42 @@ function App() {
 }
 ```
 
-***When to use useMemo***
-- Heavy calculations
-- Prevent unnecessary re computations
-- Optimize performance
+🔥  ***When to use useMemo***
+- ✔ Prevent unnecessary re computations
+- ✔ Expensive calculations
+- ✔ Large array filtering
+- ✔ Sorting big data
+- ✔ Complex derived values
+- ✔ Performance optimization needed
 
+🚫 ***When NOT To Use useMemo***
+- ❌ For small simple calculations
+- ❌ Just to “optimize everything”
+- ❌ Without performance issue
+
+Because useMemo itself has some overhead.
+
+🏋️ ***Real Life Example***
+
+**You have:**
+- 10,000 employee records
+- You calculate total yearly salary
+- This calculation is heavy.
+
+**Now suppose:**
+*You also have a button that changes theme color.*
+- When theme changes:
+- Component re-renders.
+
+**Without useMemo:**
+- Total salary recalculates again ❌
+- Even though salary data did not change.
+
+**With useMemo:**
+- React remembers the previous calculation ✅
+- It only recalculates if employee data changes.
+
+  
 ## 37. useCallback
 
 ***useCallback*** remembers a function, so it is not recreated on every render.
