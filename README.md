@@ -45,6 +45,7 @@
 41. [React design system libraries](#41-react-design-system-libraries)
 42. [React vs Angular](#42-react-vs-angular)
 43. [useReducer vs Context API vs Redux](#43-usereducer-vs-context-api-vsredux)
+44. [Modern React Patterns](#44-modern-react-patterns)
 
     
 ## 1. **State in React**
@@ -1409,3 +1410,93 @@ So the kitchen manager handles all order decisions properly.
 - Scalable architecture
 
 👉 **That headquarters system = Redux**
+
+
+## 44. **Modern React Patterns**
+
+1️⃣ Functional Components + Hooks (Instead of Classes)
+
+2️⃣ Custom Hooks (Logic Reuse Pattern)
+
+3️⃣ Component Composition (Instead of Inheritance)
+
+Example
+```jsx
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+```
+
+Usage
+```jsx
+<Card>
+  <h2>Title</h2>
+  <p>Description</p>
+</Card>
+```
+This makes components flexible and reusable.
+
+4️⃣ Controlled Components (Forms Pattern)
+
+5️⃣ Lifting State Up
+- When multiple components need same data, move state to parent.
+
+` Real life example:`
+- Two siblings need same user data → parent holds state → passes as props.
+
+6️⃣ Context API for Global State
+When prop drilling becomes messy:
+- Theme
+- Auth
+- Language
+- User
+
+7️⃣ useReducer Pattern (Complex State)
+- Forms with many fields
+- Shopping cart
+- Complex UI state
+
+8️⃣ Memoization (Performance Optimization)
+`useMemo`
+Avoid expensive recalculation.
+
+`useCallback`
+Avoid function recreation.
+
+`React.memo`
+Prevent unnecessary re-render of child.
+
+9️⃣ Server Components
+- No useEffect needed.
+- Runs on server.
+- This is modern full stack React pattern.
+
+ 🔟 Suspense & Lazy Loading
+
+ 1️⃣1️⃣ Colocation Pattern
+ Keep:
+
+- Component
+- Styles
+- Tests
+- Hooks
+
+In same folder.
+
+```jsx
+UserCard/
+  UserCard.jsx
+  UserCard.module.css
+  useUser.js
+```
+
+🚀 Modern React Architecture Summary
+| Concern       | Modern Approach                 |
+| ------------- | ------------------------------- |
+| State         | Hooks                           |
+| Reuse logic   | Custom hooks                    |
+| Global state  | Context / Redux                 |
+| Performance   | Memoization                     |
+| Data fetching | React Query / Server components |
+| Code split    | Lazy + Suspense                 |
+| Structure     | Colocation                      |
