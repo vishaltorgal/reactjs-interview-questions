@@ -601,33 +601,116 @@ const HelloWithLogger = withLogger(Hello);
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 ***Example***
-```jsx
-import { useReducer } from "react";
+simple useReducer pattern for a form with many fields.
 
-function reducer(state, action) {
+`When a form has:`
+- name
+- email
+- password
+- confirmPassword
+- etc
+
+Using multiple useState becomes messy. So we use useReducer.
+
+### 🧠 Why useReducer for forms?
+```jsx
+const [name, setName] = useState("")
+const [email, setEmail] = useState("")
+const [password, setPassword] = useState("")
+```
+We manage everything in one state object.
+
+### ✅ Simple Example: Registration Form
+
+Step 1️⃣ Define initial state
+```jsx
+const initialState = {
+  name: "",
+  email: "",
+  password: ""
+};
+```
+
+Step 2️⃣ Create reducer function
+```jsx
+function formReducer(state, action) {
   switch (action.type) {
-    case "increment":
-      return state + 1;
-    case "decrement":
-      return state - 1;
+    case "UPDATE_FIELD":
+      return {
+        ...state,
+        [action.field]: action.value
+      };
+
+    case "RESET":
+      return initialState;
+
     default:
       return state;
   }
 }
+```
 
-function Counter() {
-  const [count, dispatch] = useReducer(reducer, 0);
+Step 3️⃣ Use in Component
+```jsx
+import React, { useReducer } from "react";
+
+export default function SignupForm() {
+  const [state, dispatch] = useReducer(formReducer, initialState);
+
+  function handleChange(e) {
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: e.target.name,
+      value: e.target.value
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(state);
+  }
 
   return (
-    <>
-      <p>{count}</p>
-      <button onClick={() => dispatch({ type: "increment" })}>+</button>
-      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
-    </>
+    <form onSubmit={handleSubmit}>
+      <input
+        name="name"
+        value={state.name}
+        onChange={handleChange}
+        placeholder="Name"
+      />
+
+      <input
+        name="email"
+        value={state.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+
+      <input
+        name="password"
+        type="password"
+        value={state.password}
+        onChange={handleChange}
+        placeholder="Password"
+      />
+
+      <button type="submit">Submit</button>
+      <button type="button" onClick={() => dispatch({ type: "RESET" })}>
+        Reset
+      </button>
+    </form>
   );
 }
-
 ```
+
+### 🔥 Why This Is Better
+
+- ✔ One state object
+- ✔ Centralized logic
+- ✔ Easy to scale
+- ✔ Easy to add validation
+- ✔ Cleaner for complex forms
+
 
 | useState         | useReducer           |
 | ---------------- | -------------------- |
