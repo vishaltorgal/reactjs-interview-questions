@@ -355,7 +355,7 @@ export default App;
 - `Use Case`: Useful when you need direct access to the DOM or for simple use cases where state management is not necessary.
 - No re-render on every keystroke
 - Cleaner for small forms
-- 
+  
 <br>
 
 
