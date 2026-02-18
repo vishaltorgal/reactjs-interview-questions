@@ -219,12 +219,35 @@ A synthetic event is a cross browser wrapper around the browser’s native event
 
 ```jsx
 function Button() {
-  function handleClick(e) {
-    console.log(e);           // SyntheticEvent
-    console.log(e.target);    // Works like native event
+  function handleClick(event) {
+    console.log(event);           // SyntheticEvent
+    console.log(event.type);      // "click"
+    console.log(event.target);    // DOM element
   }
 
-  return <button onClick={handleClick}>Click me</button>;
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
+Here, event is not the native browser event directly. It is a React SyntheticEvent.
+
+### What Is Inside a SyntheticEvent?
+
+It has the same interface as native events:
+
+- event.type
+- event.target
+- event.currentTarget
+- event.preventDefault()
+- event.stopPropagation()
+
+### Real-Life Example
+```jsx
+function Input() {
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  return <input onChange={handleChange} />;
 }
 ```
 <br>
@@ -271,21 +294,22 @@ The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 Controlled components in React are form elements like `<input>`, `<textarea>`, and `<select>` where the value is controlled by React's state. The form element's value is set by the state, and any changes to the input are handled through event handlers that update the state.
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function ControlledInput() {
-  const [text, setText] = useState('');
-
-  const handleChange = (e) => {
-    setText(e.target.value);
-  };
+function App() {
+  const [value, setValue] = useState("");
 
   return (
-    <input type="text" value={text} onChange={handleChange} />
+    <>
+      <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <h1>{value}</h1>
+    </>
   );
 }
 
-export default ControlledInput;
 ```
 
 ### Key Points
@@ -296,33 +320,40 @@ export default ControlledInput;
 
 ## 9. **What are Uncontrolled components?**
 
-Uncontrolled components in React are form elements where the form data is handled by the DOM itself, rather than by React's state. In these components, you access the form values using refs, not state.
+An Uncontrolled Component is a form input where the DOM handles the state, not React.
 
 ```jsx
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
-function UncontrolledInput() {
-  const inputRef = useRef(null);
+function App() {
+  const firstRef = useRef(null);
+  const secondRef = useRef(null);
 
-  const handleSubmit = () => {
-    alert(`Input value: ${inputRef.current.value}`);
-  };
+  function handleSubmit() {
+    alert(
+      `First: ${firstRef.current.value}, Second: ${secondRef.current.value}`
+    );
+  }
 
   return (
-    <div>
-      <input type="text" ref={inputRef} />
+    <>
+      <input ref={firstRef} type="text" />
+      <input ref={secondRef} type="text" />
       <button onClick={handleSubmit}>Submit</button>
-    </div>
+    </>
   );
 }
 
-export default UncontrolledInput;
+export default App;
 ```
+
 ### Key Points
 - `Refs`: Use useRef to access the input's current value.
 - `DOM Control`: The input value is managed by the DOM, not React state.
 - `Use Case`: Useful when you need direct access to the DOM or for simple use cases where state management is not necessary.
-
+- No re-render on every keystroke
+- Cleaner for small forms
+- 
 <br>
 
 
