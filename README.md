@@ -9,7 +9,7 @@
 5. [Synthetic Events](#5-what-are-synthetic-events-in-react)
 6. [Key Prop in Lists](#6-what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
 7. [Virtual DOM](#7-what-is-virtual-dom)
-8. [Controlled Components (forms)](#8-what-are-controlled-components-forms)
+8. [Controlled Components (forms) (useRef)](#8-what-are-controlled-components-forms-useref)
 9. [Uncontrolled Components (forms)](#9-what-are-uncontrolled-components-forms)
 10. [Fragments](#10-what-are-fragments)
 11. [Stateful Components](#11-what-are-stateful-components)
@@ -291,6 +291,8 @@ The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 
 ## 8. **What are controlled components (forms)?**
 
+A Controlled Component is a form element whose value is controlled by React state.
+
 Controlled components in React are form elements like `<input>`, `<textarea>`, and `<select>` where the value is controlled by React's state. The form element's value is set by the state, and any changes to the input are handled through event handlers that update the state.
 
 ```jsx
@@ -318,9 +320,9 @@ function App() {
 
 <br>
 
-## 9. **What are Uncontrolled components (forms)?**
+## 9. **What are Uncontrolled components (forms) (useRef)?**
 
-An Uncontrolled Component is a form input where the DOM handles the state, not React.
+An Uncontrolled Component is a form element where the DOM maintains the input value, and React accesses it using refs.
 
 ```jsx
 import React, { useRef } from "react";
@@ -460,34 +462,10 @@ const Counter = () => {
 
 <br>
 
+
+
 ## 14. **useRef**
 
-`useRef` is a React hook that allows you to persist values across renders without causing a re-render.
-
-### Key Points
-- `Accessing DOM elements`: You can directly reference and interact with DOM elements (like focusing an input).
-- `Storing mutable values`: You can store values (e.g., a counter or timer) that persist between renders but don’t trigger re-renders when changed.
-
-```jsx
-import React, { useRef } from 'react';
-
-const Example = () => {
-  const inputRef = useRef(); // Create a ref
-
-  const focusInput = () => {
-    inputRef.current.focus(); // Focus the input element
-  };
-
-  return (
-    <div>
-      <input ref={inputRef} type="text" />
-      <button onClick={focusInput}>Focus the input</button>
-    </div>
-  );
-};
-```
-- useRef is used here to focus the input element when the button is clicked.
-- It does not trigger re-renders when its value changes, which is useful for tasks like accessing DOM elements directly or tracking values without re-rendering the component.
 
 <br>
 
