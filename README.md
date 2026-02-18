@@ -9,8 +9,8 @@
 5. [Synthetic Events](#5-what-are-synthetic-events-in-react)
 6. [Key Prop in Lists](#6-what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
 7. [Virtual DOM](#7-what-is-virtual-dom)
-8. [Controlled Components](#8-what-are-controlled-components)
-9. [Uncontrolled Components](#9-what-are-uncontrolled-components)
+8. [Controlled Components (forms)](#8-what-are-controlled-components-forms)
+9. [Uncontrolled Components (forms)](#9-what-are-uncontrolled-components-forms)
 10. [Fragments](#10-what-are-fragments)
 11. [Stateful Components](#11-what-are-stateful-components)
 12. [Function Components vs Class Components](#12-function-components-vs-class-components)
@@ -289,7 +289,7 @@ The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 
 <br>
 
-## 8. **What are controlled components?**
+## 8. **What are controlled components (forms)?**
 
 Controlled components in React are form elements like `<input>`, `<textarea>`, and `<select>` where the value is controlled by React's state. The form element's value is set by the state, and any changes to the input are handled through event handlers that update the state.
 
@@ -318,7 +318,7 @@ function App() {
 
 <br>
 
-## 9. **What are Uncontrolled components?**
+## 9. **What are Uncontrolled components (forms)?**
 
 An Uncontrolled Component is a form input where the DOM handles the state, not React.
 
