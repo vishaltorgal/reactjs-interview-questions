@@ -15,7 +15,7 @@
 11. [Stateful Components](#11-what-are-stateful-components)
 12. [Function Components vs Class Components](#12-function-components-vs-class-components)
 13. [Ways to Optimize React Application](#13-ways-to-optimize-react-application)
-14. [useRef Hook](#14-useref)
+14. [useLayoutEffect](#14-uselayouteffect)
 15. [createRef](#15-createref)
 16. [React Fiber](#16-what-is-react-fiber)
 17. [Callback Function](#17-callback-function)
@@ -464,8 +464,66 @@ const Counter = () => {
 
 
 
-## 14. **useRef**
+## 14. **useLayoutEffect**
 
+useLayoutEffect is a Hook that runs synchronously after DOM updates but before the browser paints the screen.
+
+### 🔄 Execution Order
+
+When a component renders:
+
+- 1️⃣ Render phase
+- 2️⃣ DOM updated
+- 3️⃣ useLayoutEffect runs
+- 4️⃣ Browser paints
+- 5️⃣ useEffect runs
+
+```jsx
+import React, { useLayoutEffect, useRef } from "react";
+
+function App() {
+  const boxRef = useRef(null);
+
+  useLayoutEffect(() => {
+    boxRef.current.style.backgroundColor = "lightblue";
+  }, []);
+
+  return (
+    <div
+      ref={boxRef}
+      style={{ width: "200px", height: "100px", backgroundColor: "pink" }}
+    >
+      Hello
+    </div>
+  );
+}
+
+export default App;
+```
+
+### 🔎 What Happens
+
+- React renders div with pink color
+- DOM updates
+- useLayoutEffect runs immediately
+- Background changes to lightblue
+- Browser paints
+- 👉 User only sees lightblue
+- 👉 No flicker
+
+### 🆚 If We Use useEffect
+
+If you replace useLayoutEffect with useEffect:
+- User may briefly see pink
+- Then it changes to lightblue
+- Small flicker happens
+
+### 🧠 Simple Rule
+
+Use useLayoutEffect when:
+- You need to measure DOM
+- You need to change layout immediately
+- You want to avoid flicker
 
 <br>
 
@@ -1667,3 +1725,4 @@ UserCard/
 | Data fetching | React Query / Server components |
 | Code split    | Lazy + Suspense                 |
 | Structure     | Colocation                      |
+
