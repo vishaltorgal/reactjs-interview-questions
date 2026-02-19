@@ -508,15 +508,37 @@ export default Example;
 
 ## 16. **What is React Fiber?**
 
-React Fiber is the internal architecture React uses to break rendering work into units and prioritize updates.
+React Fiber is the reconciliation engine introduced in React 16.
+
+It is the internal algorithm that React uses to:
+- Compare old virtual DOM with new virtual DOM
+- Decide what needs to change
+- Update the UI efficiently
 
 ***Before Fiber:***
-- Rendering was synchronous
-- Large updates could block the UI
+Rendering was 
+- Synchronous
+- Blocking
+- Could not be paused
 
 ***With Fiber:***
 - Work can be paused, resumed, or cancelled
 - High priority updates run first
+
+
+### 🔥 Two Important Phases
+1️⃣ Render Phase (Interruptible)
+
+- Can pause
+- Can resume
+- Can cancel
+- Builds Fiber tree
+
+2️⃣ Commit Phase (Not Interruptible)
+
+- Applies changes to DOM
+- Must finish completely
+- Very fast
 
 <br>
 
@@ -544,8 +566,61 @@ Goodbye!
 ```
 ### In this example
 - sayGoodbye is passed as a callback to greetUser.
-
 - After greeting the user, it calls the callback() function.
+
+
+
+### Passing values from child to parent
+
+✅ Parent Component
+
+```jsx
+import React, { useState } from "react";
+import Child from "./Child";
+
+function App() {
+  const [number, setNumber] = useState(0);
+
+  function handleNumberFromChild(num) {
+    setNumber(num);
+  }
+
+  return (
+    <>
+      <h1>Number from Child: {number}</h1>
+      <Child sendNumber={handleNumberFromChild} />
+    </>
+  );
+}
+
+export default App;
+
+```
+✅ Child Component
+```jsx
+import React from "react";
+
+function Child({ sendNumber }) {
+  return (
+    <button onClick={() => sendNumber(10)}>
+      Send 10
+    </button>
+  );
+}
+
+export default Child;
+
+```
+
+### 🔄 What Happens
+
+- Parent creates handleNumberFromChild
+- Parent passes it as prop sendNumber
+- Child calls sendNumber(10)
+- Parent receives 10
+- Parent updates state
+- UI updates
+
 
 <br>
 
