@@ -1034,8 +1034,7 @@ React lifecycle has ***three*** main phases:
 `Updating` – component re-renders due to changes
 `Unmounting` – component is removed from DOM
 
-***Example (Class Component)***
-
+### Example (Class Component)
 ```jsx
 class Demo extends React.Component {
   constructor() {
@@ -1059,10 +1058,70 @@ class Demo extends React.Component {
     return <h1>{this.state.count}</h1>;
   }
 }
+```
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/0f855e39-12e3-4274-812c-532e183e09b1" />
 
+
+### Example (functional Component)
+
+
+
+
+1️⃣ Mounting Phase
+
+👉 When component is created and inserted into DOM.
+
+`What happens:`
+- Component renders for the first time
+- DOM is created
+- Effects run
+
+```jsx
+useEffect(() => {
+  console.log("Component Mounted");
+}, []);
+```
+Empty dependency array → runs only once → on mount.
+
+
+
+2️⃣ Updating Phase
+
+👉 When component re-renders because:
+
+- State changes
+- Props change
+
+```jsx
+useEffect(() => {
+  console.log("Component Updated");
+});
+```
+Runs after every render.
+
+***Or:***
+```jsx
+useEffect(() => {
+  console.log("Count changed");
+}, [count]);
+```
+Runs only when count changes.
+
+3️⃣ Unmounting Phase
+
+👉 When component is removed from DOM.
+
+```jsx
+useEffect(() => {
+  return () => {
+    console.log("Component Unmounted");
+  };
+}, []);
 ```
 
-***Lifecycle Methods vs Hooks***
+The return function is the cleanup function.
+
+### 🎯 Functional Component Mapping
 
 | Class Lifecycle      | Hook Equivalent                     |
 | -------------------- | ----------------------------------- |
@@ -1070,7 +1129,19 @@ class Demo extends React.Component {
 | componentDidUpdate   | useEffect(() => {}, [deps])         |
 | componentWillUnmount | useEffect(() => { return cleanup }) |
 
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/0f855e39-12e3-4274-812c-532e183e09b1" />
+
+
+### 🎯 Simple Timeline
+
+- User hides component
+- ⬇
+- React starts unmount
+- ⬇
+- Cleanup runs
+- ⬇
+- DOM removed
+- ⬇
+- UI not visible
 
 
 ## 28. What are Error Boundaries in React?
