@@ -1800,7 +1800,7 @@ UserCard/
 
 <br>
 
-## 44. **React Query**
+## 45. **React Query**
 
 React Query is used to fetch and manage server data easily.
 
