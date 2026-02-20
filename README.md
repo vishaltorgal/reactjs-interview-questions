@@ -22,7 +22,7 @@
 18. [Callback vs Higher Order Component (HOC)](#18-difference-callback-vs-higher-order-component-hoc)
 19. [useReducer](#19-usereducer)
 20. [Context API](#20-context-api)
-21. [Custom Hooks](#21-custom-hook)
+21. [Custom Hooks](#21-custom-hooks)
 22. [Difference between useState and useReducer](#22-difference-between-usestate-and-usereducer)
 23. [Difference between useEffect and useLayoutEffect](#23-difference-between-useeffect-and-uselayouteffect)
 24. [Difference between useMemo and useCallback](#24-difference-between-usememo-and-usecallback)
@@ -920,7 +920,7 @@ function Dashboard() {
 
 <br>
 
-## 21. **custom hook**
+## 21. **custom hooks**
 
 - A custom hook is a reusable JavaScript function that uses React hooks and starts with the word ***use***.
 - It helps you share logic between components without repeating code.
@@ -980,6 +980,89 @@ function Counter() {
 | No JSX return          | Returns JSX          |
 | Used inside components | Used in UI tree      |
 | Starts with `use`      | Normal function name |
+
+
+### Use Cases
+
+***API Calls***
+```jsx
+function useUsers() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/users")
+      .then(res => res.json())
+      .then(setUsers);
+  }, []);
+
+  return users;
+}
+```
+
+***Loaders***
+```jsx
+function useFetchData() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchData().finally(() => setLoading(false));
+  }, []);
+
+  return loading;
+}
+```
+***Handling Repeated Side Effects***
+- Window resize
+- Scroll position
+- Online/offline status
+- Event listeners
+  
+```jsx
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handler = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  return width;
+}
+```
+
+***Abstracting Complex State Logic***
+- Forms
+- Multi-step flows
+- Validation
+  
+```jsx
+function useForm(initialValues) {
+  const [values, setValues] = useState(initialValues);
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  return { values, handleChange };
+}
+```
+
+***localStorage***
+```jsx
+function useLocalStorage(key, initial) {
+  const [value, setValue] = useState(() => {
+    return JSON.parse(localStorage.getItem(key)) ?? initial;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+```
 
 <br>
 
