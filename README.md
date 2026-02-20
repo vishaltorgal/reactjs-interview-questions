@@ -920,7 +920,7 @@ Suspense does not make code load faster, but it:
 - Improves first paint and user perception
 - You can wrap specific components, not entire app
 
-## 32. What is code splitting in React?
+## 24. What is code splitting in React?
 
 Code splitting in React is a performance optimization technique where a large JavaScript bundle is split into smaller chunks, and only the required code is loaded when needed.
 
@@ -938,7 +938,7 @@ This helps:
 | Vendor splitting | Separate libraries     |
 
 
-## 24. What is Prop Drilling in React?
+## 25. What is Prop Drilling in React?
 
 Prop drilling is a situation in React where data is passed from a parent component to deeply nested child components through multiple intermediate components, even though those intermediate components do not need the data.
 
@@ -954,7 +954,7 @@ Prop drilling is a situation in React where data is passed from a parent compone
 - Use state management libraries like Redux
 - Tightly coupled components
 
-## 25. Keys and Re-rendering in React?
+## 26. Keys and Re-rendering in React?
 
 Keys are special attributes in React used to uniquely identify elements in a list.
 
@@ -976,7 +976,7 @@ When a list changes, React:
 
 <br>
 
-## 26. What background process on npm start
+## 27. What background process on npm start
 
 ***When you run:***
 - npm looks into package.json
@@ -997,7 +997,7 @@ When a list changes, React:
 - ***npm start*** → just a trigger (command runner)
 - ***react-scripts*** → does the actual work in background
 
-## 27. React design system libraries
+## 28. React design system libraries
 
 ***React design system libraries*** are pre-built, reusable UI components that follow a consistent design language across an application or across multiple apps.
 
@@ -1038,7 +1038,7 @@ Instead of writing buttons everywhere:
 
 <br>
 
-## 28. React vs Angular
+## 29. React vs Angular
 
 | Aspect           | React                               | Angular                         | Which is better & why                   |
 | ---------------- | ----------------------------------- | ------------------------------- | --------------------------------------- |
@@ -1087,7 +1087,7 @@ Instead of writing buttons everywhere:
 - Enterprise dashboards
 
 
-## 29. useReducer vs Context API vs redux
+## 30. useReducer vs Context API vs redux
 
 🎬 Imagine You Are Managing a Restaurant
 
@@ -1185,7 +1185,7 @@ So the kitchen manager handles all order decisions properly.
 👉 **That headquarters system = Redux**
 
 
-## 30. **Modern React Patterns**
+## 31. **Modern React Patterns**
 
 1️⃣ Functional Components + Hooks (Instead of Classes)
 
@@ -1276,7 +1276,7 @@ UserCard/
 
 <br>
 
-## 31. **React Query**
+## 32. **React Query**
 
 React Query is used to fetch and manage server data easily.
 
