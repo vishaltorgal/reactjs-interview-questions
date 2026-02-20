@@ -46,6 +46,7 @@
 42. [React vs Angular](#42-react-vs-angular)
 43. [useReducer vs Context API vs Redux](#43-usereducer-vs-context-api-vsredux)
 44. [Modern React Patterns](#44-modern-react-patterns)
+45. [React Query](#45-react-query)
 
     
 ## 1. **State in React**
@@ -1797,3 +1798,96 @@ UserCard/
 | Code split    | Lazy + Suspense                 |
 | Structure     | Colocation                      |
 
+<br>
+
+## 44. **React Query**
+
+React Query is used to fetch and manage server data easily.
+
+### Setup Provider
+
+```jsx
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Users />
+    </QueryClientProvider>
+  );
+}
+```
+### Simple Example
+
+```jsx
+import { useQuery } from "@tanstack/react-query";
+
+function Users() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      return res.json();
+    }
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
+
+  return (
+    <ul>
+      {data.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### ✅ Advantages
+1️⃣ Automatic Caching
+
+If another component requests "users":
+- No extra API call.
+- Data comes from cache.
+
+2️⃣ Background Refetch
+
+`When:`
+- User refocuses tab
+- Internet reconnects
+- Data refreshes automatically.
+
+3️⃣ Built-in Loading & Error States
+
+`You get:`
+- isLoading
+- error
+- isFetching
+
+No manual state needed.
+
+4️⃣ Deduplication
+
+If 5 components request same data:
+- Only 1 network request happens.
+
+### 🔥 When to Use React Query?
+
+Use React Query when:
+- Your app fetches data from APIs
+- You need caching
+- You need background updates
+- You want less boilerplate
+- You have pagination or infinite scroll
+
+### 🔥 React Query vs useEffect
+
+| useEffect             | React Query      |
+| --------------------- | ---------------- |
+| Manual state handling | Automatic        |
+| No caching            | Built-in caching |
+| More boilerplate      | Cleaner          |
+| Harder scaling        | Scales well      |
