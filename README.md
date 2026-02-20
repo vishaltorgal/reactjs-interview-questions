@@ -15,38 +15,25 @@
 11. [Stateful Components](#11-what-are-stateful-components)
 12. [Function Components vs Class Components](#12-function-components-vs-class-components)
 13. [Ways to Optimize React Application](#13-ways-to-optimize-react-application)
-14. [useLayoutEffect](#14-uselayouteffect)
-15. [createRef](#15-createref)
-16. [React Fiber](#16-what-is-react-fiber)
-17. [Callback Function](#17-callback-function)
-18. [Callback vs Higher Order Component (HOC)](#18-difference-callback-vs-higher-order-component-hoc)
-19. [useReducer](#19-usereducer)
-20. [Context API](#20-context-api)
-21. [Custom Hooks](#21-custom-hooks)
-22. [Difference between useState and useReducer](#22-difference-between-usestate-and-usereducer)
-23. [Difference between useEffect and useLayoutEffect](#23-difference-between-useeffect-and-uselayouteffect)
-24. [Difference between useMemo and useCallback](#24-difference-between-usememo-and-usecallback)
-25. [Difference between useRef and useState](#25-difference-between-useref-and-usestate)
-26. [Difference between CSR and SSR](#26-difference-between-csr-and-ssr)
-27. [Lifecycle Phases in React](#27-lifecycle-phases-in-react)
-28. [What are Error Boundaries in React?](#28-what-are-error-boundaries-in-react)
-29. [What is Reconciliation in React?](#29-what-is-reconciliation-in-react)
-30. [What is Lazy Loading?](#30-what-is-lazy-loading)
-31. [What is Suspense in React?](#31-what-is-suspense-in-react)
-32. [What is code splitting in React?](#32-what-is-code-splitting-in-react)
-33. [What is Prop Drilling in React?](#33-what-is-prop-drilling-in-react)
-34. [Keys and Re-rendering in React?](#34-keys-and-re-rendering-in-react)
-35. [Types of Hooks in React?](#35-types-of-hooks-in-react)
-36. [useMemo](#36-usememo)
-37. [useCallback](#37-usecallback)
-38. [Available](#38-available)
-39. [Difference between custom hook and components](#39-difference-between-custom-hook-and-components)
-40. [What background process on npm start](#40-what-background-process-on-npm-start)
-41. [React design system libraries](#41-react-design-system-libraries)
-42. [React vs Angular](#42-react-vs-angular)
-43. [useReducer vs Context API vs Redux](#43-usereducer-vs-context-api-vsredux)
-44. [Modern React Patterns](#44-modern-react-patterns)
-45. [React Query](#45-react-query)
+14. [createRef](#14-createref)
+15. [React Fiber](#15-what-is-react-fiber)
+16. [Callback Function](#16-callback-function)
+17. [Callback vs Higher Order Component (HOC)](#17-difference-callback-vs-higher-order-component-hoc)
+18. [Context API](#18-context-api)
+19. [Lifecycle Phases in React](#19-lifecycle-phases-in-react)
+20. [What are Error Boundaries in React?](#20-what-are-error-boundaries-in-react)
+21. [What is Reconciliation in React?](#21-what-is-reconciliation-in-react)
+22. [What is Lazy Loading?](#22-what-is-lazy-loading)
+23. [What is Suspense in React?](#23-what-is-suspense-in-react)
+24. [What is code splitting in React?](#24-what-is-code-splitting-in-react)
+25. [What is Prop Drilling in React?](#25-what-is-prop-drilling-in-react)
+26. [Keys and Re-rendering in React?](#26-keys-and-re-rendering-in-react)
+27. [What background process on npm start](#27-what-background-process-on-npm-start)
+28. [React design system libraries](#28-react-design-system-libraries)
+29. [React vs Angular](#29-react-vs-angular)
+30. [useReducer vs Context API vs Redux](#30-usereducer-vs-context-api-vsredux)
+31. [Modern React Patterns](#31-modern-react-patterns)
+32. [React Query](#32-react-query)
 
     
 ## 1. **State in React**
@@ -463,72 +450,7 @@ const Counter = () => {
 
 <br>
 
-
-
-## 14. **useLayoutEffect**
-
-useLayoutEffect is a Hook that runs synchronously after DOM updates but before the browser paints the screen.
-
-### 🔄 Execution Order
-
-When a component renders:
-
-- 1️⃣ Render phase
-- 2️⃣ DOM updated
-- 3️⃣ useLayoutEffect runs
-- 4️⃣ Browser paints
-- 5️⃣ useEffect runs
-
-```jsx
-import React, { useLayoutEffect, useRef } from "react";
-
-function App() {
-  const boxRef = useRef(null);
-
-  useLayoutEffect(() => {
-    boxRef.current.style.backgroundColor = "lightblue";
-  }, []);
-
-  return (
-    <div
-      ref={boxRef}
-      style={{ width: "200px", height: "100px", backgroundColor: "pink" }}
-    >
-      Hello
-    </div>
-  );
-}
-
-export default App;
-```
-
-### 🔎 What Happens
-
-- React renders div with pink color
-- DOM updates
-- useLayoutEffect runs immediately
-- Background changes to lightblue
-- Browser paints
-- 👉 User only sees lightblue
-- 👉 No flicker
-
-### 🆚 If We Use useEffect
-
-If you replace useLayoutEffect with useEffect:
-- User may briefly see pink
-- Then it changes to lightblue
-- Small flicker happens
-
-### 🧠 Simple Rule
-
-Use useLayoutEffect when:
-- You need to measure DOM
-- You need to change layout immediately
-- You want to avoid flicker
-
-<br>
-
-## 15. **createRef**
+## 14. **createRef**
 
 `createRef` is a way to create a reference to a DOM element or a class component instance in React class components. It allows direct manipulation of the DOM or calling methods on class components without relying on state or props.
 
@@ -565,7 +487,7 @@ export default Example;
 ```
 <br>
 
-## 16. **What is React Fiber?**
+## 15. **What is React Fiber?**
 
 React Fiber is the reconciliation engine introduced in React 16.
 
@@ -601,7 +523,7 @@ Rendering was
 
 <br>
 
-## 17. **Callback Function**
+## 16. **Callback Function**
 
 A `callback function` is a function passed as an argument to another function, to be called (invoked) later, usually after a task is completed.
 
@@ -683,7 +605,7 @@ export default Child;
 
 <br>
 
-## 18. **Difference Callback vs. Higher-Order Component (HOC)**
+## 17. **Difference Callback vs. Higher-Order Component (HOC)**
 
  ###  Definition:
 A callback is a function passed as an argument to another function to be executed later, often after some operation is complete.
@@ -735,136 +657,7 @@ const HelloWithLogger = withLogger(Hello);
 ```
 <br>
 
-## 19. **useReducer**
-
-***useReducer*** is a React Hook used for state management when state logic is complex or depends on previous state.
-
-***Syntax***
-```jsx
-const [state, dispatch] = useReducer(reducer, initialState);
-```
-***Example***
-simple useReducer pattern for a form with many fields.
-
-`When a form has:`
-- name
-- email
-- password
-- confirmPassword
-- etc
-
-Using multiple useState becomes messy. So we use useReducer.
-
-### 🧠 Why useReducer for forms?
-```jsx
-const [name, setName] = useState("")
-const [email, setEmail] = useState("")
-const [password, setPassword] = useState("")
-```
-We manage everything in one state object.
-
-### ✅ Simple Example: Registration Form
-
-Step 1️⃣ Define initial state
-```jsx
-const initialState = {
-  name: "",
-  email: "",
-  password: ""
-};
-```
-
-Step 2️⃣ Create reducer function
-```jsx
-function formReducer(state, action) {
-  switch (action.type) {
-    case "UPDATE_FIELD":
-      return {
-        ...state,
-        [action.field]: action.value
-      };
-
-    case "RESET":
-      return initialState;
-
-    default:
-      return state;
-  }
-}
-```
-
-Step 3️⃣ Use in Component
-```jsx
-import React, { useReducer } from "react";
-
-export default function SignupForm() {
-  const [state, dispatch] = useReducer(formReducer, initialState);
-
-  function handleChange(e) {
-    dispatch({
-      type: "UPDATE_FIELD",
-      field: e.target.name,
-      value: e.target.value
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(state);
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="name"
-        value={state.name}
-        onChange={handleChange}
-        placeholder="Name"
-      />
-
-      <input
-        name="email"
-        value={state.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
-
-      <input
-        name="password"
-        type="password"
-        value={state.password}
-        onChange={handleChange}
-        placeholder="Password"
-      />
-
-      <button type="submit">Submit</button>
-      <button type="button" onClick={() => dispatch({ type: "RESET" })}>
-        Reset
-      </button>
-    </form>
-  );
-}
-```
-
-### 🔥 Why This Is Better
-
-- ✔ One state object
-- ✔ Centralized logic
-- ✔ Easy to scale
-- ✔ Easy to add validation
-- ✔ Cleaner for complex forms
-
-
-| useState         | useReducer           |
-| ---------------- | -------------------- |
-| Simple state     | Complex state        |
-| Direct updates   | Action based updates |
-| Less boilerplate | More predictable     |
-
-
-<br>
-
-## 20. **Context API**
+## 18. **Context API**
 
 The ***Context API*** in React is used to share data globally across components without passing props manually at every level.
 
@@ -920,197 +713,8 @@ function Dashboard() {
 
 <br>
 
-## 21. **custom hooks**
 
-- A custom hook is a reusable JavaScript function that uses React hooks and starts with the word ***use***.
-- It helps you share logic between components without repeating code.
-  
-### ***Custom Hook**
-```jsx
-import { useState } from "react";
-
-function useCounter() {
-  const [count, setCount] = useState(0);
-
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
-
-  return { count, increment, decrement };
-}
-
-```
-
-### ***Use the Hook in a Component***
-```jsx
-function Counter() {
-  const { count, increment, decrement } = useCounter();
-
-  return (
-    <>
-      <p>{count}</p>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-    </>
-  );
-}
-```
-
-### Key Points
-- Must start with use
-- Only call hooks at the top level
-- Only call hooks from:
-    1. React function components, or
-    2. Other custom hooks
-
- ### Benefit
- 
-|       Name                 | Description                                                   |
-| ------------------------- | ------------------------------------------------------------- |
-| ♻ **Reusability**         | Write once, reuse logic across multiple components.           |
-| ✨ **Cleaner Code**        | Keeps components simple by separating logic.                  |
-| 🧪 **Testability**        | Easier to test logic in isolation (without UI).               |
-| 📦 **Abstraction**        | Hides complex logic behind a simple API.                      |
-| 📁 **Organized Codebase** | Logic and UI are better separated, improving maintainability. |
-
-***Difference from Component***
-
-| Custom Hook            | Component            |
-| ---------------------- | -------------------- |
-| Reuses logic           | Renders UI           |
-| No JSX return          | Returns JSX          |
-| Used inside components | Used in UI tree      |
-| Starts with `use`      | Normal function name |
-
-
-### Use Cases
-
-***API Calls***
-```jsx
-function useUsers() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/users")
-      .then(res => res.json())
-      .then(setUsers);
-  }, []);
-
-  return users;
-}
-```
-
-***Loaders***
-```jsx
-function useFetchData() {
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetchData().finally(() => setLoading(false));
-  }, []);
-
-  return loading;
-}
-```
-***Handling Repeated Side Effects***
-- Window resize
-- Scroll position
-- Online/offline status
-- Event listeners
-  
-```jsx
-function useWindowWidth() {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handler = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-
-  return width;
-}
-```
-
-***Abstracting Complex State Logic***
-- Forms
-- Multi-step flows
-- Validation
-  
-```jsx
-function useForm(initialValues) {
-  const [values, setValues] = useState(initialValues);
-
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  return { values, handleChange };
-}
-```
-
-***localStorage***
-```jsx
-function useLocalStorage(key, initial) {
-  const [value, setValue] = useState(() => {
-    return JSON.parse(localStorage.getItem(key)) ?? initial;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue];
-}
-```
-
-<br>
-
-## 22. Difference between useState and useReducer
-
-| Feature      | useState             | useReducer             |
-| ------------ | -------------------- | ---------------------- |
-| Complexity   | Simple state         | Complex state logic    |
-| Update style | Direct update        | Action based update    |
-| Readability  | Less for large state | Better for large state |
-| Use case     | Counters, toggles    | Forms, complex flows   |
-
-<br>
-
-## 23. Difference between useEffect and useLayoutEffect
-
-| Feature        | useEffect    | useLayoutEffect      |
-| -------------- | ------------ | -------------------- |
-| Execution time | After paint  | Before paint         |
-| UI blocking    | Non blocking | Blocking             |
-| Performance    | Better       | Can hurt performance |
-| Use case       | API calls    | DOM measurements     |
-
-## 24. Difference between useMemo and useCallback
-
-| Feature      | useMemo                | useCallback                      |
-| ------------ | ---------------------- | -------------------------------- |
-| Purpose      | Memoizes value         | Memoizes function                |
-| Return value | Cached value           | Cached function                  |
-| Usage        | Expensive calculations | Prevent re creation of functions |
-
-## 25. Difference between useRef and useState
-
-| Feature    | useRef             | useState             |
-| ---------- | ------------------ | -------------------- |
-| Re render  | Does not re render | Re renders component |
-| Mutability | Mutable            | Immutable            |
-| Use case   | DOM access         | UI updates           |
-
-## 26. Difference between CSR and SSR
-
-| Feature      | CSR     | SSR    |
-| ------------ | ------- | ------ |
-| Rendering    | Browser | Server |
-| SEO          | Poor    | Good   |
-| Initial load | Slow    | Fast   |
-
-## 27. Lifecycle Phases in React
+## 19. Lifecycle Phases in React
 
 React lifecycle has ***three*** main phases:
 
@@ -1147,9 +751,6 @@ class Demo extends React.Component {
 
 
 ### Example (functional Component)
-
-
-
 
 1️⃣ Mounting Phase
 
@@ -1228,7 +829,7 @@ The return function is the cleanup function.
 - UI not visible
 
 
-## 28. What are Error Boundaries in React?
+## 20. What are Error Boundaries in React?
 
 Error Boundaries are React components that catch JavaScript errors in:
 
@@ -1256,7 +857,7 @@ function App() {
 - Only class components can be error boundaries
 - You can wrap specific components, not the entire app always
 
-## 29. What is Reconciliation in React?
+## 21. What is Reconciliation in React?
 
 ***Reconciliation*** is the process React uses to update the UI efficiently when state or props change.
 
@@ -1266,7 +867,7 @@ Instead of updating the entire DOM, React:
 - Compares it with the previous Virtual DOM
 - Updates only the changed parts in the real DOM
 
-## 30. What is Lazy Loading?
+## 22. What is Lazy Loading?
 
  Lazy loading in React is a performance optimization technique where components are loaded only when they are needed, instead of loading all components at the initial application load.
 
@@ -1307,7 +908,7 @@ function App() {
 export default App;
 
 ```
-## 31. What is Suspense in React?
+## 23. What is Suspense in React?
 
 Suspense is a React component that lets you pause rendering of part of the UI and show a fallback UI while waiting for something to load, most commonly lazy loaded components.
 
@@ -1337,7 +938,7 @@ This helps:
 | Vendor splitting | Separate libraries     |
 
 
-## 33. What is Prop Drilling in React?
+## 24. What is Prop Drilling in React?
 
 Prop drilling is a situation in React where data is passed from a parent component to deeply nested child components through multiple intermediate components, even though those intermediate components do not need the data.
 
@@ -1353,7 +954,7 @@ Prop drilling is a situation in React where data is passed from a parent compone
 - Use state management libraries like Redux
 - Tightly coupled components
 
-## 34. Keys and Re-rendering in React?
+## 25. Keys and Re-rendering in React?
 
 Keys are special attributes in React used to uniquely identify elements in a list.
 
@@ -1373,171 +974,9 @@ When a list changes, React:
 - Avoid using array index
 - Use database IDs when possible
 
-## 35. Types of Hooks in React?
-
-***Basic Hooks***
-| Hook       | Purpose             | Use Case                 | Example                                 |
-| ---------- | ------------------- | ------------------------ | --------------------------------------- |
-| useState   | Manage local state  | Form inputs, counters    | `const [count, setCount] = useState(0)` |
-| useEffect  | Handle side effects | API calls, subscriptions | `useEffect(() => fetchData(), [])`      |
-| useContext | Consume context     | Theme, auth, language    | `const theme = useContext(ThemeCtx)`    |
-
-***Additional Hooks***
-| Hook        | Purpose                         | Use Case                 | Example                                               |
-| ----------- | ------------------------------- | ------------------------ | ----------------------------------------------------- |
-| useRef      | Persist value without re-render | Focus input, timers      | `const inputRef = useRef(null)`                       |
-| useReducer  | Complex state logic             | Forms, state machines    | `const [state, dispatch] = useReducer(reducer, init)` |
-| useCallback | Memoize function                | Prevent child re-renders | `useCallback(fn, [])`                                 |
-| useMemo     | Memoize value                   | Expensive calculations   | `useMemo(calc, [deps])`                               |
-
-***Layout & Effect Hooks***
-| Hook               | Purpose                     | Use Case            | Example                            |
-| ------------------ | --------------------------- | ------------------- | ---------------------------------- |
-| useLayoutEffect    | DOM-read/write before paint | Measure layout      | `useLayoutEffect(() => {}, [])`    |
-| useInsertionEffect | Inject styles before paint  | CSS-in-JS libraries | `useInsertionEffect(() => {}, [])` |
-
-***Use Case Mapping***
-| Scenario            | Best Hook             |
-| ------------------- | --------------------- |
-| Input handling      | useState              |
-| API call            | useEffect             |
-| Avoid re-render     | useMemo / useCallback |
-| Share data globally | useContext            |
-| Heavy UI update     | useTransition         |
-| Access DOM          | useRef                |
-| Complex logic       | useReducer            |
-
 <br>
 
-## 36. useMemo
-
-***useMemo*** returns a cached value and recomputes it only when its dependencies change.
-
-```jsx
-import { useMemo, useState } from "react";
-
-function App() {
-  const [count, setCount] = useState(0);
-  const [number, setNumber] = useState(5);
-
-  const squared = useMemo(() => {
-    console.log("Calculating...");
-    return number * number;
-  }, [number]);
-
-  return (
-    <>
-      <p>Square: {squared}</p>
-      <button onClick={() => setCount(count + 1)}>Re render</button>
-    </>
-  );
-}
-```
-
-🔥  ***When to use useMemo***
-- ✔ Prevent unnecessary re computations
-- ✔ Expensive calculations
-- ✔ Large array filtering
-- ✔ Sorting big data
-- ✔ Complex derived values
-- ✔ Performance optimization needed
-
-🚫 ***When NOT To Use useMemo***
-- ❌ For small simple calculations
-- ❌ Just to “optimize everything”
-- ❌ Without performance issue
-- Because useMemo itself has some overhead.
-
-🏋️ ***Real Life Example***
-
-**You have:**
-- 10,000 employee records
-- You calculate total yearly salary
-- This calculation is heavy.
-
-**Now suppose:**
-*You also have a button that changes theme color.*
-- When theme changes:
-- Component re-renders.
-
-**Without useMemo:**
-- Total salary recalculates again ❌
-- Even though salary data did not change.
-
-**With useMemo:**
-- React remembers the previous calculation ✅
-- It only recalculates if employee data changes.
-
-  
-## 37. useCallback
-
-***useCallback*** remembers a function, so it is not recreated on every render.
-
-```jsx
-import React, { useState, useCallback } from "react";
-
-function App() {
-  const [count, setCount] = useState(0);
-
-  const sayHello = useCallback(() => {
-    console.log("Hello");
-  }, []);
-
-  return (
-    <>
-      <p>{count}</p>
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-      <button onClick={sayHello}>Say Hello</button>
-    </>
-  );
-}
-
-export default App;
-```
-- useCallback remembers a function so it is not recreated on every re render.
-- React normally creates functions again and again.
-- useCallback stops that and keeps the same function.
-
-
-🔥 When To Use useCallback
-- ✔ Passing functions to child components
-- ✔ Child component is wrapped with React.memo
-- ✔ Function is inside dependency array of useEffect
-- ✔ Performance optimization is needed
-
-
-🚫 When NOT To Use It
-- ❌ If function is not passed to children
-- ❌ If app is small
-- ❌ If there is no performance issue
-- ❌ For every function blindly
-  
-<br>
-
-## 38. Available
-
-
-  
-<br>
-
-## 39. Difference between custom hook and components
-
-| Aspect          | Component                  | Custom Hook             |
-| --------------- | -------------------------- | ----------------------- |
-| Purpose         | Builds and renders UI      | Reuses stateful logic   |
-| Return value    | JSX                        | Data, state, functions  |
-| Naming          | Starts with Capital letter | Must start with `use`   |
-| Can use hooks   | Yes                        | Yes                     |
-| Can return JSX  | Yes                        | No                      |
-| Reusability     | Reused by rendering        | Reused by calling       |
-| Concern         | UI + behavior              | Behavior only           |
-| Example usage   | `<UserProfile />`          | `useUser()`             |
-| Best used when  | You need to show something | You need to share logic |
-| React treats as | Renderable element         | Logic abstraction       |
-
-<br>
-
-## 40. What background process on npm start
+## 26. What background process on npm start
 
 ***When you run:***
 - npm looks into package.json
@@ -1558,7 +997,7 @@ export default App;
 - ***npm start*** → just a trigger (command runner)
 - ***react-scripts*** → does the actual work in background
 
-## 41. React design system libraries
+## 27. React design system libraries
 
 ***React design system libraries*** are pre-built, reusable UI components that follow a consistent design language across an application or across multiple apps.
 
@@ -1599,7 +1038,7 @@ Instead of writing buttons everywhere:
 
 <br>
 
-## 42. React vs Angular
+## 28. React vs Angular
 
 | Aspect           | React                               | Angular                         | Which is better & why                   |
 | ---------------- | ----------------------------------- | ------------------------------- | --------------------------------------- |
@@ -1648,7 +1087,7 @@ Instead of writing buttons everywhere:
 - Enterprise dashboards
 
 
-## 43. useReducer vs Context API vs redux
+## 29. useReducer vs Context API vs redux
 
 🎬 Imagine You Are Managing a Restaurant
 
@@ -1746,7 +1185,7 @@ So the kitchen manager handles all order decisions properly.
 👉 **That headquarters system = Redux**
 
 
-## 44. **Modern React Patterns**
+## 30. **Modern React Patterns**
 
 1️⃣ Functional Components + Hooks (Instead of Classes)
 
@@ -1837,7 +1276,7 @@ UserCard/
 
 <br>
 
-## 45. **React Query**
+## 31. **React Query**
 
 React Query is used to fetch and manage server data easily.
 
