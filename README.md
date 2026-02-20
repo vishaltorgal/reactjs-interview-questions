@@ -39,7 +39,7 @@
 35. [Types of Hooks in React?](#35-types-of-hooks-in-react)
 36. [useMemo](#36-usememo)
 37. [useCallback](#37-usecallback)
-38. [Redux](#38-redux)
+38. [Available](#38-available)
 39. [Difference between custom hook and components](#39-difference-between-custom-hook-and-components)
 40. [What background process on npm start](#40-what-background-process-on-npm-start)
 41. [React design system libraries](#41-react-design-system-libraries)
@@ -1431,56 +1431,10 @@ export default App;
   
 <br>
 
-## 38. Redux
+## 38. Available
 
-***Redux*** is a state management library used to manage global application state in a predictable way.
-- Redux stores the entire app state in one central store and updates it using actions and reducers.
 
-***Core concepts***
-- Store → where state lives
-- Action → what happened
-- Reducer → how state changes
-
-***Store***
-```jsx
-import { createStore } from "redux";
-const store = createStore(counterReducer);
-```
-***Action***
-```jsx
-const increment = { type: "INCREMENT" };
-```
-***Reducer***
-```jsx
-function counterReducer(state = 0, action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-    default:
-      return state;
-  }
-}
-```
-
-***Using Redux in React***
-```jsx
-import { Provider, useSelector, useDispatch } from "react-redux";
-
-function Counter() {
-  const count = useSelector(state => state);
-  const dispatch = useDispatch();
-
-  return (
-    <>
-      <p>{count}</p>
-      <button onClick={() => dispatch({ type: "INCREMENT" })}>
-        Increase
-      </button>
-    </>
-  );
-}
-```
-
+  
 <br>
 
 ## 39. Difference between custom hook and components
