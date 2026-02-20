@@ -31,9 +31,8 @@
 27. [What background process on npm start](#27-what-background-process-on-npm-start)
 28. [React design system libraries](#28-react-design-system-libraries)
 29. [React vs Angular](#29-react-vs-angular)
-30. [useReducer vs Context API vs Redux](#30-usereducer-vs-context-api-vsredux)
-31. [Modern React Patterns](#31-modern-react-patterns)
-32. [React Query](#32-react-query)
+30. [Modern React Patterns](#30-modern-react-patterns)
+31. [React Query](#31-react-query)
 
     
 ## 1. **State in React**
@@ -1086,106 +1085,9 @@ Instead of writing buttons everywhere:
 - Government portals
 - Enterprise dashboards
 
+<br>
 
-## 30. useReducer vs Context API vs redux
-
-🎬 Imagine You Are Managing a Restaurant
-
-***We’ll compare:***
-- useReducer
-- Context API
-- Redux
-
-
-## 1️⃣ useReducer
-🍳 `Kitchen Manager`
-
-*Inside the kitchen:*
-
-***Many things can happen to one order:****
-
-- Add item
-- Remove item
-- Change quantity
-- Apply discount
-- Cancel order
-
-*All these actions affect one order state.*
-
-***You need rules:***
-- Cannot cook if ingredients are out
-- Cannot apply discount twice
-- Cannot cancel after serving
-
-So the kitchen manager handles all order decisions properly.
-
-👉 **That kitchen manager = useReducer**
-
-***When to use:***
-- One feature
-- Complex logic
-- Many actions changing the same state
-- Clear decision rules needed
-
-## 2️⃣ Context API
-📢 `Restaurant Announcement System`
-
-*Now imagine:*
-
-***The restaurant has information everyone needs:***
-- Today’s special dish
-- Restaurant closing time
-- Discount day
-- Chef name
-
-*Instead of telling each waiter individually, you make an announcement.*
-
-*Everyone can access that info easily.*
-
-👉 **That announcement system = Context API**
-
-***When to use:***
-- Theme
-- Logged-in user
-- Language
-- Small global settings
-- Data that many components need
-
-***Important:***
-- Context only shares data.
-- It does not manage complex logic.
-
-
-## 3️⃣ Redux
-🏢 `Restaurant Franchise Headquarters`
-
-***Now imagine:***
-
-*You own 200 restaurant branches across the country.*
-
-***You need:***
-- Centralized order tracking
-- Inventory management
-- Employee management
-- Payment systems
-- Analytics
-- Logging
-- Strict rules
-- Audit tracking
-
-*You cannot manage this casually.*
-
-***You need:***
-- Structured flow
-- Predictable updates
-- Middleware
-- Debugging tools
-- Scalable architecture
-
-👉 **That headquarters system = Redux**
-
-
-## 31. **Modern React Patterns**
+## 30. **Modern React Patterns**
 
 1️⃣ Functional Components + Hooks (Instead of Classes)
 
@@ -1276,7 +1178,7 @@ UserCard/
 
 <br>
 
-## 32. **React Query**
+## 31. **React Query**
 
 React Query is used to fetch and manage server data easily.
 
