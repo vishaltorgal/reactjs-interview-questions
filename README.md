@@ -37,6 +37,7 @@
 33. [Protected Routes Login](#33-protected-routes-login)
 34. [Role Based Restrictions](#34-role-based-restrictions)
 35. [JWT Token Usage](#35-jwt-token-usage)
+36. [Children](#36-children)
 
 
     
@@ -1627,3 +1628,43 @@ function ProtectedRoute({ children }) {
 - No protected data
 - No need to verify user
 - So JWT is unnecessary.
+
+
+## 36. Children
+
+In React, children is a special prop that represents the content placed inside a component tag.
+
+### ✅ Simple Meaning
+
+Whatever you write inside a component:
+```jsx
+<Card>
+  <h2>Hello</h2>
+</Card>
+```
+
+The <h2>Hello</h2> part becomes children.
+
+### ✅ Real Usage Example: Layout Wrapper
+```jsx
+function Layout({ children }) {
+  return (
+    <>
+      <header>Navbar</header>
+      <main>{children}</main>
+      <footer>Footer</footer>
+    </>
+  );
+}
+```
+
+Usage
+
+```jsx
+<Layout>
+  <Profile />
+</Layout>
+```
+
+- Navbar and Footer stay same
+- Profile is dynamic content (children)
