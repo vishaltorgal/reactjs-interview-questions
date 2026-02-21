@@ -38,6 +38,7 @@
 34. [Role Based Restrictions](#34-role-based-restrictions)
 35. [JWT Token Usage](#35-jwt-token-usage)
 36. [Children](#36-children)
+37. [Axios API Call](#37-axios-api-call)
 
 
     
@@ -1668,3 +1669,145 @@ Usage
 
 - Navbar and Footer stay same
 - Profile is dynamic content (children)
+
+
+## 37. Axios API Call
+
+### Basic GET Request
+```jsx
+import axios from "axios";
+
+const token = "your_jwt_token_here";
+
+axios.get("https://api.example.com/users", {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+})
+.then((response) => {
+  console.log(response.data);
+})
+.catch((error) => {
+  console.log(error);
+});
+```
+
+### ✔ What happens?
+
+- axios.get() sends request
+- .then() runs when success
+- .catch() runs when error
+
+  
+### Using async/await (Cleaner)
+```jsx
+import axios from "axios";
+
+async function fetchUsers() {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(
+      "https://api.example.com/users",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+fetchUsers();
+```
+
+
+
+
+### 📡 Axios Interceptor Basic Example
+`An Axios interceptor lets you run code:`
+
+- ✅ Before request is sent
+- ✅ After response is received
+- ✅ On error
+
+`Mostly used for:`
+
+- Attaching JWT token
+- Handling 401 errors
+- Logging
+- Global error handling
+
+### ✅ 1️⃣ Request Interceptor Example
+Used to attach token automatically.
+
+```jsx
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "https://api.example.com",
+});
+
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+```
+
+### 🔹 What happens here?
+
+`Before every API call:`
+
+- Token is read from localStorage
+- Added in headers
+- Then request continues
+
+### ✅ 2️⃣ Response Interceptor Example
+Used to handle global errors like 401.
+
+```jsx
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      console.log("Unauthorized. Redirect to login.");
+      window.location.href = "/login";
+    }
+
+    return Promise.reject(error);
+  }
+);
+```
+
+### ✅ 3️⃣ How To Use
+```jsx
+import api from "./api";
+
+api.get("/users")
+   .then(res => console.log(res.data))
+   .catch(err => console.log(err));
+```
+
+### 🧠 Real Life Flow
+
+- User logs in → token saved in localStorage
+- Every request → interceptor adds token
+- If token expired → response interceptor catches 401 → redirect
