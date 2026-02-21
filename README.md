@@ -34,6 +34,7 @@
 30. [Modern React Patterns](#30-modern-react-patterns)
 31. [React Query](#31-react-query)
 
+
     
 ## 1. **State in React**
 
@@ -1269,3 +1270,4 @@ Use React Query when:
 | No caching            | Built-in caching |
 | More boilerplate      | Cleaner          |
 | Harder scaling        | Scales well      |
+
