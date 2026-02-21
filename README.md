@@ -34,6 +34,7 @@
 30. [Modern React Patterns](#30-modern-react-patterns)
 31. [React Query](#31-react-query)
 32. [Ways to check performance of react app](#32-ways-to-check-performance-of-react-app)
+33. [Protected Routes Login](#33-protected-routes-login)
 
 
     
@@ -1339,3 +1340,161 @@ import { Profiler } from "react";
 | Why Did You Render | why-did-you-render      | Unnecessary re-renders                | Debug memo issues              |
 | Bundle Analyzer    | webpack-bundle-analyzer | Bundle size, heavy dependencies       | Reduce app size                |
 | Console Logging    | Browser console         | Count re-renders                      | Quick debugging                |
+
+
+<br>
+
+## 33. Protected Routes Login
+
+### ✅ What This Achieves
+
+ ✔ Logged in user can access
+- /profile
+- /settings
+
+✔ Non logged in user
+- Can only see homepage
+
+If they try /profile → redirected to home
+- ✔ Clean separation
+- ✔ Reusable ProtectedRoute
+
+### Folder Structure
+```jsx
+src/
+ ├── App.js
+ ├── auth/
+ │     └── AuthContext.js
+ ├── routes/
+ │     └── ProtectedRoute.js
+ └── pages/
+       ├── Home.js
+       ├── Profile.js
+       └── Settings.js
+```
+
+### 1️⃣ Auth Context (Global Login State)
+`📄 auth/AuthContext.js`
+
+```jsx
+import { createContext, useContext, useState } from "react";
+
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null); 
+  // null = not logged in
+
+  const login = () => {
+    setUser({ id: 1, name: "Vishal" });
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+```
+
+### 2️⃣ Protected Route
+`📄 routes/ProtectedRoute.js`
+
+```jsx
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
+
+function ProtectedRoute({ children }) {
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
+
+export default ProtectedRoute;
+```
+
+### 3️⃣ Pages
+`📄 pages/Home.js`
+
+```jsx
+import { useAuth } from "../auth/AuthContext";
+
+function Home() {
+  const { user, login, logout } = useAuth();
+
+  return (
+    <div>
+      <h2>Home Page</h2>
+
+      {user ? (
+        <>
+          <p>Welcome {user.name}</p>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <button onClick={login}>Login</button>
+      )}
+    </div>
+  );
+}
+
+export default Home;
+```
+
+### 4️⃣ App.js
+```jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./auth/AuthContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
+
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+
+          <Route path="/" element={<Home />} />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+
+export default App;
+```
