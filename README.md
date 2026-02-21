@@ -33,6 +33,7 @@
 29. [React vs Angular](#29-react-vs-angular)
 30. [Modern React Patterns](#30-modern-react-patterns)
 31. [React Query](#31-react-query)
+32. [Ways to check performance of react app](#32-ways-to-check-performance-of-react-app)
 
 
     
@@ -1271,3 +1272,70 @@ Use React Query when:
 | More boilerplate      | Cleaner          |
 | Harder scaling        | Scales well      |
 
+
+## 32. Ways to check performance of react app
+
+### 1️⃣ React DevTools Profiler
+
+Use the Profiler tab in React DevTools.
+
+***What it shows:***
+
+- Which components re-render
+- How many times they re-render
+- How long each render took
+- Why component re-rendered
+
+### 2️⃣ Chrome Performance Tab
+Use Chrome DevTools Performance tab.
+
+***What it shows:***
+
+- CPU usage
+- JavaScript execution time
+- Paint time
+- Layout shifts
+- Memory usage
+
+### 3️⃣ Lighthouse Report
+Inside Chrome DevTools → Lighthouse tab.
+
+***What it shows:***
+
+- Performance score
+- Accessibility score
+- SEO score
+- Best practices
+- Suggestions to improve
+
+### 4️⃣ React Profiler API (Advanced)
+
+React has built-in Profiler component:
+
+```jsx
+import { Profiler } from "react";
+
+<Profiler id="App" onRender={(...args) => console.log(args)}>
+  <App />
+</Profiler>
+```
+
+***What it shows:***
+
+- Slow components
+- Expensive re-renders
+- Whether memo is working
+- Performance bottlenecks
+ -Re-render frequency
+
+
+### React performance table
+
+| Method             | Tool                    | What It Checks                        | When To Use                    |
+| ------------------ | ----------------------- | ------------------------------------- | ------------------------------ |
+| React Profiler     | React Developer Tools   | Component re-renders, render time     | Debug slow components          |
+| Chrome Performance | Google Chrome DevTools  | CPU usage, JS execution, paint time   | Detect blocking or heavy tasks |
+| Lighthouse         | Lighthouse              | Performance score, SEO, accessibility | Optimize production app        |
+| Why Did You Render | why-did-you-render      | Unnecessary re-renders                | Debug memo issues              |
+| Bundle Analyzer    | webpack-bundle-analyzer | Bundle size, heavy dependencies       | Reduce app size                |
+| Console Logging    | Browser console         | Count re-renders                      | Quick debugging                |
