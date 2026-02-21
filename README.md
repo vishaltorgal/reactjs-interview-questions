@@ -35,6 +35,8 @@
 31. [React Query](#31-react-query)
 32. [Ways to check performance of react app](#32-ways-to-check-performance-of-react-app)
 33. [Protected Routes Login](#33-protected-routes-login)
+34. [Role Based Restrictions](#34-role-based-restrictions)
+35. [JWT Token Usage](#35-jwt-token-usage)
 
 
     
@@ -1516,3 +1518,112 @@ function Settings() {
 
 export default Settings;
 ```
+
+
+## 34. Role Based Restrictions
+
+### 🔄 How JWT Flow Works (Very Simple)
+
+- 1️⃣ User logs in
+- 2️⃣ Backend verifies credentials
+- 3️⃣ Backend sends JWT
+- 4️⃣ React stores JWT
+- 5️⃣ React sends JWT in API calls
+- 6️⃣ Backend verifies JWT
+
+### ✅ Simple Role Protected Route
+```jsx
+import { Navigate } from "react-router-dom";
+
+function RoleProtected({ role, children }) {
+  const user = { role: "user" }; // change to "admin" to test
+
+  if (user.role !== role) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
+```
+
+### ✅ Usage
+```jsx
+<Route
+  path="/admin"
+  element={
+    <RoleProtected role="admin">
+      <h2>Admin Page</h2>
+    </RoleProtected>
+  }
+/>
+```
+
+### 🔎 What Happens
+
+- If user.role === "admin" → page shows
+- If not → redirected to home
+
+## 35. JWT Token Usage
+
+### Step 1: Login and Store Token
+```jsx
+const handleLogin = async () => {
+  const res = await fetch("/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  localStorage.setItem("token", data.token);
+};
+```
+
+### Step 2: Send Token in API Call
+```jsx
+const token = localStorage.getItem("token");
+
+fetch("/profile", {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+```
+
+### Step 3: Protect Route Using Token
+```jsx
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
+}
+```
+
+### 🕒 When Do We Use JWT in React?
+
+- ✔ You have login system
+- ✔ Backend needs to verify user identity
+- ✔ You want protected APIs
+- ✔ You want role based access
+
+***JWT is used for authentication and authorization.***
+
+### can we use jwt even we dont have login
+`JWT is mainly used for:`
+
+- Authentication
+- Authorization
+- Identifying a specific user
+  
+`If there is no login, then:`
+
+- No user identity
+- No role
+- No protected data
+- No need to verify user
+- So JWT is unnecessary.
