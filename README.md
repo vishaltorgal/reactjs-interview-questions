@@ -1498,3 +1498,21 @@ function App() {
 
 export default App;
 ```
+
+### 📄 pages/Profile.js
+```jsx
+function Profile() {
+  return <h2>Profile Page</h2>;
+}
+
+export default Profile;
+```
+
+### 📄 pages/Settings.js
+```jsx
+function Settings() {
+  return <h2>Settings Page</h2>;
+}
+
+export default Settings;
+```
