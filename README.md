@@ -39,6 +39,7 @@
 35. [JWT Token Usage](#35-jwt-token-usage)
 36. [Children](#36-children)
 37. [Axios API Call](#37-axios-api-call)
+38. [GraphQL](#38-graphql)
 
 
     
@@ -1811,3 +1812,71 @@ api.get("/users")
 - User logs in → token saved in localStorage
 - Every request → interceptor adds token
 - If token expired → response interceptor catches 401 → redirect
+
+
+
+## 38. GraphQL
+
+### Setup Apollo Client
+
+```jsx
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://example.com/graphql", // your GraphQL API
+  cache: new InMemoryCache(),
+});
+
+export default client;
+```
+
+### Fetch Data in Page (SSR Example)
+```jsx
+// pages/index.js
+
+import { gql } from "@apollo/client";
+import client from "../lib/apollo";
+
+export async function getServerSideProps() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        users {
+          id
+          name
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      users: data.users,
+    },
+  };
+}
+
+export default function Home({ users }) {
+  return (
+    <div>
+      <h1>User List</h1>
+      {users.map((user) => (
+        <p key={user.id}>{user.name}</p>
+      ))}
+    </div>
+  );
+}
+```
+
+- SEO friendly ✅
+- Single request ✅
+- Only required fields fetched ✅
+
+### 🎯 Why This Is Powerful
+
+`Instead of:`
+- Multiple REST calls
+
+`You get:`
+- Exact nested data in one query
+- Clean structure
