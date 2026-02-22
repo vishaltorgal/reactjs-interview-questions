@@ -617,6 +617,33 @@ Rendering was
 - Must finish completely
 - Very fast
 
+
+### 🎯 Simple Example
+
+`Imagine:`
+
+- User is typing in input
+- At the same time a big list is rendering
+
+`With old React:`
+- List rendering could block typing
+
+`With Fiber:`
+- Typing is high priority
+- List rendering can pause
+- Typing stays smooth
+
+### 🔥 Key Concepts of Fiber
+1️⃣ Incremental Rendering
+- Break large rendering work into small chunks.
+
+2️⃣ Priority Based Updates
+- User interactions > background rendering.
+
+3️⃣ Better Scheduling
+- React decides best time to update UI.
+
+
 <br>
 
 ## 16. **Callback Function**
