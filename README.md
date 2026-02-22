@@ -270,6 +270,9 @@ const users = ["Vishal", "Amit", "Rahul"];
 
 ## 7. **What is Virtual DOM?**
 
+<img width="681" height="240" alt="image" src="https://github.com/user-attachments/assets/947983c5-cf91-4867-b606-1119785bee26" />
+
+
 ### 🔄 How It Works (Step by Step)
 
 - 1️⃣ React creates a Virtual DOM (JS object representation of UI)
