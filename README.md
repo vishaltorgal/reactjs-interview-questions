@@ -1015,22 +1015,70 @@ Without lazy loading, a user visiting your "Home" page has to wait for the brows
 - Wasted Bandwidth: Users download code they might never use.
 - Higher Bounce Rates: Especially on mobile devices or slow networks.
 
+
+### 🏠 Example: E commerce Homepage
 ```jsx
-import React, { Suspense, lazy } from "react";
+import React, { useState, Suspense } from "react";
 
-const Profile = lazy(() => import("./Profile"));
+const Banner = React.lazy(() => import("./Banner"));
 
-function App() {
+function HomePage() {
+  const [search, setSearch] = useState("");
+
   return (
-    <Suspense fallback={<h3>Loading...</h3>}>
-      <Profile />
-    </Suspense>
+    <div>
+      <h1>My Store</h1>
+
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <Suspense fallback={<p>Loading Banner...</p>}>
+        <Banner />
+      </Suspense>
+
+      <p>Searching for: {search}</p>
+    </div>
   );
 }
 
-export default App;
-
+export default HomePage;
 ```
+
+### 🔥 What Happens Internally
+
+1️⃣ Homepage loads
+- Header + Input render immediately
+
+2️⃣ Banner is NOT loaded at first
+- It starts loading in background
+
+3️⃣ User starts typing
+
+`React Fiber sees:`
+
+- Typing = High priority
+- Banner loading = Lower priority
+
+- 👉 Typing stays smooth
+- 👉 Banner continues loading without blocking
+
+
+### 🧠 Why This Is Good
+
+`Without Fiber and lazy loading:`
+- Large banner JS could block main thread
+- Typing might lag
+
+`With Fiber:`
+- React splits work
+- Gives priority to user interaction
+
+<br>
+
 ## 23. What is Suspense in React?
 
 Suspense is a React component that lets you pause rendering of part of the UI and show a fallback UI while waiting for something to load, most commonly lazy loaded components.
@@ -1045,13 +1093,12 @@ Suspense does not make code load faster, but it:
 
 ## 24. What is code splitting in React?
 
-Code splitting in React is a performance optimization technique where a large JavaScript bundle is split into smaller chunks, and only the required code is loaded when needed.
+`Code Splitting means:`
 
-This helps:
+- 👉 Breaking your JavaScript bundle into smaller chunks
+- 👉 Loading those chunks only when needed
+- 👉 This improves performance and reduces initial load time.
 
-- Reduce initial bundle size
-- Improve first page load time
-- Improve application performance
 
 ***Types of Code Splitting***
 | Type             | Description            |
@@ -1059,6 +1106,21 @@ This helps:
 | Route based      | Split code per route   |
 | Component based  | Split heavy components |
 | Vendor splitting | Separate libraries     |
+
+### ✅ Simple Example (Route Based Splitting)
+```jsx
+import React, { Suspense } from "react";
+
+const About = React.lazy(() => import("./About"));
+
+function App() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <About />
+    </Suspense>
+  );
+}
+```
 
 
 ## 25. What is Prop Drilling in React?
