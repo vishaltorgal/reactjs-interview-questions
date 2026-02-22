@@ -270,19 +270,105 @@ const users = ["Vishal", "Amit", "Rahul"];
 
 ## 7. **What is Virtual DOM?**
 
-The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The representation of a UI is kept in memory and synced with the "real" DOM. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called reconciliation.
+### 🔄 How It Works (Step by Step)
 
-### Key Points
-- `Performance`: Updates to the real DOM are expensive. The Virtual DOM minimizes these updates by batching changes and updating the real DOM only when necessary.
-- `Simplicity`: Developers can write declarative code without worrying about how to efficiently update the DOM.
-- `Consistency`: The Virtual DOM helps ensure the UI is always in sync with the state.
+- 1️⃣ React creates a Virtual DOM (JS object representation of UI)
+
+- 2️⃣ When state changes
+React creates a new Virtual DOM
+
+- 3️⃣ React compares old Virtual DOM with new one
+This process is called diffing
+
+- 4️⃣ Only the changed parts are updated in the real DOM
+
+This process is called ***Reconciliation***
+
 
 ### How the Virtual DOM Works
 - `Initial Render` : When the component is first rendered, the Virtual DOM creates a virtual representation of the DOM elements.
 - `Diffing Algorithm` : React uses a diffing algorithm to compare the new virtual DOM tree with the previous one.
 - `Efficient Updates` : React updates only the parts of the real DOM that have changed, minimizing direct DOM manipulations.
 
+
+### We have 2 components c1 and c2. if something changed in c1 does c2 rerender or not?
+
+### Case 1️⃣ C1 and C2 are siblings
+```jsx
+function App() {
+  return (
+    <>
+      <C1 />
+      <C2 />
+    </>
+  );
+}
+```
+If state changes inside C1 only:
+```jsx
+function C1() {
+  const [count, setCount] = useState(0);
+}
+```
+
+- 👉 Only C1 re renders
+- 👉 C2 does NOT re render
+- Because C2 is independent.
+
+
+### Case 2️⃣ State is in Parent
+
+```jsx
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <C1 count={count} />
+      <C2 />
+    </>
+  );
+}
+```
+
+`Now when count changes:`
+
+- 👉 App re renders
+-👉 C1 re renders
+- 👉 C2 ALSO re renders
+- Even if C2 does not use count
+
+`Why?`
+- Because parent re rendered, so all children render again.
+
+
+### Case 3️⃣ Using React.memo
+```jsx
+const C2 = React.memo(() => {
+  console.log("C2 render");
+  return <div>C2</div>;
+});
+```
+
+`Now:`
+
+- If parent re renders
+- But C2 props did not change
+- 👉 C2 will NOT re render
+- This prevents unnecessary renders.
+
+
+### Simple Rule
+
+If state changes inside component
+- → Only that component re renders
+
+If parent re renders
+- → All children re render
+
+Unless optimized with React.memo
 <br>
+
 
 ## 8. **What are controlled components (forms)?**
 
