@@ -784,15 +784,14 @@ const HelloWithLogger = withLogger(Hello);
 
 The ***Context API*** in React is used to share data globally across components without passing props manually at every level.
 
-### ***UserContext.js***
+### Context.js
 ```jsx
 import React, { createContext } from 'react';
-
 export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
-  const user = "Alice";
-
+const UserProvider = ({ children }) => {
+  const user = { name: 'John Doe', id: 1 };
+  
   return (
     <UserContext.Provider value={user}>
       {children}
@@ -800,34 +799,44 @@ export const UserProvider = ({ children }) => {
   );
 };
 
+export default UserProvider;
 ```
 
-### ***Create Context***
+### App.js
 ```jsx
-import { createContext } from "react";
+import React from 'react';
+import WelcomePage from './WelcomePage';
+import UserProvider from './Context';
 
-const ThemeContext = createContext();
-```
-### ***Provide Context***
-```jsx
-function App() {
+const App = () => {
   return (
-    <ThemeContext.Provider value="dark">
-      <Dashboard />
-    </ThemeContext.Provider>
+    <UserProvider>
+      <WelcomePage />
+    </UserProvider>
   );
-}
+};
+
+export default App;
 ```
-### ***Consume Context***
+### WelcomePage.js
 ```jsx
-import { useContext } from "react";
+import React, { useContext } from 'react';
+import { UserContext } from './Context';
 
-function Dashboard() {
-  const theme = useContext(ThemeContext);
-  return <p>{theme}</p>;  //<p>dark</p>
-}
+const WelcomePage = () => {
+  const { user } = useContext(UserContext);
 
+  return (
+    <div>
+      <h1>Welcome User:</h1>
+      <p>Name: {user.name} id: {user.id}</p>
+    </div>
+  );
+};
+
+export default WelcomePage;
 ```
+
 ### ***Key points***
 
 - Avoids prop drilling
