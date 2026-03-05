@@ -948,9 +948,27 @@ export default App;
 
 React lifecycle has ***three*** main phases:
 
-`Mounting` – component is created and added to DOM
-`Updating` – component re-renders due to changes
-`Unmounting` – component is removed from DOM
+- `Mounting` – component is created and added to DOM
+- `Updating` – component re-renders due to changes
+- `Unmounting` – component is removed from DOM
+
+### Table - React Lifecycle Phases
+
+| Phase              | Lifecycle Method                    | When It Runs                    | Use Case                           |
+| ------------------ | ----------------------------------- | ------------------------------- | ---------------------------------- |
+| **Mounting**       | `constructor()`                     | When component is created       | Initialize state                   |
+|                    | `static getDerivedStateFromProps()` | Before render                   | Update state from props            |
+|                    | `render()`                          | Renders JSX to UI               | UI creation                        |
+|                    | `componentDidMount()`               | After component is added to DOM | API calls, subscriptions           |
+| **Updating**       | `static getDerivedStateFromProps()` | When props/state change         | Sync state with props              |
+|                    | `shouldComponentUpdate()`           | Before re-render                | Performance optimization           |
+|                    | `render()`                          | Re-render UI                    | Update UI                          |
+|                    | `getSnapshotBeforeUpdate()`         | Before DOM update               | Capture DOM info (scroll position) |
+|                    | `componentDidUpdate()`              | After update                    | API calls on update                |
+| **Unmounting**     | `componentWillUnmount()`            | Before component removed        | Cleanup timers, listeners          |
+| **Error Handling** | `static getDerivedStateFromError()` | When child throws error         | Show fallback UI                   |
+|                    | `componentDidCatch()`               | After error occurs              | Log error                          |
+
 
 ### Example (Class Component)
 ```jsx
