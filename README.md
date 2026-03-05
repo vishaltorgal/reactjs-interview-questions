@@ -843,6 +843,104 @@ export default WelcomePage;
 - Useful for global data
 - Triggers re render when value changes
 
+## Context API + useReducer
+
+### reducer.js
+```jsx
+export const counterReducer = (state, action) => {
+  switch (action.type) {
+
+    case "INCREMENT":
+      return { count: state.count + 1 };
+
+    case "DECREMENT":
+      return { count: state.count - 1 };
+
+    default:
+      return state;
+  }
+};
+```
+
+### CounterContext.js
+```jsx
+import { createContext, useReducer } from "react";
+import { counterReducer } from "./reducer";
+
+export const CounterContext = createContext();
+
+export const CounterProvider = ({ children }) => {
+
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <CounterContext.Provider value={{ state, dispatch }}>
+      {children}
+    </CounterContext.Provider>
+  );
+};
+```
+
+### CounterDisplay.js
+```jsx
+import { useContext } from "react";
+import { CounterContext } from "./CounterContext";
+
+function CounterDisplay() {
+
+  const { state } = useContext(CounterContext);
+
+  return <h2>Count: {state.count}</h2>;
+}
+
+export default CounterDisplay;
+```
+
+### CounterButtons.js
+```jsx
+import { useContext } from "react";
+import { CounterContext } from "./CounterContext";
+
+function CounterButtons() {
+
+  const { dispatch } = useContext(CounterContext);
+
+  return (
+    <div>
+
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>
+        Increase
+      </button>
+
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>
+        Decrease
+      </button>
+
+    </div>
+  );
+}
+
+export default CounterButtons;
+```
+
+### App.js
+```jsx
+import { CounterProvider } from "./CounterContext";
+import CounterDisplay from "./CounterDisplay";
+import CounterButtons from "./CounterButtons";
+
+function App() {
+
+  return (
+    <CounterProvider>
+      <CounterDisplay />
+      <CounterButtons />
+    </CounterProvider>
+  );
+}
+
+export default App;
+```
 <br>
 
 
