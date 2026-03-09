@@ -1200,8 +1200,16 @@ function HomePage() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <Suspense fallback={<p>Loading Banner...</p>}>
-        <Banner />
+      <Suspense fallback={<div>Loading Banner1...</div>}>
+        <Banner1 />
+      </Suspense>
+
+      <Suspense fallback={<div>Loading Banner2...</div>}>
+        <Banner2 />
+      </Suspense>
+
+      <Suspense fallback={<div>Loading Banner3...</div>}>
+        <Banner3 />
       </Suspense>
 
       <p>Searching for: {search}</p>
@@ -1211,6 +1219,9 @@ function HomePage() {
 
 export default HomePage;
 ```
+
+- ✔ Parallel loading
+- ✔ Whichever finishes first renders first
 
 ### 🔥 What Happens Internally
 
@@ -1254,6 +1265,26 @@ Suspense does not make code load faster, but it:
 - Allows splitting large bundles
 - Improves first paint and user perception
 - You can wrap specific components, not entire app
+
+```jsx
+import React, { Suspense } from "react";
+
+const Banner1 = React.lazy(() => import("./Banner1"));
+const Banner2 = React.lazy(() => import("./Banner2"));
+
+function Home() {
+  return (
+    <Suspense fallback={<div>Loading banners...</div>}>
+      <Banner1 />
+      <Banner2 />
+    </Suspense>
+  );
+}
+```
+
+⚠️ Important:
+- If both banners are inside one Suspense
+- The fallback shows until both components load
 
 ## 24. What is code splitting in React?
 
