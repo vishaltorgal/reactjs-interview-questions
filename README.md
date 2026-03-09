@@ -22,7 +22,7 @@
 18. [Context API](#18-context-api)
 19. [Lifecycle Phases in React](#19-lifecycle-phases-in-react)
 20. [What are Error Boundaries in React?](#20-what-are-error-boundaries-in-react)
-21. [What is Reconciliation in React?](#21-what-is-reconciliation-in-react)
+21. [useRef vs createRef](#21-useref-vs-createref)
 22. [What is Lazy Loading?](#22-what-is-lazy-loading)
 23. [What is Suspense in React?](#23-what-is-suspense-in-react)
 24. [What is code splitting in React?](#24-what-is-code-splitting-in-react)
@@ -1100,15 +1100,59 @@ function App() {
 - Only class components can be error boundaries
 - You can wrap specific components, not the entire app always
 
-## 21. What is Reconciliation in React?
+### functional Components ErrorBoundary
+```jsx
+npm install react-error-boundary
+```
 
-***Reconciliation*** is the process React uses to update the UI efficiently when state or props change.
+```jsx
+import { ErrorBoundary } from "react-error-boundary";
 
-Instead of updating the entire DOM, React:
+function ErrorFallback({ error }) {
+  return (
+    <div>
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+    </div>
+  );
+}
 
-- Creates a new Virtual DOM
-- Compares it with the previous Virtual DOM
-- Updates only the changed parts in the real DOM
+function App() {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <MyComponent />
+    </ErrorBoundary>
+  );
+}
+```
+
+### What Error Boundaries Catch
+
+`They catch errors in:`
+
+- ✔ Rendering
+- ✔ Lifecycle methods
+- ✔ Constructors
+
+<br>
+
+
+## 21. useRef vs createRef
+
+| Feature                          | `useRef`                                                           | `createRef`                                                       |
+| -------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| **Used in**                      | Functional components (Hooks)                                      | Class components                                                  |
+| **Import**                       | `import { useRef } from "react"`                                   | `import React from "react"`                                       |
+| **Re-render behavior**           | Same ref object persists across renders                            | New ref object created on every render                            |
+| **State persistence**            | Value persists between renders                                     | Value resets when component re-renders                            |
+| **Typical usage**                | Functional component DOM access or mutable value                   | Class component DOM access                                        |
+| **Performance**                  | Better for functional components because it does not recreate refs | Less efficient in functional components because it recreates refs |
+| **Where defined**                | Inside component using hook                                        | Usually inside constructor                                        |
+| **Value access**                 | `ref.current`                                                      | `ref.current`                                                     |
+| **Common use cases**             | DOM access, storing mutable values, timers, previous values        | DOM access in class components                                    |
+| **Recommended for modern React** | ✅ Yes                                                              | ❌ Mostly legacy (class components)                                |
+
+<br>
 
 ## 22. What is Lazy Loading?
 
