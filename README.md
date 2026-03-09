@@ -1658,6 +1658,8 @@ Use React Query when:
 
 Use the Profiler tab in React DevTools.
 
+To see the React DevTools Profiler, you first need to install the React Developer Tools browser extension. Then it will appear inside Chrome DevTools.
+
 ***What it shows:***
 
 - Which components re-render
@@ -1676,6 +1678,17 @@ Use Chrome DevTools Performance tab.
 - Layout shifts
 - Memory usage
 
+***Core Web Vitals Comparison***
+
+| Metric                              | What it Measures                                | When it Happens                   | Good Value        |
+| ----------------------------------- | ----------------------------------------------- | --------------------------------- | ----------------- |
+| **LCP (Largest Contentful Paint)**  | Time to render the largest visible content      | Page loading                      | ≤ **2.5 seconds** |
+| **CLS (Cumulative Layout Shift)**   | Visual stability (layout shifting unexpectedly) | During page load & render         | ≤ **0.1**         |
+| **INP (Interaction to Next Paint)** | Responsiveness after user interaction           | After user clicks, taps, or types | ≤ **200 ms**      |
+
+<img width="416" height="313" alt="image" src="https://github.com/user-attachments/assets/4e4a7e8a-9ab7-46e6-bedc-d6e4429f6a01" />
+
+
 ### 3️⃣ Lighthouse Report
 Inside Chrome DevTools → Lighthouse tab.
 
@@ -1686,6 +1699,9 @@ Inside Chrome DevTools → Lighthouse tab.
 - SEO score
 - Best practices
 - Suggestions to improve
+
+<img width="415" height="325" alt="image" src="https://github.com/user-attachments/assets/816343ad-798c-42e9-9ce7-ca20d7b3ddbb" />
+
 
 ### 4️⃣ React Profiler API (Advanced)
 
