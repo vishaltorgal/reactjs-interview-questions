@@ -1063,18 +1063,13 @@ The return function is the cleanup function.
 | componentWillUnmount | useEffect(() => { return cleanup }) |
 
 
-
 ### 🎯 Simple Timeline
 
-- User hides component
-- ⬇
-- React starts unmount
-- ⬇
-- Cleanup runs
-- ⬇
-- DOM removed
-- ⬇
-- UI not visible
+- Step 1: User hides component
+- Step 2: React starts unmount
+- Step 3: Cleanup runs
+- Step 4: DOM removed
+- Step 5: UI not visible
 
 
 ## 20. What are Error Boundaries in React?
