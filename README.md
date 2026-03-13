@@ -40,6 +40,7 @@
 36. [Children](#36-children)
 37. [Axios API Call](#37-axios-api-call)
 38. [GraphQL](#38-graphql)
+39. [React Folder Structure](#39-react-folder-structure)
 
 
     
@@ -2269,3 +2270,129 @@ export default function Home({ users }) {
 `You get:`
 - Exact nested data in one query
 - Clean structure
+
+
+## 39. React Folder Structure
+
+***Small Projects***
+
+```jsx
+src/
+ ├── components/
+ │    ├── Header.jsx
+ │    ├── Footer.jsx
+ │    └── Button.jsx
+ │
+ ├── pages/
+ │    ├── Home.jsx
+ │    └── About.jsx
+ │
+ ├── assets/
+ │    ├── images/
+ │    └── styles/
+ │
+ ├── utils/
+ │    └── helpers.js
+ │
+ ├── App.jsx
+ └── index.js
+```
+
+***Medium / Large Projects***
+
+```jsx
+src/
+│
+├── components/
+│   ├── common/
+│   │    ├── Button/
+│   │    │    ├── Button.jsx
+│   │    │    └── Button.module.scss
+│   │
+│   └── layout/
+│        ├── Header/
+│        └── Footer/
+│
+├── features/
+│   ├── auth/
+│   │    ├── Login.jsx
+│   │    ├── Register.jsx
+│   │    └── authSlice.js
+│   │
+│   ├── dashboard/
+│   │    ├── Dashboard.jsx
+│   │    └── Dashboard.scss
+│
+├── hooks/
+│   ├── useAuth.js
+│   └── useFetch.js
+│
+├── services/
+│   └── api.js
+│
+├── store/
+│   ├── store.js
+│   └── rootReducer.js
+│
+├── utils/
+│   ├── constants.js
+│   └── helpers.js
+│
+├── styles/
+│   └── global.scss
+│
+├── App.jsx
+└── main.jsx
+```
+
+***Public pages, Authenticated pages, and Common components.***
+
+```jsx
+src/
+│
+├── pages/
+│   │
+│   ├── public/              (No login required)
+│   │     ├── Home/
+│   │     │     └── Home.jsx
+│   │     │
+│   │     └── InfoPage/
+│   │           └── InfoPage.jsx
+│   │
+│   └── private/             (Login required)
+│         ├── Settings/
+│         │     └── Settings.jsx
+│         │
+│         └── Profile/
+│               └── Profile.jsx
+│
+├── components/
+│   │
+│   ├── common/
+│   │     ├── Header/
+│   │     │     └── Header.jsx
+│   │     │
+│   │     └── Footer/
+│   │           └── Footer.jsx
+│   │
+│   └── ui/                  (Reusable UI components)
+│         ├── Button/
+│         └── Modal/
+│
+├── layouts/
+│     ├── PublicLayout.jsx
+│     └── PrivateLayout.jsx
+│
+├── services/
+│     └── api.js
+│
+├── hooks/
+│
+├── utils/
+│
+├── routes/
+│     └── AppRoutes.jsx
+│
+├── App.jsx
+└── index.js
+```
