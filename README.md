@@ -46,6 +46,7 @@
 42. [API layer](#42-api-layer)
 43. [Debug](#43-debug)
 44. [package.json vs package-lock.json](#44-packagejson-vs-package-lockjson)
+45. [Security Issues](#45-security-issues)
 
 
     
@@ -2781,3 +2782,74 @@ package-lock.json locks the exact versions of dependencies installed.
 | ----------------- | ---------------------------- |
 | package.json      | Shopping list                |
 | package-lock.json | Actual bill with exact items |
+
+
+## 45. Security Issues
+`Common risks include:`
+
+- Cross-Site Scripting (XSS)
+- Cross-Site Request Forgery (CSRF)
+- Sensitive data exposure
+- Insecure API calls
+- Improper authentication handling
+
+### What is XSS and how does React prevent it?
+XSS (Cross-Site Scripting) happens when malicious scripts are injected into the application.
+
+Example of risky code:
+```jsx
+<div dangerouslySetInnerHTML={{ __html: data }} />
+```
+
+***Best practice:***
+- Avoid using it
+- Sanitize data using libraries like DOMPurify
+
+```jsx
+import DOMPurify from "dompurify";
+
+const cleanHTML = DOMPurify.sanitize(data);
+```
+
+### How to secure API calls in React?
+
+- Use HTTPS
+- Add authentication tokens
+ -Avoid exposing sensitive data
+
+### secrets not be stored in React code
+React apps run in the browser, so users can inspect the code.
+
+```jsx
+const API_KEY = "123456";
+```
+
+Anyone can see it in DevTools.
+
+`Solution:`
+- Store secrets on the backend
+- Use environment variables only for non-sensitive values.
+
+### Prevent CSRF attacks
+
+CSRF occurs when a malicious site sends requests using an authenticated user.
+
+`Solutions:`
+- CSRF tokens
+- SameSite cookies
+- Server validation
+
+### Content Security Policy (CSP)
+CSP is a browser security feature that prevents loading unauthorized scripts.
+
+```jsx
+Content-Security-Policy: script-src 'self'
+```
+
+### How to protect against dependency vulnerabilities?
+React apps use many packages.
+
+```jsx
+npm audit
+npm audit fix
+```
