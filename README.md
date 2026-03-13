@@ -43,6 +43,7 @@
 39. [React Folder Structure](#39-react-folder-structure)
 40. [Pages vs Layout vs Components](#40-pages-vs-layout-vs-components)
 41. [How to create a re-usable components](#41-how-to-create-a-re-usable-components)
+42. [API layer](#42-api-layer)
 
 
     
@@ -2569,3 +2570,62 @@ function Button({ label = "Click", type = "primary" }) {
 - ✅ Keep components small and focused
 - ✅ Avoid hardcoding data
 - ✅ Keep UI separate from business logic
+
+
+## 42. API layer
+
+API layer means a separate layer in the application responsible for handling all API calls (communication with the backend) instead of writing API calls directly inside components.
+
+It helps keep UI and data fetching logic separated.
+
+### Without API Layer (Bad Practice)
+
+API call directly inside component:
+```jsx
+import axios from "axios";
+
+function Users() {
+  useEffect(() => {
+    axios.get("/api/users").then(res => console.log(res.data));
+  }, []);
+}
+```
+
+`Problems:`
+- Logic mixed with UI
+- Hard to reuse
+- Hard to maintain
+
+### With API Layer (Best Practice)
+
+***API Layer File***
+```jsx
+// services/userApi.js
+import axios from "axios";
+
+export const getUsers = () => {
+  return axios.get("/api/users");
+};
+```
+
+***Component***
+```jsx
+import { getUsers } from "../services/userApi";
+
+function Users() {
+  useEffect(() => {
+    getUsers().then(res => console.log(res.data));
+  }, []);
+}
+```
+
+### Folder Structure
+```jsx
+src
+ ├── components
+ ├── pages
+ ├── services
+ │     └── userApi.js
+ ├── utils
+ └── App.jsx
+```
