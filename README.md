@@ -44,6 +44,7 @@
 40. [Pages vs Layout vs Components](#40-pages-vs-layout-vs-components)
 41. [How to create a re-usable components](#41-how-to-create-a-re-usable-components)
 42. [API layer](#42-api-layer)
+43. [Debug](#43-debug)
 
 
     
@@ -2629,3 +2630,88 @@ src
  ├── utils
  └── App.jsx
 ```
+## 43. Debug
+
+### 1. Browser DevTools
+
+```jsx
+Right Click → Inspect
+or
+F12
+```
+
+| Tab      | Use            |
+| -------- | -------------- |
+| Console  | Errors & logs  |
+| Network  | API requests   |
+| Elements | HTML structure |
+| Sources  | Debug JS       |
+
+
+### 2. Using debugger
+
+```jsx
+function handleClick() {
+  debugger;
+  setCount(count + 1);
+}
+```
+
+`When this line runs, the browser pauses and you can inspect:`
+
+- variables
+- state
+- call stack
+
+### 3. React Developer Tools
+
+Install React DevTools extension.
+
+`Components Tab`
+
+***Shows:***
+- component tree
+- props
+- state
+- hooks
+
+### 4. Debug API Calls
+
+`Use Network tab to see:`
+- request URL
+- response data
+- status codes
+
+### 5. React Profiler (Performance Debugging)
+
+`React DevTools → Profiler tab`
+
+***Used to detect:***
+- slow components
+- unnecessary re-renders
+
+### 6. Error Boundaries
+Catch UI errors.
+
+```jsx
+class ErrorBoundary extends React.Component {
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+```
+
+### Debugging Tools Summary
+
+| Method         | Purpose                  |
+| -------------- | ------------------------ |
+| console.log    | Quick debugging          |
+| debugger       | Pause execution          |
+| DevTools       | Inspect browser behavior |
+| React DevTools | Inspect components       |
+| Network tab    | Debug API                |
+| React Profiler | Performance analysis     |
