@@ -45,7 +45,7 @@
 41. [How to create a re-usable components](#41-how-to-create-a-re-usable-components)
 42. [API layer](#42-api-layer)
 43. [Debug](#43-debug)
-44. [package.json vs package-lock.json](#44-package.json vs package-lock.json)
+44. [package.json vs package-lock.json](#44-packagejson-vs-package-lockjson)
 
 
     
