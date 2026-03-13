@@ -42,6 +42,7 @@
 38. [GraphQL](#38-graphql)
 39. [React Folder Structure](#39-react-folder-structure)
 40. [Pages vs Layout vs Components](#40-pages-vs-layout-vs-components)
+41. [How to create a re-usable components](#41-how-to-create-a-re-usable-components)
 
 
     
@@ -2470,3 +2471,101 @@ App
        │     └── Button (component)
        └── Footer (component)
 ```
+
+## 41. How to create a re-usable components
+
+### Use Props
+Reusable components should accept props instead of hardcoded values.
+
+❌ Not reusable
+```jsx
+function Button() {
+  return <button>Submit</button>;
+}
+```
+
+✅ Reusable
+```jsx
+function Button({ label }) {
+  return <button>{label}</button>;
+}
+```
+***Usage:***
+```jsx
+<Button label="Submit" />
+<Button label="Cancel" />
+```
+
+### Use Children for Flexible Content
+Use children when content inside component changes.
+
+Example:
+```jsx
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+```
+
+Usage:
+```jsx
+<Card>
+  <h2>Profile</h2>
+  <p>User information</p>
+</Card>
+```
+
+### Make Component Configurable
+Allow customization using props.
+
+Example:
+```jsx
+function Button({ label, type }) {
+  return <button className={type}>{label}</button>;
+}
+```
+Usage:
+```jsx
+<Button label="Save" type="primary" />
+<Button label="Delete" type="danger" />
+```
+
+### Separate Logic and UI
+
+Example:
+```jsx
+function Input({ value, onChange, placeholder }) {
+  return (
+    <input
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+    />
+  );
+}
+```
+Usage:
+```jsx
+<Input
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  placeholder="Enter name"
+/>
+```
+
+### Use Default Props
+
+Provide default values.
+
+```jsx
+function Button({ label = "Click", type = "primary" }) {
+  return <button className={type}>{label}</button>;
+}
+```
+
+`Best Practices`
+
+- ✅ Use props for customization
+- ✅ Use children for flexible content
+- ✅ Keep components small and focused
+- ✅ Avoid hardcoding data
+- ✅ Keep UI separate from business logic
