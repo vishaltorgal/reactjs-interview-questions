@@ -41,6 +41,7 @@
 37. [Axios API Call](#37-axios-api-call)
 38. [GraphQL](#38-graphql)
 39. [React Folder Structure](#39-react-folder-structure)
+40. [Pages vs Layout vs Components](#40-pages-vs-layout-vs-components)
 
 
     
@@ -2395,4 +2396,77 @@ src/
 │
 ├── App.jsx
 └── index.js
+```
+
+## 40. Pages vs Layout vs Components
+
+### Pages
+Pages represent complete screens and are usually mapped to routes (URLs).
+
+`Examples:`
+- Home page
+- Info page
+- Profile page
+- Settings page
+- 
+
+```jsx
+function Home() {
+  return <h1>Home Page</h1>;
+}
+```
+
+### Layout
+
+Layouts define the common page structure used by multiple pages.
+
+`They usually contain:`
+- Header
+- Footer
+- Sidebar
+- bMain content wrapper
+
+```jsx
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+function PublicLayout({ children }) {
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  );
+}
+
+export default PublicLayout;
+```
+
+### Components
+
+Components are reusable UI building blocks.
+
+`Examples:`
+- Button
+- Card
+- Header
+- Footer
+- Modal
+
+```jsx
+function Button({ label }) {
+  return <button>{label}</button>;
+}
+```
+
+### How They Work Together
+```jsx
+App
+ └── Layout
+       ├── Header (component)
+       ├── Page (route)
+       │     ├── Card (component)
+       │     └── Button (component)
+       └── Footer (component)
 ```
