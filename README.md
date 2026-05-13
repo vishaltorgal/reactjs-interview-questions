@@ -140,46 +140,30 @@ A Higher-Order Component (HOC) is a pattern in React that allows you to reuse co
 - Theming / styling injection
 - Data fetching wrapper
 
-### ***Create the HOC***
+### Step 1: Create HOC
 ```jsx
-
-function withGreeting(Component) {
-  return function WithGreeting(props) {
+function withTitle(Component) {
+  return function () {
     return (
       <div>
-        <h1>Hello, Welcome!</h1>
-        <Component {...props} />
+        <h2>This is a title added by HOC</h2>
+        <Component />
       </div>
     );
   };
 }
-
-export default withGreeting;
 ```
 
-### ***Use the HOC with a component***
-
+### Step 2: Create a simple component 
 ```jsx
-import React from 'react';
-import withGreeting from './withGreeting';  // Import the HOC
-
-// Regular component that displays a message
-function Message() {
-  return <p>This is a message from the component.</p>;
+function Hello() {
+  return <p>Hello World</p>;
 }
+```
 
-// Wrap the Message component with the HOC
-const MessageWithGreeting = withGreeting(Message);
-
-function App() {
-  return (
-    <div>
-      <MessageWithGreeting /> {/* HOC adds the greeting */}
-    </div>
-  );
-}
-
-export default App;
+### Step 3: Wrap it using HOC
+```jsx
+const HelloWithTitle = withTitle(Hello);
 ```
 <br>
 
