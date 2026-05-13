@@ -4,49 +4,48 @@
 
 1. [State in React](#1-state-in-react)
 2. [Difference Between State and Props](#2-difference-between-state-and-props)
-3. [Higher Order Components (HOC)](#3-what-are-higher-order-components-hoc)
-4. [Pure Components](#4-what-are-pure-components-in-react)
-5. [Synthetic Events](#5-what-are-synthetic-events-in-react)
-6. [Key Prop in Lists](#6-what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
-7. [Virtual DOM](#7-what-is-virtual-dom)
-8. [Controlled Components (forms)](#8-what-are-controlled-components-forms)
-9. [Uncontrolled Components (forms) (useRef)](#9-what-are-uncontrolled-components-forms-useref)
-10. [Fragments](#10-what-are-fragments)
-11. [Stateful Components](#11-what-are-stateful-components)
-12. [Function Components vs Class Components](#12-function-components-vs-class-components)
-13. [Ways to Optimize React Application](#13-ways-to-optimize-react-application)
-14. [createRef](#14-createref)
+3. [Function Components vs Class Components](#12-function-components-vs-class-components)
+4. [Lifecycle Phases in React](#19-lifecycle-phases-in-react)
+5. [Stateful Components](#11-what-are-stateful-components)
+6. [Controlled Components (forms)](#8-what-are-controlled-components-forms)
+7. [Uncontrolled Components (forms) (useRef) vs createRef](#9-what-are-uncontrolled-components-forms-useref-vs-createRef)
+8. [Callback Function](#16-callback-function)
+9. [Higher Order Components (HOC)](#3-what-are-higher-order-components-hoc)
+10. [Callback vs Higher Order Component (HOC)](#17-difference-callback-vs-higher-order-component-hoc)
+11. [Pure Components](#4-what-are-pure-components-in-react)
+12. [Synthetic Events](#5-what-are-synthetic-events-in-react)
+13. [Key Prop in Lists](#6-what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
+14. [Virtual DOM](#7-what-is-virtual-dom)
 15. [React Fiber](#15-what-is-react-fiber)
-16. [Callback Function](#16-callback-function)
-17. [Callback vs Higher Order Component (HOC)](#17-difference-callback-vs-higher-order-component-hoc)
+16. [Fragments](#10-what-are-fragments)
+17. [Ways to Optimize React Application](#13-ways-to-optimize-react-application)
 18. [Context API](#18-context-api)
-19. [Lifecycle Phases in React](#19-lifecycle-phases-in-react)
-20. [What are Error Boundaries in React?](#20-what-are-error-boundaries-in-react)
-21. [useRef vs createRef](#21-useref-vs-createref)
-22. [What is Lazy Loading?](#22-what-is-lazy-loading)
-23. [What is Suspense in React?](#23-what-is-suspense-in-react)
-24. [What is code splitting in React?](#24-what-is-code-splitting-in-react)
-25. [What is Prop Drilling in React?](#25-what-is-prop-drilling-in-react)
-26. [Keys and Re-rendering in React?](#26-keys-and-re-rendering-in-react)
-27. [What background process on npm start](#27-what-background-process-on-npm-start)
-28. [React design system libraries](#28-react-design-system-libraries)
-29. [React vs Angular](#29-react-vs-angular)
-30. [Modern React Patterns](#30-modern-react-patterns)
-31. [React Query](#31-react-query)
-32. [Ways to check performance of react app](#32-ways-to-check-performance-of-react-app)
-33. [Protected Routes Login](#33-protected-routes-login)
-34. [Role Based Restrictions](#34-role-based-restrictions)
-35. [JWT Token Usage](#35-jwt-token-usage)
-36. [Children](#36-children)
-37. [Axios API Call](#37-axios-api-call)
-38. [GraphQL](#38-graphql)
-39. [React Folder Structure](#39-react-folder-structure)
-40. [Pages vs Layout vs Components](#40-pages-vs-layout-vs-components)
-41. [How to create a re-usable components](#41-how-to-create-a-re-usable-components)
-42. [API layer](#42-api-layer)
-43. [Debug](#43-debug)
-44. [package.json vs package-lock.json](#44-packagejson-vs-package-lockjson)
-45. [Security Issues](#45-security-issues)
+19. [What are Error Boundaries in React?](#20-what-are-error-boundaries-in-react)
+20. [useRef vs createRef](#21-useref-vs-createref)
+21. [What is Lazy Loading?](#22-what-is-lazy-loading)
+22. [What is Suspense in React?](#23-what-is-suspense-in-react)
+23. [What is code splitting in React?](#24-what-is-code-splitting-in-react)
+24. [What is Prop Drilling in React?](#25-what-is-prop-drilling-in-react)
+25. [Keys and Re-rendering in React?](#26-keys-and-re-rendering-in-react)
+26. [What background process on npm start](#27-what-background-process-on-npm-start)
+27. [React design system libraries](#28-react-design-system-libraries)
+28. [React vs Angular](#29-react-vs-angular)
+29. [Modern React Patterns](#30-modern-react-patterns)
+30. [React Query](#31-react-query)
+31. [Ways to check performance of react app](#32-ways-to-check-performance-of-react-app)
+32. [Protected Routes Login](#33-protected-routes-login)
+33. [Role Based Restrictions](#34-role-based-restrictions)
+34. [JWT Token Usage](#35-jwt-token-usage)
+35. [Children](#36-children)
+36. [Axios API Call](#37-axios-api-call)
+37. [GraphQL](#38-graphql)
+38. [React Folder Structure](#39-react-folder-structure)
+39. [Pages vs Layout vs Components](#40-pages-vs-layout-vs-components)
+40. [How to create a re-usable components](#41-how-to-create-a-re-usable-components)
+41. [API layer](#42-api-layer)
+42. [Debug](#43-debug)
+43. [package.json vs package-lock.json](#44-packagejson-vs-package-lockjson)
+44. [Security Issues](#45-security-issues)
 
 
     
@@ -121,51 +120,9 @@ export default Counter;
 | Re render  | Changes trigger re render        | Changes trigger re render                  |
 
 
-
-
-## 3. **What are Higher-Order Components (HOC)?**
-
-A Higher-Order Component (HOC) is a pattern in React that allows you to reuse component logic. It is a function that takes a component and returns a new component with added functionality.
-
-### Key Points
-- HOC is a function: It takes a component and returns a new component.
-- It doesn’t modify the original component: Instead, it enhances or adds features to it.
-
-### Example Usecase
-- Authentication protection (Protected routes)
-- Role based access control
-- Logging / analytics wrapper
-- Loading state handling
-- Error handling (Error boundary style wrapper)
-- Theming / styling injection
-- Data fetching wrapper
-
-### Step 1: Create HOC
-```jsx
-function withTitle(Component) {
-  return function () {
-    return (
-      <div>
-        <h2>This is a title added by HOC</h2>
-        <Component />
-      </div>
-    );
-  };
-}
-```
-
-### Step 2: Create a simple component 
-```jsx
-function Hello() {
-  return <p>Hello World</p>;
-}
-```
-
-### Step 3: Wrap it using HOC
-```jsx
-const HelloWithTitle = withTitle(Hello);
-```
 <br>
+
+
 
 ## 4. **What are Pure Components in React?**
 
@@ -388,6 +345,65 @@ If parent re renders
 Unless optimized with React.memo
 <br>
 
+## 8. **What is React Fiber?**
+
+React Fiber is the reconciliation engine introduced in React 16.
+
+It is the internal algorithm that React uses to:
+- Compare old virtual DOM with new virtual DOM
+- Decide what needs to change
+- Update the UI efficiently
+
+***Before Fiber:***
+Rendering was 
+- Synchronous
+- Blocking
+- Could not be paused
+
+***With Fiber:***
+- Work can be paused, resumed, or cancelled
+- High priority updates run first
+
+
+### 🔥 Two Important Phases
+1️⃣ Render Phase (Interruptible)
+
+- Can pause
+- Can resume
+- Can cancel
+- Builds Fiber tree
+
+2️⃣ Commit Phase (Not Interruptible)
+
+- Applies changes to DOM
+- Must finish completely
+- Very fast
+
+
+### 🎯 Simple Example
+
+`Imagine:`
+
+- User is typing in input
+- At the same time a big list is rendering
+
+`With old React:`
+- List rendering could block typing
+
+`With Fiber:`
+- Typing is high priority
+- List rendering can pause
+- Typing stays smooth
+
+### 🔥 Key Concepts of Fiber
+1️⃣ Incremental Rendering
+- Break large rendering work into small chunks.
+
+2️⃣ Priority Based Updates
+- User interactions > background rendering.
+
+3️⃣ Better Scheduling
+- React decides best time to update UI.
 
 ## 8. **What are controlled components (forms)?**
 
@@ -420,9 +436,20 @@ function App() {
 
 <br>
 
-## 9. **What are Uncontrolled components (forms) (useRef)?**
+## 9. **Uncontrolled Components (forms) (useRef) vs createRef**
 
-An Uncontrolled Component is a form element where the DOM maintains the input value, and React accesses it using refs.
+***Uncontrolled components*** use DOM to store form values and refs like useRef (functional) or createRef (class) to access them without React controlling the input state.
+
+### What is an Uncontrolled Component?
+
+An uncontrolled component is a form element where:
+
+👉 DOM stores and manages the value
+👉 React does NOT track every change
+👉 We access value only when needed using refs
+
+### useRef (Functional Components)
+useRef is used in functional components to access DOM elements.
 
 ```jsx
 import React, { useRef } from "react";
@@ -449,16 +476,60 @@ function App() {
 export default App;
 ```
 
-### Key Points
-- `Refs`: Use useRef to access the input's current value.
-- `DOM Control`: The input value is managed by the DOM, not React state.
-- `Use Case`: Useful when you need direct access to the DOM or for simple use cases where state management is not necessary.
-- No re-render on every keystroke
-- Cleaner for small forms
-  
+### Key points (useRef)
+- Used in functional components
+- Stores reference to DOM element
+- Does NOT cause re-render when value changes
+- Value is accessed using ref.current.value
+- Best for simple forms or direct DOM access
+- 👉 DOM controls input, React just reads it when needed
+
+### createRef (Class Components)
+`createRef` is used in class components to create a reference to DOM elements.
+
+```jsx
+import React, { Component } from 'react';
+
+class Example extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef(); // Create a ref
+  }
+
+  focusInput = () => {
+    this.inputRef.current.focus(); // Focus the input element
+  };
+
+  render() {
+    return (
+      <div>
+        <input ref={this.inputRef} type="text" />
+        <button onClick={this.focusInput}>Focus the input</button>
+      </div>
+    );
+  }
+}
+
+export default Example;
+```
+
+### Key points (createRef)
+- Used in class components
+- Creates a new ref object
+- Used to access DOM elements or class methods
+- Does NOT cause re-render
+- Mostly used in legacy code
+- 👉 Works like useRef but for class components
+
+| Feature           | createRef           | useRef                |
+| ----------------- | ------------------- | --------------------- |
+| Used in           | Class components    | Functional components |
+| React version     | Older approach      | Modern approach       |
+| Re-renders        | New ref each render | Same ref persists     |
+| Best use          | Legacy code         | Modern React apps     |
+| Causes re-render? | No                  | No                    |
+
 <br>
-
-
 
 ## 10. **What are fragments?**
 
@@ -560,105 +631,6 @@ const Counter = () => {
 - `What it does`: Images are often the biggest assets in a React application. Using techniques like lazy loading, responsive images, and proper formats (e.g., WebP) can improve loading performance.
 - `When to use`: Use loading="lazy" for images and consider srcset for responsive images.
 
-<br>
-
-## 14. **createRef**
-
-`createRef` is a way to create a reference to a DOM element or a class component instance in React class components. It allows direct manipulation of the DOM or calling methods on class components without relying on state or props.
-
-### Key Points
-- `Used in class components`: createRef is specific to class components (not functional components).
-- `Creates a reference`: It creates an object with a current property that refers to the DOM element or component instance.
-- `Access DOM elements`: It helps you interact with DOM elements (like focusing an input or reading its value).
-- `Access class component methods`: It allows interaction with methods in child class components.
-
-```jsx
-import React, { Component } from 'react';
-
-class Example extends Component {
-  constructor(props) {
-    super(props);
-    this.inputRef = React.createRef(); // Create a ref
-  }
-
-  focusInput = () => {
-    this.inputRef.current.focus(); // Focus the input element
-  };
-
-  render() {
-    return (
-      <div>
-        <input ref={this.inputRef} type="text" />
-        <button onClick={this.focusInput}>Focus the input</button>
-      </div>
-    );
-  }
-}
-
-export default Example;
-```
-<br>
-
-## 15. **What is React Fiber?**
-
-React Fiber is the reconciliation engine introduced in React 16.
-
-It is the internal algorithm that React uses to:
-- Compare old virtual DOM with new virtual DOM
-- Decide what needs to change
-- Update the UI efficiently
-
-***Before Fiber:***
-Rendering was 
-- Synchronous
-- Blocking
-- Could not be paused
-
-***With Fiber:***
-- Work can be paused, resumed, or cancelled
-- High priority updates run first
-
-
-### 🔥 Two Important Phases
-1️⃣ Render Phase (Interruptible)
-
-- Can pause
-- Can resume
-- Can cancel
-- Builds Fiber tree
-
-2️⃣ Commit Phase (Not Interruptible)
-
-- Applies changes to DOM
-- Must finish completely
-- Very fast
-
-
-### 🎯 Simple Example
-
-`Imagine:`
-
-- User is typing in input
-- At the same time a big list is rendering
-
-`With old React:`
-- List rendering could block typing
-
-`With Fiber:`
-- Typing is high priority
-- List rendering can pause
-- Typing stays smooth
-
-### 🔥 Key Concepts of Fiber
-1️⃣ Incremental Rendering
-- Break large rendering work into small chunks.
-
-2️⃣ Priority Based Updates
-- User interactions > background rendering.
-
-3️⃣ Better Scheduling
-- React decides best time to update UI.
-
 
 <br>
 
@@ -742,6 +714,49 @@ export default Child;
 - UI updates
 
 
+<br>
+## 3. **What are Higher-Order Components (HOC)?**
+
+A Higher-Order Component (HOC) is a pattern in React that allows you to reuse component logic. It is a function that takes a component and returns a new component with added functionality.
+
+### Key Points
+- HOC is a function: It takes a component and returns a new component.
+- It doesn’t modify the original component: Instead, it enhances or adds features to it.
+
+### Example Usecase
+- Authentication protection (Protected routes)
+- Role based access control
+- Logging / analytics wrapper
+- Loading state handling
+- Error handling (Error boundary style wrapper)
+- Theming / styling injection
+- Data fetching wrapper
+
+### Step 1: Create HOC
+```jsx
+function withTitle(Component) {
+  return function () {
+    return (
+      <div>
+        <h2>This is a title added by HOC</h2>
+        <Component />
+      </div>
+    );
+  };
+}
+```
+
+### Step 2: Create a simple component 
+```jsx
+function Hello() {
+  return <p>Hello World</p>;
+}
+```
+
+### Step 3: Wrap it using HOC
+```jsx
+const HelloWithTitle = withTitle(Hello);
+```
 <br>
 
 ## 17. **Difference Callback vs. Higher-Order Component (HOC)**
