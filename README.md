@@ -169,7 +169,9 @@ const HelloWithTitle = withTitle(Hello);
 
 ## 4. **What are Pure Components in React?**
 
-Pure Components in React are components that avoid unnecessary re renders by doing a shallow comparison of props and state.
+A Pure Component is a React component that only re-renders when its props or state actually change.
+
+If nothing changed, it skips re-render to improve performance.
 
 ### Key Points
 - React automatically compares previous vs next props and state
@@ -186,25 +188,44 @@ import React, { PureComponent } from "react";
 class MyComponent extends PureComponent {
   render() {
     console.log("Rendered");
-    return <h1>Hello</h1>;
+
+    return <h1>{this.props.name}</h1>;
   }
 }
-
 ```
+
+### How it behaves
+
+If you pass same props again:
+
+```jsx
+<MyComponent name="John" />
+<MyComponent name="John" />
+```
+👉 It will NOT re-render second time
+
+
 ### ***Functional equivalent***
 In modern React, we create pure components by wrapping a functional component in ***React.memo***
 
 ```jsx
-const MyComponent = React.memo(() => {
+import React from "react";
+
+const MyComponent = ({ name }) => {
   console.log("Rendered");
-  return <h1>Hello</h1>;
-});
+  return <h1>{name}</h1>;
+};
+
+export default React.memo(MyComponent);
 ```
+
 <br>
 
 ## 5. **What are synthetic events in React?**
 
-A synthetic event is a cross browser wrapper around the browser’s native event.
+A Synthetic Event is React’s wrapper around native browser events like click, change, submit, etc.
+
+Instead of using the browser event directly, React gives you a consistent event object.
 
 ### Key Points
 - `Cross-Browser Compatibility`: Synthetic events normalize behavior across browsers.
