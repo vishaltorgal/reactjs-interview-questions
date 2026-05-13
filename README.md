@@ -324,7 +324,7 @@ function App() {
 
 <br>
 
-## 7. **Uncontrolled Components (forms) (useRef) vs createRef**
+## 7. **What are Uncontrolled Components (forms) (useRef) vs createRef**
 
 ***Uncontrolled components*** use DOM to store form values and refs like useRef (functional) or createRef (class) to access them without React controlling the input state.
 
