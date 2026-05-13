@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
-1. [State in React](#1-state-in-react)
+1. [State in Reactttt](#1-state-in-react)
 2. [Difference Between State and Props](#2-difference-between-state-and-props)
 3. [Function Components vs Class Components](#3-function-components-vs-class-components)
 4. [Lifecycle Phases in React](#4-lifecycle-phases-in-react)
