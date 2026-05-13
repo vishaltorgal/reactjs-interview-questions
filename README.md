@@ -21,31 +21,30 @@
 17. [Ways to Optimize React Application](#17-ways-to-optimize-react-application)
 18. [Context API](#18-context-api)
 19. [What are Error Boundaries in React?](#19-what-are-error-boundaries-in-react)
-20. [useRef vs createRef](#20-useref-vs-createref)
-21. [What is Lazy Loading?](#21-what-is-lazy-loading)
-22. [What is Suspense in React?](#22-what-is-suspense-in-react)
-23. [What is code splitting in React?](#23-what-is-code-splitting-in-react)
-24. [What is Prop Drilling in React?](#24-what-is-prop-drilling-in-react)
-25. [Keys and Re-rendering in React?](#25-keys-and-re-rendering-in-react)
-26. [What background process on npm start](#26-what-background-process-on-npm-start)
-27. [React design system libraries](#27-react-design-system-libraries)
-28. [React vs Angular](#28-react-vs-angular)
-29. [Modern React Patterns](#29-modern-react-patterns)
-30. [React Query](#30-react-query)
-31. [Ways to check performance of react app](#31-ways-to-check-performance-of-react-app)
-32. [Protected Routes Login](#32-protected-routes-login)
-33. [Role Based Restrictions](#33-role-based-restrictions)
-34. [JWT Token Usage](#34-jwt-token-usage)
-35. [Children](#35-children)
-36. [Axios API Call](#36-axios-api-call)
-37. [GraphQL](#37-graphql)
-38. [React Folder Structure](#38-react-folder-structure)
-39. [Pages vs Layout vs Components](#39-pages-vs-layout-vs-components)
-40. [How to create a re-usable components](#40-how-to-create-a-re-usable-components)
-41. [API layer](#41-api-layer)
-42. [Debug](#42-debug)
-43. [package.json vs package-lock.json](#43-packagejson-vs-package-lockjson)
-44. [Security Issues](#44-security-issues)
+20. [What is Lazy Loading?](#20-what-is-lazy-loading)
+21. [What is Suspense in React?](#21-what-is-suspense-in-react)
+22. [What is code splitting in React?](#22-what-is-code-splitting-in-react)
+23. [What is Prop Drilling in React?](#23-what-is-prop-drilling-in-react)
+24. [Keys and Re-rendering in React?](#24-keys-and-re-rendering-in-react)
+25. [What background process on npm start](#25-what-background-process-on-npm-start)
+26. [React design system libraries](#26-react-design-system-libraries)
+27. [React vs Angular](#27-react-vs-angular)
+28. [Modern React Patterns](#28-modern-react-patterns)
+29. [React Query](#29-react-query)
+30. [Ways to check performance of react app](#30-ways-to-check-performance-of-react-app)
+31. [Protected Routes Login](#31-protected-routes-login)
+32. [Role Based Restrictions](#32-role-based-restrictions)
+33. [JWT Token Usage](#33-jwt-token-usage)
+34. [Children](#34-children)
+35. [Axios API Call](#35-axios-api-call)
+36. [GraphQL](#36-graphql)
+37. [React Folder Structure](#37-react-folder-structure)
+38. [Pages vs Layout vs Components](#38-pages-vs-layout-vs-components)
+39. [How to create a re-usable components](#39-how-to-create-a-re-usable-components)
+40. [API layer](#40-api-layer)
+41. [Debug](#41-debug)
+42. [package.json vs package-lock.json](#42-packagejson-vs-package-lockjson)
+43. [Security Issues](#43-security-issues)
 
 
     
@@ -1169,25 +1168,7 @@ function App() {
 
 <br>
 
-
-## 20. useRef vs createRef
-
-| Feature                          | `useRef`                                                           | `createRef`                                                       |
-| -------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| **Used in**                      | Functional components (Hooks)                                      | Class components                                                  |
-| **Import**                       | `import { useRef } from "react"`                                   | `import React from "react"`                                       |
-| **Re-render behavior**           | Same ref object persists across renders                            | New ref object created on every render                            |
-| **State persistence**            | Value persists between renders                                     | Value resets when component re-renders                            |
-| **Typical usage**                | Functional component DOM access or mutable value                   | Class component DOM access                                        |
-| **Performance**                  | Better for functional components because it does not recreate refs | Less efficient in functional components because it recreates refs |
-| **Where defined**                | Inside component using hook                                        | Usually inside constructor                                        |
-| **Value access**                 | `ref.current`                                                      | `ref.current`                                                     |
-| **Common use cases**             | DOM access, storing mutable values, timers, previous values        | DOM access in class components                                    |
-| **Recommended for modern React** | ✅ Yes                                                              | ❌ Mostly legacy (class components)                                |
-
-<br>
-
-## 21. What is Lazy Loading?
+## 20. What is Lazy Loading?
 
  Lazy loading in React is a performance optimization technique where components are loaded only when they are needed, instead of loading all components at the initial application load.
 
@@ -1287,7 +1268,7 @@ export default HomePage;
 
 <br>
 
-## 22. What is Suspense in React?
+## 21. What is Suspense in React?
 
 Suspense is a React component that lets you pause rendering of part of the UI and show a fallback UI while waiting for something to load, most commonly lazy loaded components.
 
@@ -1319,7 +1300,7 @@ function Home() {
 - If both banners are inside one Suspense
 - The fallback shows until both components load
 
-## 24. What is code splitting in React?
+## 22. What is code splitting in React?
 
 `Code Splitting means:`
 
@@ -1350,8 +1331,9 @@ function App() {
 }
 ```
 
+<br>
 
-## 25. What is Prop Drilling in React?
+## 23. What is Prop Drilling in React?
 
 Prop drilling is a situation in React where data is passed from a parent component to deeply nested child components through multiple intermediate components, even though those intermediate components do not need the data.
 
@@ -1367,7 +1349,9 @@ Prop drilling is a situation in React where data is passed from a parent compone
 - Use state management libraries like Redux
 - Tightly coupled components
 
-## 26. Keys and Re-rendering in React?
+<br>
+
+## 24. Keys and Re-rendering in React?
 
 Keys are special attributes in React used to uniquely identify elements in a list.
 
@@ -1389,7 +1373,7 @@ When a list changes, React:
 
 <br>
 
-## 27. What background process on npm start
+## 25. What background process on npm start
 
 ***When you run:***
 - npm looks into package.json
@@ -1410,7 +1394,9 @@ When a list changes, React:
 - ***npm start*** → just a trigger (command runner)
 - ***react-scripts*** → does the actual work in background
 
-## 28. React design system libraries
+<br>
+
+## 26. React design system libraries
 
 ***React design system libraries*** are pre-built, reusable UI components that follow a consistent design language across an application or across multiple apps.
 
@@ -1451,7 +1437,7 @@ Instead of writing buttons everywhere:
 
 <br>
 
-## 29. React vs Angular
+## 27. React vs Angular
 
 | Aspect           | React                               | Angular                         | Which is better & why                   |
 | ---------------- | ----------------------------------- | ------------------------------- | --------------------------------------- |
@@ -1501,7 +1487,7 @@ Instead of writing buttons everywhere:
 
 <br>
 
-## 30. **Modern React Patterns**
+## 28. **Modern React Patterns**
 
 1️⃣ Functional Components + Hooks (Instead of Classes)
 
@@ -1592,7 +1578,7 @@ UserCard/
 
 <br>
 
-## 31. **React Query**
+## 29. **React Query**
 
 React Query is used to fetch and manage server data easily.
 
@@ -1685,7 +1671,7 @@ Use React Query when:
 | Harder scaling        | Scales well      |
 
 
-## 32. Ways to check performance of react app
+## 30. Ways to check performance of react app
 
 ### 1️⃣ React DevTools Profiler
 
@@ -1771,7 +1757,7 @@ import { Profiler } from "react";
 
 <br>
 
-## 33. Protected Routes Login
+## 31. Protected Routes Login
 
 ### ✅ What This Achieves
 
@@ -1944,8 +1930,9 @@ function Settings() {
 export default Settings;
 ```
 
+<br>
 
-## 34. Role Based Restrictions
+## 32. Role Based Restrictions
 
 ### 🔄 How JWT Flow Works (Very Simple)
 
@@ -1988,7 +1975,7 @@ function RoleProtected({ role, children }) {
 - If user.role === "admin" → page shows
 - If not → redirected to home
 
-## 35. JWT Token Usage
+## 33. JWT Token Usage
 
 ### Step 1: Login and Store Token
 ```jsx
@@ -2053,8 +2040,9 @@ function ProtectedRoute({ children }) {
 - No need to verify user
 - So JWT is unnecessary.
 
+<br>
 
-## 36. Children
+## 34. Children
 
 In React, children is a special prop that represents the content placed inside a component tag.
 
@@ -2093,8 +2081,9 @@ Usage
 - Navbar and Footer stay same
 - Profile is dynamic content (children)
 
+<br>
 
-## 37. Axios API Call
+## 35. Axios API Call
 
 ### Basic GET Request
 ```jsx
@@ -2147,8 +2136,6 @@ async function fetchUsers() {
 
 fetchUsers();
 ```
-
-
 
 
 ### 📡 Axios Interceptor Basic Example
@@ -2235,9 +2222,9 @@ api.get("/users")
 - Every request → interceptor adds token
 - If token expired → response interceptor catches 401 → redirect
 
+<br>
 
-
-## 38. GraphQL
+## 36. GraphQL
 
 ### Setup Apollo Client
 
@@ -2303,8 +2290,9 @@ export default function Home({ users }) {
 - Exact nested data in one query
 - Clean structure
 
+<br>
 
-## 39. React Folder Structure
+## 37. React Folder Structure
 
 ***Small Projects***
 
@@ -2429,7 +2417,9 @@ src/
 └── index.js
 ```
 
-## 40. Pages vs Layout vs Components
+<br>
+
+## 38. Pages vs Layout vs Components
 
 ### Pages
 Pages represent complete screens and are usually mapped to routes (URLs).
@@ -2502,7 +2492,9 @@ App
        └── Footer (component)
 ```
 
-## 41. How to create a re-usable components
+<br>
+
+## 39. How to create a re-usable components
 
 ### Use Props
 Reusable components should accept props instead of hardcoded values.
@@ -2600,8 +2592,9 @@ function Button({ label = "Click", type = "primary" }) {
 - ✅ Avoid hardcoding data
 - ✅ Keep UI separate from business logic
 
+<br>
 
-## 42. API layer
+## 40. API layer
 
 API layer means a separate layer in the application responsible for handling all API calls (communication with the backend) instead of writing API calls directly inside components.
 
@@ -2658,7 +2651,10 @@ src
  ├── utils
  └── App.jsx
 ```
-## 43. Debug
+
+<br>
+
+## 41. Debug
 
 ### 1. Browser DevTools
 
@@ -2744,8 +2740,9 @@ class ErrorBoundary extends React.Component {
 | Network tab    | Debug API                |
 | React Profiler | Performance analysis     |
 
+<br>
 
-## 44. package.json vs package-lock.json
+## 42. package.json vs package-lock.json
 
 package.json defines project dependencies and configuration, while package-lock.json locks the exact versions of those dependencies to ensure consistent installations across environments.
 
@@ -2809,8 +2806,9 @@ package-lock.json locks the exact versions of dependencies installed.
 | package.json      | Shopping list                |
 | package-lock.json | Actual bill with exact items |
 
+<br>
 
-## 45. Security Issues
+## 43. Security Issues
 `Common risks include:`
 
 - Cross-Site Scripting (XSS)
