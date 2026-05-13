@@ -882,7 +882,7 @@ Rendering was
 
 
 
-## 16. **fragments**
+## 16. **Fragments**
 
 Fragments allow you to group multiple elements without adding extra nodes to the DOM. They help keep the DOM clean and avoid unnecessary wrapping elements like `<div>`.
 
