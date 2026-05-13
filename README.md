@@ -4,24 +4,24 @@
 
 1. [State in React](#1-state-in-react)
 2. [Difference Between State and Props](#2-difference-between-state-and-props)
-3. [Function Components vs Class Components](#12-function-components-vs-class-components)
-4. [Lifecycle Phases in React](#19-lifecycle-phases-in-react)
-5. [Stateful Components](#11-what-are-stateful-components)
-6. [Controlled Components (forms)](#8-what-are-controlled-components-forms)
-7. [Uncontrolled Components (forms) (useRef) vs createRef](#9-what-are-uncontrolled-components-forms-useref-vs-createRef)
-8. [Callback Function](#16-callback-function)
-9. [Higher Order Components (HOC)](#3-what-are-higher-order-components-hoc)
-10. [Callback vs Higher Order Component (HOC)](#17-difference-callback-vs-higher-order-component-hoc)
-11. [Pure Components](#4-what-are-pure-components-in-react)
-12. [Synthetic Events](#5-what-are-synthetic-events-in-react)
-13. [Key Prop in Lists](#6-what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)
-14. [Virtual DOM](#7-what-is-virtual-dom)
-15. [React Fiber](#15-what-is-react-fiber)
-16. [Fragments](#10-what-are-fragments)
-17. [Ways to Optimize React Application](#13-ways-to-optimize-react-application)
+3. [Function Components vs Class Components](#3-function-components-vs-class-components)
+4. [Lifecycle Phases in React](#4-lifecycle-phases-in-react)
+5. [Stateful Components](#5-what-are-stateful-components)
+6. [Controlled Components (forms)](#6-what-are-controlled-components-forms)
+7. [Uncontrolled Components (forms) (useRef) vs createRef](#7-what-are-uncontrolled-components-forms-useref-vs-createRef)
+8. [Callback Function](#8-callback-function)
+9. [Higher Order Components (HOC)](#9-higher-order-components-hoc)
+10. [Callback vs Higher Order Component (HOC)](#10-callback-vs-higher-order-component-hoc)
+11. [Pure Components](#11-pure-components)
+12. [Synthetic Events](#12-synthetic-events)
+13. [Key Prop in Lists](#13-key-prop-in-lists)
+14. [Virtual DOM](#14-virtual-dom)
+15. [React Fiber](#15-react-fiber)
+16. [Fragments](#16-fragments)
+17. [Ways to Optimize React Application](#17-ways-to-optimize-react-application)
 18. [Context API](#18-context-api)
-19. [What are Error Boundaries in React?](#20-what-are-error-boundaries-in-react)
-20. [useRef vs createRef](#21-useref-vs-createref)
+19. [What are Error Boundaries in React?](#19-what-are-error-boundaries-in-react)
+20. [useRef vs createRef](#20-useref-vs-createref)
 21. [What is Lazy Loading?](#22-what-is-lazy-loading)
 22. [What is Suspense in React?](#23-what-is-suspense-in-react)
 23. [What is code splitting in React?](#24-what-is-code-splitting-in-react)
@@ -122,9 +122,482 @@ export default Counter;
 
 <br>
 
+## 3. **Function Components vs Class Components**
+
+| Feature       | Functional Component | Class Component          |
+| ------------- | -------------------- | ------------------------ |
+| Syntax        | JavaScript function  | ES6 class                |
+| State         | Managed using hooks  | Managed using this.state |
+| Lifecycle     | useEffect hook       | Lifecycle methods        |
+| Performance   | Lightweight          | Slightly heavier         |
+| Current usage | Preferred            | Less used                |
 
 
-## 4. **What are Pure Components in React?**
+<br>
+
+## 4. Lifecycle Phases in React
+
+React lifecycle has ***three*** main phases:
+
+- `Mounting` – component is created and added to DOM
+- `Updating` – component re-renders due to changes
+- `Unmounting` – component is removed from DOM
+
+### Table - React Lifecycle Phases
+
+| Phase              | Lifecycle Method                    | When It Runs                    | Use Case                           |
+| ------------------ | ----------------------------------- | ------------------------------- | ---------------------------------- |
+| **Mounting**       | `constructor()`                     | When component is created       | Initialize state                   |
+|                    | `static getDerivedStateFromProps()` | Before render                   | Update state from props            |
+|                    | `render()`                          | Renders JSX to UI               | UI creation                        |
+|                    | `componentDidMount()`               | After component is added to DOM | API calls, subscriptions           |
+| **Updating**       | `static getDerivedStateFromProps()` | When props/state change         | Sync state with props              |
+|                    | `shouldComponentUpdate()`           | Before re-render                | Performance optimization           |
+|                    | `render()`                          | Re-render UI                    | Update UI                          |
+|                    | `getSnapshotBeforeUpdate()`         | Before DOM update               | Capture DOM info (scroll position) |
+|                    | `componentDidUpdate()`              | After update                    | API calls on update                |
+| **Unmounting**     | `componentWillUnmount()`            | Before component removed        | Cleanup timers, listeners          |
+| **Error Handling** | `static getDerivedStateFromError()` | When child throws error         | Show fallback UI                   |
+|                    | `componentDidCatch()`               | After error occurs              | Log error                          |
+
+
+### Example (Class Component)
+```jsx
+class Demo extends React.Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  componentDidMount() {
+    console.log("Mounted");
+  }
+
+  componentDidUpdate() {
+    console.log("Updated");
+  }
+
+  componentWillUnmount() {
+    console.log("Unmounted");
+  }
+
+  render() {
+    return <h1>{this.state.count}</h1>;
+  }
+}
+```
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/0f855e39-12e3-4274-812c-532e183e09b1" />
+
+
+### Example (functional Component)
+
+1️⃣ Mounting Phase
+
+👉 When component is created and inserted into DOM.
+
+`What happens:`
+- Component renders for the first time
+- DOM is created
+- Effects run
+
+```jsx
+useEffect(() => {
+  console.log("Component Mounted");
+}, []);
+```
+Empty dependency array → runs only once → on mount.
+
+
+
+2️⃣ Updating Phase
+
+👉 When component re-renders because:
+
+- State changes
+- Props change
+
+```jsx
+useEffect(() => {
+  console.log("Component Updated");
+});
+```
+Runs after every render.
+
+***Or:***
+```jsx
+useEffect(() => {
+  console.log("Count changed");
+}, [count]);
+```
+Runs only when count changes.
+
+3️⃣ Unmounting Phase
+
+👉 When component is removed from DOM.
+
+```jsx
+useEffect(() => {
+  return () => {
+    console.log("Component Unmounted");
+  };
+}, []);
+```
+
+The return function is the cleanup function.
+
+### 🎯 Functional Component Mapping
+
+| Class Lifecycle      | Hook Equivalent                     |
+| -------------------- | ----------------------------------- |
+| componentDidMount    | useEffect(() => {}, [])             |
+| componentDidUpdate   | useEffect(() => {}, [deps])         |
+| componentWillUnmount | useEffect(() => { return cleanup }) |
+
+
+### 🎯 Simple Timeline
+
+- Step 1: User hides component
+- Step 2: React starts unmount
+- Step 3: Cleanup runs
+- Step 4: DOM removed
+- Step 5: UI not visible
+
+<br>
+
+## 5. **What are stateful components?**
+
+A component is considered stateful if its behavior depends on its internal state. These stateful components can either be functional components with hooks or class components.
+
+```jsx
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);  // Declaring state
+
+  const increment = () => {
+    setCount(count + 1);  // Updating state
+  };
+
+  return (
+    <div>
+      <p>{count}</p>  {/* Displaying state */}
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+};
+```
+
+### Comparison with Stateless (Functional) Components
+- `Stateful components` can modify and track their state over time.
+- `Stateless components` (also called "dumb" components) do not manage their own state; they simply receive props from their parent component and render UI based on those props.
+
+  <br>
+
+## 6. **What are controlled components (forms)?**
+
+A Controlled Component is a form element whose value is controlled by React state.
+
+Controlled components in React are form elements like `<input>`, `<textarea>`, and `<select>` where the value is controlled by React's state. The form element's value is set by the state, and any changes to the input are handled through event handlers that update the state.
+
+```jsx
+import React, { useState } from "react";
+
+function App() {
+  const [value, setValue] = useState("");
+
+  return (
+    <>
+      <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <h1>{value}</h1>
+    </>
+  );
+}
+
+```
+
+### Key Points
+- The value of the input is tied to the text state.
+- The onChange handler updates the state when the user types, keeping the input value in sync with the state.
+
+<br>
+
+## 7. **Uncontrolled Components (forms) (useRef) vs createRef**
+
+***Uncontrolled components*** use DOM to store form values and refs like useRef (functional) or createRef (class) to access them without React controlling the input state.
+
+### What is an Uncontrolled Component?
+
+An uncontrolled component is a form element where:
+
+👉 DOM stores and manages the value
+👉 React does NOT track every change
+👉 We access value only when needed using refs
+
+### useRef (Functional Components)
+useRef is used in functional components to access DOM elements.
+
+```jsx
+import React, { useRef } from "react";
+
+function App() {
+  const firstRef = useRef(null);
+  const secondRef = useRef(null);
+
+  function handleSubmit() {
+    alert(
+      `First: ${firstRef.current.value}, Second: ${secondRef.current.value}`
+    );
+  }
+
+  return (
+    <>
+      <input ref={firstRef} type="text" />
+      <input ref={secondRef} type="text" />
+      <button onClick={handleSubmit}>Submit</button>
+    </>
+  );
+}
+
+export default App;
+```
+
+### Key points (useRef)
+- Used in functional components
+- Stores reference to DOM element
+- Does NOT cause re-render when value changes
+- Value is accessed using ref.current.value
+- Best for simple forms or direct DOM access
+- 👉 DOM controls input, React just reads it when needed
+
+### createRef (Class Components)
+`createRef` is used in class components to create a reference to DOM elements.
+
+```jsx
+import React, { Component } from 'react';
+
+class Example extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef(); // Create a ref
+  }
+
+  focusInput = () => {
+    this.inputRef.current.focus(); // Focus the input element
+  };
+
+  render() {
+    return (
+      <div>
+        <input ref={this.inputRef} type="text" />
+        <button onClick={this.focusInput}>Focus the input</button>
+      </div>
+    );
+  }
+}
+
+export default Example;
+```
+
+### Key points (createRef)
+- Used in class components
+- Creates a new ref object
+- Used to access DOM elements or class methods
+- Does NOT cause re-render
+- Mostly used in legacy code
+- 👉 Works like useRef but for class components
+
+| Feature           | createRef           | useRef                |
+| ----------------- | ------------------- | --------------------- |
+| Used in           | Class components    | Functional components |
+| React version     | Older approach      | Modern approach       |
+| Re-renders        | New ref each render | Same ref persists     |
+| Best use          | Legacy code         | Modern React apps     |
+| Causes re-render? | No                  | No                    |
+
+<br>
+
+## 8. **Callback Function**
+
+A `callback function` is a function passed as an argument to another function, to be called (invoked) later, usually after a task is completed.
+
+### ***Class Component Example***
+```jsx
+function greetUser(name, callback) {
+  console.log("Hello, " + name + "!");
+  callback();
+}
+
+function sayGoodbye() {
+  console.log("Goodbye!");
+}
+
+greetUser("Alice", sayGoodbye);
+
+// Output
+Hello, Alice!
+Goodbye!
+
+```
+### In this example
+- sayGoodbye is passed as a callback to greetUser.
+- After greeting the user, it calls the callback() function.
+
+
+
+### Passing values from child to parent
+
+✅ Parent Component
+
+```jsx
+import React, { useState } from "react";
+import Child from "./Child";
+
+function App() {
+  const [number, setNumber] = useState(0);
+
+  function handleNumberFromChild(num) {
+    setNumber(num);
+  }
+
+  return (
+    <>
+      <h1>Number from Child: {number}</h1>
+      <Child sendNumber={handleNumberFromChild} />
+    </>
+  );
+}
+
+export default App;
+
+```
+✅ Child Component
+```jsx
+import React from "react";
+
+function Child({ sendNumber }) {
+  return (
+    <button onClick={() => sendNumber(10)}>
+      Send 10
+    </button>
+  );
+}
+
+export default Child;
+
+```
+
+### 🔄 What Happens
+
+- Parent creates handleNumberFromChild
+- Parent passes it as prop sendNumber
+- Child calls sendNumber(10)
+- Parent receives 10
+- Parent updates state
+- UI updates
+
+
+<br>
+
+## 9. **What are Higher-Order Components (HOC)?**
+
+A Higher-Order Component (HOC) is a pattern in React that allows you to reuse component logic. It is a function that takes a component and returns a new component with added functionality.
+
+### Key Points
+- HOC is a function: It takes a component and returns a new component.
+- It doesn’t modify the original component: Instead, it enhances or adds features to it.
+
+### Example Usecase
+- Authentication protection (Protected routes)
+- Role based access control
+- Logging / analytics wrapper
+- Loading state handling
+- Error handling (Error boundary style wrapper)
+- Theming / styling injection
+- Data fetching wrapper
+
+### Step 1: Create HOC
+```jsx
+function withTitle(Component) {
+  return function () {
+    return (
+      <div>
+        <h2>This is a title added by HOC</h2>
+        <Component />
+      </div>
+    );
+  };
+}
+```
+
+### Step 2: Create a simple component 
+```jsx
+function Hello() {
+  return <p>Hello World</p>;
+}
+```
+
+### Step 3: Wrap it using HOC
+```jsx
+const HelloWithTitle = withTitle(Hello);
+```
+<br>
+
+## 10. **Callback vs. Higher-Order Component (HOC)**
+
+ ###  Definition:
+A callback is a function passed as an argument to another function to be executed later, often after some operation is complete.
+
+### Commonly Used For:
+- Handling asynchronous behavior (e.g., API calls, event handling).
+
+- Executing code after a function finishes.
+
+
+### ***Callback Component Example***
+```jsx
+  function doSomething(callback) {
+  console.log("Doing something...");
+  callback();  // call the callback function
+}
+
+function afterDone() {
+  console.log("Done!");
+}
+
+doSomething(afterDone);
+```
+
+ ###  Definition:
+A Higher-Order Component is a function that takes a component and returns a new component. It's used to add additional behavior or logic to an existing React component.
+
+### Commonly Used For:
+- Code reuse in React apps.
+
+- Adding cross-cutting concerns (e.g., authentication, logging, theming, etc.).
+
+
+### ***Callback Component Example***
+```jsx
+  function withLogger(WrappedComponent) {
+  return function EnhancedComponent(props) {
+    console.log("Rendering:", WrappedComponent.name);
+    return <WrappedComponent {...props} />;
+  };
+}
+
+function Hello() {
+  return <h1>Hello World</h1>;
+}
+
+const HelloWithLogger = withLogger(Hello);
+
+```
+<br>
+
+## 11. **Pure Components**
 
 A Pure Component is a React component that only re-renders when its props or state actually change.
 
@@ -178,7 +651,8 @@ export default React.memo(MyComponent);
 
 <br>
 
-## 5. **What are synthetic events in React?**
+
+## 12. **synthetic events**
 
 A Synthetic Event is React’s wrapper around native browser events like click, change, submit, etc.
 
@@ -224,7 +698,7 @@ function Input() {
 ```
 <br>
 
-## 6. **What is "key" prop and what is the benefit of using it in arrays of elements?**
+## 13. **Key Prop in Lists**
 
 The ***key prop*** helps React track which list items have changed, been added, or removed.
 
@@ -245,7 +719,7 @@ const users = ["Vishal", "Amit", "Rahul"];
 ```
 <br>
 
-## 7. **What is Virtual DOM?**
+## 14. **Virtual DOM**
 
 <img width="681" height="240" alt="image" src="https://github.com/user-attachments/assets/947983c5-cf91-4867-b606-1119785bee26" />
 
@@ -345,7 +819,7 @@ If parent re renders
 Unless optimized with React.memo
 <br>
 
-## 8. **What is React Fiber?**
+## 15. **React Fiber**
 
 React Fiber is the reconciliation engine introduced in React 16.
 
@@ -405,133 +879,10 @@ Rendering was
 3️⃣ Better Scheduling
 - React decides best time to update UI.
 
-## 8. **What are controlled components (forms)?**
 
-A Controlled Component is a form element whose value is controlled by React state.
 
-Controlled components in React are form elements like `<input>`, `<textarea>`, and `<select>` where the value is controlled by React's state. The form element's value is set by the state, and any changes to the input are handled through event handlers that update the state.
 
-```jsx
-import React, { useState } from "react";
-
-function App() {
-  const [value, setValue] = useState("");
-
-  return (
-    <>
-      <input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <h1>{value}</h1>
-    </>
-  );
-}
-
-```
-
-### Key Points
-- The value of the input is tied to the text state.
-- The onChange handler updates the state when the user types, keeping the input value in sync with the state.
-
-<br>
-
-## 9. **Uncontrolled Components (forms) (useRef) vs createRef**
-
-***Uncontrolled components*** use DOM to store form values and refs like useRef (functional) or createRef (class) to access them without React controlling the input state.
-
-### What is an Uncontrolled Component?
-
-An uncontrolled component is a form element where:
-
-👉 DOM stores and manages the value
-👉 React does NOT track every change
-👉 We access value only when needed using refs
-
-### useRef (Functional Components)
-useRef is used in functional components to access DOM elements.
-
-```jsx
-import React, { useRef } from "react";
-
-function App() {
-  const firstRef = useRef(null);
-  const secondRef = useRef(null);
-
-  function handleSubmit() {
-    alert(
-      `First: ${firstRef.current.value}, Second: ${secondRef.current.value}`
-    );
-  }
-
-  return (
-    <>
-      <input ref={firstRef} type="text" />
-      <input ref={secondRef} type="text" />
-      <button onClick={handleSubmit}>Submit</button>
-    </>
-  );
-}
-
-export default App;
-```
-
-### Key points (useRef)
-- Used in functional components
-- Stores reference to DOM element
-- Does NOT cause re-render when value changes
-- Value is accessed using ref.current.value
-- Best for simple forms or direct DOM access
-- 👉 DOM controls input, React just reads it when needed
-
-### createRef (Class Components)
-`createRef` is used in class components to create a reference to DOM elements.
-
-```jsx
-import React, { Component } from 'react';
-
-class Example extends Component {
-  constructor(props) {
-    super(props);
-    this.inputRef = React.createRef(); // Create a ref
-  }
-
-  focusInput = () => {
-    this.inputRef.current.focus(); // Focus the input element
-  };
-
-  render() {
-    return (
-      <div>
-        <input ref={this.inputRef} type="text" />
-        <button onClick={this.focusInput}>Focus the input</button>
-      </div>
-    );
-  }
-}
-
-export default Example;
-```
-
-### Key points (createRef)
-- Used in class components
-- Creates a new ref object
-- Used to access DOM elements or class methods
-- Does NOT cause re-render
-- Mostly used in legacy code
-- 👉 Works like useRef but for class components
-
-| Feature           | createRef           | useRef                |
-| ----------------- | ------------------- | --------------------- |
-| Used in           | Class components    | Functional components |
-| React version     | Older approach      | Modern approach       |
-| Re-renders        | New ref each render | Same ref persists     |
-| Best use          | Legacy code         | Modern React apps     |
-| Causes re-render? | No                  | No                    |
-
-<br>
-
-## 10. **What are fragments?**
+## 16. **fragments**
 
 Fragments allow you to group multiple elements without adding extra nodes to the DOM. They help keep the DOM clean and avoid unnecessary wrapping elements like `<div>`.
 
@@ -563,49 +914,7 @@ export default FragmentExample;
   
 <br>
 
-## 11. **What are stateful components?**
-
-A component is considered stateful if its behavior depends on its internal state. These stateful components can either be functional components with hooks or class components.
-
-```jsx
-import React, { useState } from 'react';
-
-const Counter = () => {
-  const [count, setCount] = useState(0);  // Declaring state
-
-  const increment = () => {
-    setCount(count + 1);  // Updating state
-  };
-
-  return (
-    <div>
-      <p>{count}</p>  {/* Displaying state */}
-      <button onClick={increment}>Increment</button>
-    </div>
-  );
-};
-```
-
-### Comparison with Stateless (Functional) Components
-- `Stateful components` can modify and track their state over time.
-- `Stateless components` (also called "dumb" components) do not manage their own state; they simply receive props from their parent component and render UI based on those props.
-
-  <br>
-
-## 12. **Function Components vs Class Components**
-
-| Feature       | Functional Component | Class Component          |
-| ------------- | -------------------- | ------------------------ |
-| Syntax        | JavaScript function  | ES6 class                |
-| State         | Managed using hooks  | Managed using this.state |
-| Lifecycle     | useEffect hook       | Lifecycle methods        |
-| Performance   | Lightweight          | Slightly heavier         |
-| Current usage | Preferred            | Less used                |
-
-
-<br>
-
-## 13. **Ways to optimize react application**
+## 17. **Ways to optimize react application**
 
 ### Use PureComponent for Class Components
 - `What it does`: Prevents re-renders if props and state are shallowly equal to the previous ones.
@@ -631,184 +940,6 @@ const Counter = () => {
 - `What it does`: Images are often the biggest assets in a React application. Using techniques like lazy loading, responsive images, and proper formats (e.g., WebP) can improve loading performance.
 - `When to use`: Use loading="lazy" for images and consider srcset for responsive images.
 
-
-<br>
-
-## 16. **Callback Function**
-
-A `callback function` is a function passed as an argument to another function, to be called (invoked) later, usually after a task is completed.
-
-### ***Class Component Example***
-```jsx
-function greetUser(name, callback) {
-  console.log("Hello, " + name + "!");
-  callback();
-}
-
-function sayGoodbye() {
-  console.log("Goodbye!");
-}
-
-greetUser("Alice", sayGoodbye);
-
-// Output
-Hello, Alice!
-Goodbye!
-
-```
-### In this example
-- sayGoodbye is passed as a callback to greetUser.
-- After greeting the user, it calls the callback() function.
-
-
-
-### Passing values from child to parent
-
-✅ Parent Component
-
-```jsx
-import React, { useState } from "react";
-import Child from "./Child";
-
-function App() {
-  const [number, setNumber] = useState(0);
-
-  function handleNumberFromChild(num) {
-    setNumber(num);
-  }
-
-  return (
-    <>
-      <h1>Number from Child: {number}</h1>
-      <Child sendNumber={handleNumberFromChild} />
-    </>
-  );
-}
-
-export default App;
-
-```
-✅ Child Component
-```jsx
-import React from "react";
-
-function Child({ sendNumber }) {
-  return (
-    <button onClick={() => sendNumber(10)}>
-      Send 10
-    </button>
-  );
-}
-
-export default Child;
-
-```
-
-### 🔄 What Happens
-
-- Parent creates handleNumberFromChild
-- Parent passes it as prop sendNumber
-- Child calls sendNumber(10)
-- Parent receives 10
-- Parent updates state
-- UI updates
-
-
-<br>
-## 3. **What are Higher-Order Components (HOC)?**
-
-A Higher-Order Component (HOC) is a pattern in React that allows you to reuse component logic. It is a function that takes a component and returns a new component with added functionality.
-
-### Key Points
-- HOC is a function: It takes a component and returns a new component.
-- It doesn’t modify the original component: Instead, it enhances or adds features to it.
-
-### Example Usecase
-- Authentication protection (Protected routes)
-- Role based access control
-- Logging / analytics wrapper
-- Loading state handling
-- Error handling (Error boundary style wrapper)
-- Theming / styling injection
-- Data fetching wrapper
-
-### Step 1: Create HOC
-```jsx
-function withTitle(Component) {
-  return function () {
-    return (
-      <div>
-        <h2>This is a title added by HOC</h2>
-        <Component />
-      </div>
-    );
-  };
-}
-```
-
-### Step 2: Create a simple component 
-```jsx
-function Hello() {
-  return <p>Hello World</p>;
-}
-```
-
-### Step 3: Wrap it using HOC
-```jsx
-const HelloWithTitle = withTitle(Hello);
-```
-<br>
-
-## 17. **Difference Callback vs. Higher-Order Component (HOC)**
-
- ###  Definition:
-A callback is a function passed as an argument to another function to be executed later, often after some operation is complete.
-
-### Commonly Used For:
-- Handling asynchronous behavior (e.g., API calls, event handling).
-
-- Executing code after a function finishes.
-
-
-### ***Callback Component Example***
-```jsx
-  function doSomething(callback) {
-  console.log("Doing something...");
-  callback();  // call the callback function
-}
-
-function afterDone() {
-  console.log("Done!");
-}
-
-doSomething(afterDone);
-```
-
- ###  Definition:
-A Higher-Order Component is a function that takes a component and returns a new component. It's used to add additional behavior or logic to an existing React component.
-
-### Commonly Used For:
-- Code reuse in React apps.
-
-- Adding cross-cutting concerns (e.g., authentication, logging, theming, etc.).
-
-
-### ***Callback Component Example***
-```jsx
-  function withLogger(WrappedComponent) {
-  return function EnhancedComponent(props) {
-    console.log("Rendering:", WrappedComponent.name);
-    return <WrappedComponent {...props} />;
-  };
-}
-
-function Hello() {
-  return <h1>Hello World</h1>;
-}
-
-const HelloWithLogger = withLogger(Hello);
-
-```
 <br>
 
 ## 18. **Context API**
@@ -974,136 +1105,7 @@ export default App;
 ```
 <br>
 
-
-## 19. Lifecycle Phases in React
-
-React lifecycle has ***three*** main phases:
-
-- `Mounting` – component is created and added to DOM
-- `Updating` – component re-renders due to changes
-- `Unmounting` – component is removed from DOM
-
-### Table - React Lifecycle Phases
-
-| Phase              | Lifecycle Method                    | When It Runs                    | Use Case                           |
-| ------------------ | ----------------------------------- | ------------------------------- | ---------------------------------- |
-| **Mounting**       | `constructor()`                     | When component is created       | Initialize state                   |
-|                    | `static getDerivedStateFromProps()` | Before render                   | Update state from props            |
-|                    | `render()`                          | Renders JSX to UI               | UI creation                        |
-|                    | `componentDidMount()`               | After component is added to DOM | API calls, subscriptions           |
-| **Updating**       | `static getDerivedStateFromProps()` | When props/state change         | Sync state with props              |
-|                    | `shouldComponentUpdate()`           | Before re-render                | Performance optimization           |
-|                    | `render()`                          | Re-render UI                    | Update UI                          |
-|                    | `getSnapshotBeforeUpdate()`         | Before DOM update               | Capture DOM info (scroll position) |
-|                    | `componentDidUpdate()`              | After update                    | API calls on update                |
-| **Unmounting**     | `componentWillUnmount()`            | Before component removed        | Cleanup timers, listeners          |
-| **Error Handling** | `static getDerivedStateFromError()` | When child throws error         | Show fallback UI                   |
-|                    | `componentDidCatch()`               | After error occurs              | Log error                          |
-
-
-### Example (Class Component)
-```jsx
-class Demo extends React.Component {
-  constructor() {
-    super();
-    this.state = { count: 0 };
-  }
-
-  componentDidMount() {
-    console.log("Mounted");
-  }
-
-  componentDidUpdate() {
-    console.log("Updated");
-  }
-
-  componentWillUnmount() {
-    console.log("Unmounted");
-  }
-
-  render() {
-    return <h1>{this.state.count}</h1>;
-  }
-}
-```
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/0f855e39-12e3-4274-812c-532e183e09b1" />
-
-
-### Example (functional Component)
-
-1️⃣ Mounting Phase
-
-👉 When component is created and inserted into DOM.
-
-`What happens:`
-- Component renders for the first time
-- DOM is created
-- Effects run
-
-```jsx
-useEffect(() => {
-  console.log("Component Mounted");
-}, []);
-```
-Empty dependency array → runs only once → on mount.
-
-
-
-2️⃣ Updating Phase
-
-👉 When component re-renders because:
-
-- State changes
-- Props change
-
-```jsx
-useEffect(() => {
-  console.log("Component Updated");
-});
-```
-Runs after every render.
-
-***Or:***
-```jsx
-useEffect(() => {
-  console.log("Count changed");
-}, [count]);
-```
-Runs only when count changes.
-
-3️⃣ Unmounting Phase
-
-👉 When component is removed from DOM.
-
-```jsx
-useEffect(() => {
-  return () => {
-    console.log("Component Unmounted");
-  };
-}, []);
-```
-
-The return function is the cleanup function.
-
-### 🎯 Functional Component Mapping
-
-| Class Lifecycle      | Hook Equivalent                     |
-| -------------------- | ----------------------------------- |
-| componentDidMount    | useEffect(() => {}, [])             |
-| componentDidUpdate   | useEffect(() => {}, [deps])         |
-| componentWillUnmount | useEffect(() => { return cleanup }) |
-
-
-### 🎯 Simple Timeline
-
-- Step 1: User hides component
-- Step 2: React starts unmount
-- Step 3: Cleanup runs
-- Step 4: DOM removed
-- Step 5: UI not visible
-
-
-## 20. What are Error Boundaries in React?
+## 19. What are Error Boundaries in React?
 
 Error Boundaries are React components that catch JavaScript errors in:
 
@@ -1168,7 +1170,7 @@ function App() {
 <br>
 
 
-## 21. useRef vs createRef
+## 20. useRef vs createRef
 
 | Feature                          | `useRef`                                                           | `createRef`                                                       |
 | -------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
@@ -1185,7 +1187,7 @@ function App() {
 
 <br>
 
-## 22. What is Lazy Loading?
+## 21. What is Lazy Loading?
 
  Lazy loading in React is a performance optimization technique where components are loaded only when they are needed, instead of loading all components at the initial application load.
 
@@ -1285,7 +1287,7 @@ export default HomePage;
 
 <br>
 
-## 23. What is Suspense in React?
+## 22. What is Suspense in React?
 
 Suspense is a React component that lets you pause rendering of part of the UI and show a fallback UI while waiting for something to load, most commonly lazy loaded components.
 
