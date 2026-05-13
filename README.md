@@ -297,15 +297,11 @@ const users = ["Vishal", "Amit", "Rahul"];
 
 - 1️⃣ React creates a Virtual DOM (JS object representation of UI)
 
-- 2️⃣ When state changes
-React creates a new Virtual DOM
+- 2️⃣ When state changes, React creates a new Virtual DOM
 
-- 3️⃣ React compares old Virtual DOM with new one
-This process is called diffing
+- 3️⃣ React compares old Virtual DOM with new one. This process is called ***diffing***
 
-- 4️⃣ Only the changed parts are updated in the real DOM
-
-This process is called ***Reconciliation***
+- 4️⃣ Only the changed parts are updated in the real DOM. This process is called ***Reconciliation***
 
 
 ### How the Virtual DOM Works
@@ -357,7 +353,7 @@ function App() {
 `Now when count changes:`
 
 - 👉 App re renders
--👉 C1 re renders
+- 👉 C1 re renders
 - 👉 C2 ALSO re renders
 - Even if C2 does not use count
 
