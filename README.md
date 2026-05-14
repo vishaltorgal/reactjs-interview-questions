@@ -331,9 +331,9 @@ function App() {
 
 An uncontrolled component is a form element where:
 
-👉 DOM stores and manages the value
-👉 React does NOT track every change
-👉 We access value only when needed using refs
+- 👉 DOM stores and manages the value
+- 👉 React does NOT track every change
+- 👉 We access value only when needed using refs
 
 ### useRef (Functional Components)
 useRef is used in functional components to access DOM elements.
