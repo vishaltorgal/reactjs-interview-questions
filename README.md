@@ -1622,6 +1622,8 @@ Use the Profiler tab in React DevTools.
 
 To see the React DevTools Profiler, you first need to install the React Developer Tools browser extension. Then it will appear inside Chrome DevTools.
 
+<img width="648" height="213" alt="image" src="https://github.com/user-attachments/assets/d630833e-4397-43ea-9d6f-1e8e3924cba5" />
+
 ***What it shows:***
 
 - Which components re-render
@@ -1631,6 +1633,8 @@ To see the React DevTools Profiler, you first need to install the React Develope
 
 ### 2️⃣ Chrome Performance Tab
 Use Chrome DevTools Performance tab.
+
+<img width="303" height="249" alt="image" src="https://github.com/user-attachments/assets/a13e6074-2ce3-4338-ab13-f38b8cbc7df3" />
 
 ***What it shows:***
 
@@ -1653,6 +1657,8 @@ Use Chrome DevTools Performance tab.
 
 ### 3️⃣ Lighthouse Report
 Inside Chrome DevTools → Lighthouse tab.
+
+<img width="377" height="403" alt="image" src="https://github.com/user-attachments/assets/eb595429-4399-4d22-9e0b-c4e74ff909e8" />
 
 ***What it shows:***
 
