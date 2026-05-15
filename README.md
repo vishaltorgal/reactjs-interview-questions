@@ -1521,7 +1521,9 @@ UserCard/
 
 ## 29. **React Query**
 
-React Query is used to fetch and manage server data easily.
+React Query (now officially called TanStack Query) is a popular library used in React apps to fetch, cache, and manage server data (data that comes from APIs).
+
+Instead of writing a lot of manual code for loading states, caching, retries, and syncing data, React Query handles all of that for you.
 
 ### Setup Provider
 
