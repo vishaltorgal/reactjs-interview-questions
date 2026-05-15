@@ -2004,8 +2004,6 @@ Whatever you write inside a component:
 </Card>
 ```
 
-The <h2>Hello</h2> part becomes children.
-
 ### ✅ Real Usage Example: Layout Wrapper
 ```jsx
 function Layout({ children }) {
@@ -2019,7 +2017,7 @@ function Layout({ children }) {
 }
 ```
 
-Usage
+***Usage***
 
 ```jsx
 <Layout>
