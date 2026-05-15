@@ -265,26 +265,17 @@ The return function is the cleanup function.
 
 ## 5. **What are stateful components?**
 
-A component is considered stateful if its behavior depends on its internal state. These stateful components can either be functional components with hooks or class components.
+A stateful component is a component that uses/manages state.
 
 ```jsx
-import React, { useState } from 'react';
+function Counter() {
+  const [count, setCount] = useState(0);
 
-const Counter = () => {
-  const [count, setCount] = useState(0);  // Declaring state
-
-  const increment = () => {
-    setCount(count + 1);  // Updating state
-  };
-
-  return (
-    <div>
-      <p>{count}</p>  {/* Displaying state */}
-      <button onClick={increment}>Increment</button>
-    </div>
-  );
-};
+  return <h1>{count}</h1>;
+}
 ```
+
+`Counter` is called a stateful component because it contains React state.
 
 ### Comparison with Stateless (Functional) Components
 - `Stateful components` can modify and track their state over time.
