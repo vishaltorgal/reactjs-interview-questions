@@ -539,54 +539,17 @@ const HelloWithTitle = withTitle(Hello);
 
 ## 10. **Callback vs. Higher-Order Component (HOC)**
 
- ###  Definition:
-A callback is a function passed as an argument to another function to be executed later, often after some operation is complete.
+| Feature          | Higher Order Component (HOC)                                        | Callback Function                                            |
+| ---------------- | ------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Definition       | A function that takes a component and returns an enhanced component | A function passed from parent to child and executed by child |
+| Purpose          | Reuse and enhance component logic                                   | Send data or trigger action from child to parent             |
+| Direction        | Component → Component (wrapping)                                    | Child → Parent communication                                 |
+| Used for         | Adding features like auth, logging, loading UI                      | Passing values or events                                     |
+| Pattern type     | Component pattern                                                   | Function communication pattern                               |
+| Data flow        | Wraps and modifies component                                        | Sends data upward                                            |
+| Reusability      | High (logic reuse across components)                                | Medium (specific to parent-child relation)                   |
+| Example use case | Add loader, auth check, role-based UI                               | Form input, button click handling                            |
 
-### Commonly Used For:
-- Handling asynchronous behavior (e.g., API calls, event handling).
-
-- Executing code after a function finishes.
-
-
-### ***Callback Component Example***
-```jsx
-  function doSomething(callback) {
-  console.log("Doing something...");
-  callback();  // call the callback function
-}
-
-function afterDone() {
-  console.log("Done!");
-}
-
-doSomething(afterDone);
-```
-
- ###  Definition:
-A Higher-Order Component is a function that takes a component and returns a new component. It's used to add additional behavior or logic to an existing React component.
-
-### Commonly Used For:
-- Code reuse in React apps.
-
-- Adding cross-cutting concerns (e.g., authentication, logging, theming, etc.).
-
-
-### ***Callback Component Example***
-```jsx
-  function withLogger(WrappedComponent) {
-  return function EnhancedComponent(props) {
-    console.log("Rendering:", WrappedComponent.name);
-    return <WrappedComponent {...props} />;
-  };
-}
-
-function Hello() {
-  return <h1>Hello World</h1>;
-}
-
-const HelloWithLogger = withLogger(Hello);
-
-```
 <br>
 
 ## 11. **Pure Components**
