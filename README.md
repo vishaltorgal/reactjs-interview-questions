@@ -21,11 +21,11 @@
 17. [Ways to Optimize React Application](#17-ways-to-optimize-react-application)
 18. [Context API](#18-context-api)
 19. [What are Error Boundaries in React?](#19-what-are-error-boundaries-in-react)
-20. [What is Lazy Loading?](#20-what-is-lazy-loading)
-21. [What is Suspense in React?](#21-what-is-suspense-in-react)
+20. [What is Lazy Loading and Suspense?](#20-what-is-lazy-loading-and-suspense)
+21. [empty](#21-empty)
 22. [What is code splitting in React?](#22-what-is-code-splitting-in-react)
 23. [What is Prop Drilling in React?](#23-what-is-prop-drilling-in-react)
-24. [Keys and Re-rendering in React?](#24-keys-and-re-rendering-in-react)
+24. [empty](#24-empty)
 25. [What background process on npm start](#25-what-background-process-on-npm-start)
 26. [React design system libraries](#26-react-design-system-libraries)
 27. [React vs Angular](#27-react-vs-angular)
@@ -657,12 +657,26 @@ function Input() {
 
 The ***key prop*** helps React track which list items have changed, been added, or removed.
 
-### ***Why key is important***
-Without key, React may:
+ ***Without key, React may***
 - Re render unnecessary items
 - Update the wrong components
 - Cause UI bugs
 
+Keys are special attributes in React used to uniquely identify elements in a list.
+
+***Why Keys Are Important for Performance***
+When a list changes, React:
+
+- Compares previous Virtual DOM with new Virtual DOM
+- Uses keys to identify which items changed, moved, or stayed the same
+- Updates only the required DOM nodes
+
+***Key Rules***
+- Keys must be unique
+- Keys must be stable
+- Avoid using array index
+- Use database IDs when possible
+  
 ```jsx
 const users = ["Vishal", "Amit", "Rahul"];
 
@@ -1124,7 +1138,7 @@ function App() {
 
 <br>
 
-## 20. What is Lazy Loading?
+## 20. What is Lazy Loading and Suspense?
 
  Lazy loading in React is a performance optimization technique where components are loaded only when they are needed, instead of loading all components at the initial application load.
 
@@ -1154,7 +1168,9 @@ Without lazy loading, a user visiting your "Home" page has to wait for the brows
 ```jsx
 import React, { useState, Suspense } from "react";
 
-const Banner = React.lazy(() => import("./Banner"));
+const Banner1 = React.lazy(() => import("./Banner1"));
+const Banner2 = React.lazy(() => import("./Banner2"));
+const Banner3 = React.lazy(() => import("./Banner3"));
 
 function HomePage() {
   const [search, setSearch] = useState("");
@@ -1193,6 +1209,12 @@ export default HomePage;
 - ✔ Parallel loading
 - ✔ Whichever finishes first renders first
 
+
+⚠️ Important:
+- If both banners are inside one Suspense
+- The fallback shows until both components load
+
+
 ### 🔥 What Happens Internally
 
 1️⃣ Homepage loads
@@ -1211,6 +1233,13 @@ export default HomePage;
 - 👉 Typing stays smooth
 - 👉 Banner continues loading without blocking
 
+### Suspense does not make code load faster, but it:
+
+- Prevents blocking the UI
+- Shows meaningful loading states
+- Allows splitting large bundles
+- Improves first paint and user perception
+- You can wrap specific components, not entire app
 
 ### 🧠 Why This Is Good
 
@@ -1224,37 +1253,8 @@ export default HomePage;
 
 <br>
 
-## 21. What is Suspense in React?
+## 21. empty
 
-Suspense is a React component that lets you pause rendering of part of the UI and show a fallback UI while waiting for something to load, most commonly lazy loaded components.
-
-Suspense does not make code load faster, but it:
-
-- Prevents blocking the UI
-- Shows meaningful loading states
-- Allows splitting large bundles
-- Improves first paint and user perception
-- You can wrap specific components, not entire app
-
-```jsx
-import React, { Suspense } from "react";
-
-const Banner1 = React.lazy(() => import("./Banner1"));
-const Banner2 = React.lazy(() => import("./Banner2"));
-
-function Home() {
-  return (
-    <Suspense fallback={<div>Loading banners...</div>}>
-      <Banner1 />
-      <Banner2 />
-    </Suspense>
-  );
-}
-```
-
-⚠️ Important:
-- If both banners are inside one Suspense
-- The fallback shows until both components load
 
 ## 22. What is code splitting in React?
 
@@ -1273,6 +1273,7 @@ function Home() {
 | Vendor splitting | Separate libraries     |
 
 ### ✅ Simple Example (Route Based Splitting)
+
 ```jsx
 import React, { Suspense } from "react";
 
@@ -1307,25 +1308,9 @@ Prop drilling is a situation in React where data is passed from a parent compone
 
 <br>
 
-## 24. Keys and Re-rendering in React?
+## 24. Empty
 
-Keys are special attributes in React used to uniquely identify elements in a list.
 
-***Why Keys Are Important for Performance***
-When a list changes, React:
-
-- Compares previous Virtual DOM with new Virtual DOM
-- Uses keys to identify which items changed, moved, or stayed the same
-- Updates only the required DOM nodes
-
-  Without proper keys, React may re-render more elements than necessary.
-
-***Key Rules***
-
-- Keys must be unique
-- Keys must be stable
-- Avoid using array index
-- Use database IDs when possible
 
 <br>
 
