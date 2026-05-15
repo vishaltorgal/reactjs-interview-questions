@@ -445,49 +445,51 @@ Goodbye!
 import React, { useState } from "react";
 import Child from "./Child";
 
-function App() {
-  const [number, setNumber] = useState(0);
+function Parent() {
+  const [message, setMessage] = useState("");
 
-  function handleNumberFromChild(num) {
-    setNumber(num);
-  }
+  const receiveData = (data) => {
+    setMessage(data);
+  };
 
   return (
-    <>
-      <h1>Number from Child: {number}</h1>
-      <Child sendNumber={handleNumberFromChild} />
-    </>
+    <div>
+      <h2>Message from Child: {message}</h2>
+
+      <Child sendData={receiveData} />
+    </div>
   );
 }
 
-export default App;
-
+export default Parent;
 ```
+
 ✅ Child Component
 ```jsx
 import React from "react";
 
-function Child({ sendNumber }) {
+function Child({ sendData }) {
   return (
-    <button onClick={() => sendNumber(10)}>
-      Send 10
+    <button onClick={() => sendData("Hello Parent!")}>
+      Send Data
     </button>
   );
 }
 
 export default Child;
-
 ```
 
-### 🔄 What Happens
+### Output
 
-- Parent creates handleNumberFromChild
-- Parent passes it as prop sendNumber
-- Child calls sendNumber(10)
-- Parent receives 10
-- Parent updates state
-- UI updates
+Initial screen (before click)
+```jsx
+Message from Child:
+```
 
+Updated screen (after click)
+```jsx
+Message from Child: Hello Parent!
+```
 
 <br>
 
