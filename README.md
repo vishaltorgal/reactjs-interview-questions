@@ -2376,7 +2376,6 @@ Pages represent complete screens and are usually mapped to routes (URLs).
 - Info page
 - Profile page
 - Settings page
-- 
 
 ```jsx
 function Home() {
