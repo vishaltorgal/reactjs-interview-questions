@@ -2391,7 +2391,7 @@ Layouts define the common page structure used by multiple pages.
 - Header
 - Footer
 - Sidebar
-- bMain content wrapper
+- Main content wrapper
 
 ```jsx
 import Header from "../components/Header";
