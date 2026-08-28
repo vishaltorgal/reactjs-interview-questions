@@ -26,7 +26,7 @@
 22. [What is code splitting in React?](#22-what-is-code-splitting-in-react)
 23. [What is Prop Drilling in React?](#23-what-is-prop-drilling-in-react)
 24. [empty](#24-empty)
-25. [What background process on npm start](#25-what-background-process-on-npm-start)
+25. [What background process runs on npm start](#25-what-background-process-runs-on-npm-start)
 26. [React design system libraries](#26-react-design-system-libraries)
 27. [React vs Angular](#27-react-vs-angular)
 28. [Modern React Patterns](#28-modern-react-patterns)
@@ -1314,7 +1314,7 @@ Prop drilling is a situation in React where data is passed from a parent compone
 
 <br>
 
-## 25. What background process on npm start
+## 25. What background process runs on npm start
 
 ***When you run:***
 - npm looks into package.json
