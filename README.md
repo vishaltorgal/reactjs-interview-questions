@@ -22,7 +22,7 @@
 18. [Context API](#18-context-api)
 19. [What are Error Boundaries in React?](#19-what-are-error-boundaries-in-react)
 20. [What is Lazy Loading and Suspense?](#20-what-is-lazy-loading-and-suspense)
-21. [empty](#21-empty)
+21. [Default import vs named import](#21-default-import-vs-named-import)
 22. [What is code splitting in React?](#22-what-is-code-splitting-in-react)
 23. [What is Prop Drilling in React?](#23-what-is-prop-drilling-in-react)
 24. [empty](#24-empty)
@@ -1253,7 +1253,50 @@ export default HomePage;
 
 <br>
 
-## 21. empty
+## 21. Default import vs named import
+
+
+
+```jsx
+// mathUtils.js
+
+// 1. DEFAULT EXPORT (Only one allowed per file)
+const mainCalculator = {
+  brand: "Casio",
+  version: "1.0"
+};
+export default mainCalculator;
+
+// 2. NAMED EXPORTS (Can have as many as you want)
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+```
+
+`Default import`
+
+```jsx
+// Both of these grab the mainCalculator object:
+import abc from "./mathUtils.js";
+import myCalc from "./mathUtils.js";
+
+console.log(abc.brand);  // Output: "Casio"
+console.log(myCalc.brand); // Output: "Casio"
+```
+
+`Named import`
+
+```jsx
+// ✅ CORRECT: Names match the exported functions
+import { add, multiply } from "./mathUtils.js";
+
+console.log(add(2, 3));      // Output: 5
+console.log(multiply(2, 3)); // Output: 6
+
+// ❌ INCORRECT: "abc" was never exported by name inside mathUtils.js
+import { abc } from "./mathUtils.js";
+
+console.log(abc); // Output: undefined
+```
 
 
 ## 22. What is code splitting in React?
