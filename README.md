@@ -45,6 +45,7 @@
 41. [Debug](#41-debug)
 42. [package.json vs package-lock.json](#42-packagejson-vs-package-lockjson)
 43. [Security Issues](#43-security-issues)
+44. [Template Literals](#44-template-literals)
 
 
     
@@ -2896,4 +2897,25 @@ React apps use many packages.
 ```jsx
 npm audit
 npm audit fix
+```
+<br>
+
+## 44. Template literals
+
+Template literals are a way to create strings in JavaScript using backticks (`) instead of quotes.
+
+They are especially useful for putting variables or expressions directly inside a string.
+
+***Normal string***
+```jsx
+const name = "Vishal";
+
+console.log("Hello " + name);
+```
+
+***Template literal***
+```jsx
+const name = "Vishal";
+
+console.log(`Hello ${name}`);
 ```
