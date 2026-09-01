@@ -25,7 +25,7 @@
 21. [Default import vs named import](#21-default-import-vs-named-import)
 22. [What is code splitting in React?](#22-what-is-code-splitting-in-react)
 23. [What is Prop Drilling in React?](#23-what-is-prop-drilling-in-react)
-24. [empty](#24-empty)
+24. [Lexical Scope](#24-lexical-scope)
 25. [What background process runs on npm start](#25-what-background-process-runs-on-npm-start)
 26. [React design system libraries](#26-react-design-system-libraries)
 27. [React vs Angular](#27-react-vs-angular)
@@ -1351,9 +1351,40 @@ Prop drilling is a situation in React where data is passed from a parent compone
 
 <br>
 
-## 24. Empty
+## 24. Lexical Scope
 
+Lexical scope = where a variable can be accessed based on where the code is written.
 
+***Example***
+
+```jsx
+const name = "Vishal";
+
+function greet() {
+  console.log(name);
+}
+
+greet();
+```
+greet() can access name because name was defined in its outer scope.
+
+***Example***
+
+```jsx
+function outer() {
+  const x = 10;
+
+  function inner() {
+    console.log(x);
+  }
+
+  inner();
+}
+```
+
+inner() can access x because inner was written inside outer.
+
+This is also the foundation of closures.
 
 <br>
 
